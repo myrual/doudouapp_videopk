@@ -14,7 +14,7 @@
   <% if @battle.present? %>
   <div class="row">
     <div class="col-md-3" style="width: 50%">
-      <div class="panel" style="background-color: #efefef; margin-top: 20px;">
+      <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 400px;">
           <p><%= @left_video.title %></p>
           <p>
           <%= @left_video.user.email %>
@@ -37,8 +37,8 @@
       <% else %>
         <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
       <% end %>
-      <%= video_tag(@left_video.video_url.to_s, :controls =>true) %>
-      <hr>
+      <%= video_tag([@left_video.video_url.to_s], :size => "400x400", :controls =>true) %>
+      <hr align="left" width="400px">
 
       <div class="panel with-nav-tabs panel-default" style="height: 600px;">
           <div class="panel-heading">
@@ -87,7 +87,7 @@
       </div>
     </div>
     <div class="col-md-3" style="width: 50%">
-      <div class="panel" style="background-color: #efefef; margin-top: 20px;">
+      <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 400px;">
           <p><%= @right_video.title %></p>
           <p>
             <%= @right_video.user.email %>
@@ -110,8 +110,8 @@
       <% else %>
         <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
       <% end %>
-      <%= video_tag(@right_video.video_url.to_s, :controls =>true) %>
-      <hr>
+      <%= video_tag([@right_video.video_url.to_s], :size => "400x400", :controls =>true) %>
+      <hr align="left" width="400px">
 
       <div class="panel with-nav-tabs panel-default" style="height: 600px;">
           <div class="panel-heading">
