@@ -5,6 +5,7 @@ class BattlesController < ApplicationController
   def index
     @battle = Battle.recent.first
 
+    if @battle.present?
     @left_video = Video.find(@battle.left_video_id)
     @right_video = Video.find(@battle.right_video_id)
 
@@ -13,6 +14,7 @@ class BattlesController < ApplicationController
 
     @right_video_comments = VideoComment.where(video_id: @battle.right_video_id).order("created_at DESC")
     @right_video_comment = VideoComment.new
+    end
   end
 
   def follow_left_video
