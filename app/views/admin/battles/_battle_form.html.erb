@@ -1,0 +1,18 @@
+<div class="form-group" style="width: 800px; ">
+    <%= simple_form_for [:admin, @battle] do |f| %>
+    <div class="group">
+        <%= f.input :title, :label => "PK赛名称" %>
+    </div>
+    <div class="group">
+        <%= f.input :description, :label => "PK赛介绍" %>
+    </div>
+    <div class="group">
+      <%= select_tag(:left_video_id, options_for_select(@videos), :prompt => "视频一") %>
+    </div>
+    <div class="group">
+      <%= select_tag(:right_video_id, options_for_select(@videos), :prompt => "视频二") %>
+    </div>
+    <%= f.submit "Submit" , disable_with: "Submiting...", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_battles_path, class: "btn btn-primary"%>
+</div>
+<% end %>

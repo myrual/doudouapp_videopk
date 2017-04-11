@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6" style="width: 80%">
+        <div class=" panel" style="background-color: #efefef; margin-top: 20px;">
+            <h2><%= @battle.title %></h2>
+            <p style="height: 30px;"><%= simple_format(@battle.description) %></p>
+        </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3" style="width: 40%">
+      <div class="panel" style="background-color: #efefef; margin-top: 20px;">
+          <p><%= link_to(@left_video.title, admin_video_path(@left_video)) %></p>
+      </div>
+      <% if @left_video.image.present? %>
+        <%= image_tag(@left_video.image.thumb.url, class: "thumbnail") %>
+      <% else %>
+        <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
+      <% end %>
+      <%= video_tag(@left_video.video_url.to_s, :controls =>true) %>
+    </div>
+    <div class="col-md-3" style="width: 40%">
+      <div class="panel" style="background-color: #efefef; margin-top: 20px;">
+          <p><%= link_to(@right_video.title, admin_video_path(@right_video)) %></p>
+      </div>
+      <% if @right_video.image.present? %>
+        <%= image_tag(@right_video.image.thumb.url, class: "thumbnail") %>
+      <% else %>
+        <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
+      <% end %>
+      <%= video_tag(@right_video.video_url.to_s, :controls =>true) %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,158 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6" style="width: 100%">
+        <div class=" panel" style="background-color: #efefef; margin-top: 20px;">
+            <h2><%= @battle.title %></h2>
+            <p style="height: 30px; "><%= simple_format(@battle.description) %></p>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3" style="width: 50%">
+      <div class="panel" style="background-color: #efefef; margin-top: 20px;">
+          <p><%= @left_video.title %></p>
+          <p>
+          <%= @left_video.user.email %>
+          <% if current_user %>
+            <% if current_user.has_follow_left?(@battle) %>
+              <%= link_to unfollow_left_video_battle_path(@battle), :method => :post do %>
+                <i class="fa fa-thumbs-up fa-lg" aria-hidden="true" ></i>
+              <% end %>
+            <% else %>
+              <%= link_to follow_left_video_battle_path(@battle), :method => :post do %>
+                  <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true" ></i>
+              <% end %>
+            <% end %>
+          <% end %>
+          <%= @battle.left_followers.count %>
+          </p>
+      </div>
+      <% if @left_video.image.present? %>
+        <%= image_tag(@left_video.image.medium.url, class: "thumbnail") %>
+      <% else %>
+        <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
+      <% end %>
+      <%= video_tag(@left_video.video_url.to_s, :controls =>true) %>
+      <hr>
+
+      <div class="panel with-nav-tabs panel-default" style="height: 600px;">
+          <div class="panel-heading">
+                  <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a href="#viewcomments" data-toggle="tab">精选评论</a>
+                      </li>
+                      <li><a href="#wirtecomments" data-toggle="tab">
+                        <i class="fa fa-comments-o" aria-hidden="true"></i> 写评论</a>
+                      </li>
+                  </ul>
+          </div>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="viewcomments">
+                    <% @left_video_comments.each do |left_comment| %>
+                      <div class="reviews">
+                        <ul class="list-group">
+                          <li class="list-group-item" >
+                            <div class="row" >
+                              <div class="col-md-2" style="color: #bcbaba">
+                                  <%= left_comment.user.email %>
+                              </div>
+                                <br>
+                              <div class="col-md-8">
+                                  <%= left_comment.comment %>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                    </div>
+                    <% end %>
+                   </div>
+                  <div class="tab-pane" id="wirtecomments">
+                      <div>
+                        <%= simple_form_for([@battle, @left_video, @left_video_comment]) do |f| %>
+                        <div class="form-inputs">
+                          <%= f.input :comment, label: false, class: "form-control" %>
+                        </div>
+                        <div class="form-actions">
+                          <%= f.button :submit, value = "提交", class: "btn btn-primary" %>
+                        </div>
+                        <% end %>
+                      </div>
+                   </div>
+                </div>
+      </div>
+    </div>
+    <div class="col-md-3" style="width: 50%">
+      <div class="panel" style="background-color: #efefef; margin-top: 20px;">
+          <p><%= @right_video.title %></p>
+          <p>
+            <%= @right_video.user.email %>
+            <% if current_user %>
+              <% if current_user.has_follow_right?(@battle) %>
+                <%= link_to unfollow_right_video_battle_path(@battle), :method => :post do %>
+                  <i class="fa fa-thumbs-up fa-lg" aria-hidden="true" ></i>
+                <% end %>
+              <% else %>
+                <%= link_to follow_right_video_battle_path(@battle), :method => :post do %>
+                    <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true" ></i>
+                <% end %>
+              <% end %>
+            <% end %>
+            <%= @battle.right_followers.count %>
+          </p>
+      </div>
+      <% if @right_video.image.present? %>
+        <%= image_tag(@right_video.image.medium.url, class: "thumbnail") %>
+      <% else %>
+        <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
+      <% end %>
+      <%= video_tag(@right_video.video_url.to_s, :controls =>true) %>
+      <hr>
+
+      <div class="panel with-nav-tabs panel-default" style="height: 600px;">
+          <div class="panel-heading">
+                  <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a href="#viewcomments2" data-toggle="tab">精选评论</a>
+                      </li>
+                      <li><a href="#wirtecomments2" data-toggle="tab">
+                        <i class="fa fa-comments-o" aria-hidden="true"></i> 写评论</a>
+                      </li>
+                  </ul>
+          </div>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="viewcomments2">
+                    <% @right_video_comments.each do |right_comment| %>
+                      <div class="reviews">
+                        <ul class="list-group">
+                          <li class="list-group-item" >
+                            <div class="row" >
+                              <div class="col-md-2" style="color: #bcbaba">
+                                  <%= right_comment.user.email %>
+                              </div>
+                                <br>
+                              <div class="col-md-8">
+                                  <%= right_comment.comment %>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                    </div>
+                    <% end %>
+                   </div>
+                  <div class="tab-pane" id="wirtecomments2">
+                      <div>
+                        <%= simple_form_for([@battle, @right_video, @right_video_comment]) do |f| %>
+                        <div class="form-inputs">
+                          <%= f.input :comment, label: false, class: "form-control" %>
+                        </div>
+                        <div class="form-actions">
+                          <%= f.button :submit, value = "提交", class: "btn btn-primary" %>
+                        </div>
+                        <% end %>
+                      </div>
+                   </div>
+                </div>
+      </div>
+    </div>
+  </div>
+</div>

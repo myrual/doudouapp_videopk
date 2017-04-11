@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170411025036) do
+ActiveRecord::Schema.define(version: 20170411124240) do
 
   create_table "battles", force: :cascade do |t|
     t.string   "title"
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(version: 20170411025036) do
     t.integer  "right_video_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "favor_left_video_relationships", force: :cascade do |t|
+    t.integer  "battle_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "favor_right_video_relationships", force: :cascade do |t|
+    t.integer  "battle_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "favor_video_relationships", force: :cascade do |t|

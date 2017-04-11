@@ -1,0 +1,35 @@
+<div class="col-md-12">
+  <h2> <%= @video.title %> - 评论列表 </h2>
+
+  <hr>
+
+  <table class="table table-boldered table-striped custab">
+      <thead>
+          <td>发布者</td>
+          <td>评论内容</td>
+          <td>发布日期</td>
+          <td>操作选项</td>
+      </thead>
+      <% @comments.each do |c| %>
+      <tr>
+          <td><%= c.user.email %></td>
+          <td>
+              <%= c.comment %>
+          </td>
+          <td><%= c.created_at %></td>
+          <td>
+              <%= link_to edit_admin_video_video_comment_path(@video, c), class: 'btn btn-info btn-xs' do %>
+              <i class="fa fa-pencil"></i><% end %>
+              <%= link_to admin_video_video_comment_path(@video, c), :method => :delete, :data => {:confirm => "Are your sure?" }, class: 'btn btn-danger btn-xs' do %>
+              <i class="fa fa-trash-o"></i>
+              <% end %>
+          </td>
+      </tr>
+      <% end %>
+  </table>
+
+  <div class="pull-right" style="margin-top: 10px; margin-bottom:10px;">
+    <%= link_to "Back", admin_videos_path, class: "btn btn-primary" %>
+  </div>
+
+</div>

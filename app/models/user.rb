@@ -12,18 +12,33 @@ class User < ApplicationRecord
   has_many :video_comments
   has_many :comments_for_videos, through: :video_comments, source: :video
 
-  has_many :favor_videos_relationships
-  has_many :favor_videos, through: :favor_videos_relationships, source: :video
+  has_many :favor_left_video_relationships
+  has_many :favor_left_videos, through: :favor_left_video_relationships, source: :battle
 
-  def has_follow?(video)
-    favor_videos.include?(chef)
+  has_many :favor_right_video_relationships
+  has_many :favor_right_videos, through: :favor_right_video_relationships, source: :battle
+
+  def has_follow_left?(battle)
+    favor_left_videos.include?(battle)
   end
 
-  def follow!(video)
-    favor_videos << video
+  def follow_left!(battle)
+    favor_left_videos << battle
   end
 
-  def unfollow!(video)
-    favor_videos.delete(video)
+  def unfollow_left!(battle)
+    favor_left_videos.delete(battle)
+  end
+
+  def has_follow_right?(battle)
+    favor_right_videos.include?(battle)
+  end
+
+  def follow_right!(battle)
+    favor_right_videos << battle
+  end
+
+  def unfollow_right!(battle)
+    favor_right_videos.delete(battle)
   end
 end
