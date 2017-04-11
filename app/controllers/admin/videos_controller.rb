@@ -50,6 +50,6 @@ class Admin::VideosController < ApplicationController
 
     private
     def video_params
-      params.require(:video).permit(:title, :description)
+      params.require(:video).permit(:title, :description, :video, :image)
     end
 end
