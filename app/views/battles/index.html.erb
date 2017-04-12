@@ -33,11 +33,11 @@
           </p>
       </div>
       <% if @left_video.image.present? %>
-        <%= image_tag(@left_video.image.medium.url, class: "thumbnail") %>
+        <%= image_tag(@left_video.image.medium.url, :size => "100x100", class: "thumbnail") %>
       <% else %>
         <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
       <% end %>
-      <%= video_tag(@left_video.video_url.to_s, :controls =>true) %>
+      <%= video_tag(@left_video.video_url.to_s, :size => "300x300", :controls =>true) %>
     </div>
     <div class="col-md-3" style="width: 50%">
       <div class="panel" style="background-color: #efefef; margin-top: 20px;">
@@ -59,11 +59,11 @@
           </p>
       </div>
       <% if @right_video.image.present? %>
-        <%= image_tag(@right_video.image.medium.url, class: "thumbnail") %>
+        <%= image_tag(@right_video.image.medium.url, :size => "100x100",class: "thumbnail") %>
       <% else %>
         <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
       <% end %>
-      <%= video_tag(@right_video.video_url.to_s, :controls =>true) %>
+      <%= video_tag(@right_video.video_url.to_s,:size => "300x300", :controls =>true) %>
     </div>
   </div>
 
