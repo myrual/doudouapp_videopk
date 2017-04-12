@@ -7,7 +7,7 @@
         <td>视频名称</td>
         <td>视频封面</td>
         <td>操作选项</td>
-        <td>留言总数</td>
+        <!-- <td>留言总数</td> -->
         <td>发布者</td>
         <td>发布日期</td>
     </thead>
@@ -31,7 +31,7 @@
             <i class="fa fa-trash-o"></i>
             <% end %>
         </td>
-        <td><%= link_to(v.video_comments.count, admin_video_video_comments_path(v)) %></td>
+        <!-- <td><%#= link_to(v.video_comments.count, admin_video_video_comments_path(v)) %></td> -->
         <td><%= v.user.email %></td>
         <td><%= v.created_at %></td>
     </tr>

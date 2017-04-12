@@ -9,11 +9,14 @@ class BattlesController < ApplicationController
     @left_video = Video.find(@battle.left_video_id)
     @right_video = Video.find(@battle.right_video_id)
 
-    @left_video_comments = VideoComment.where(video_id: @battle.left_video_id).order("created_at DESC")
-    @left_video_comment = VideoComment.new
+    # @left_video_comments = VideoComment.where(video_id: @battle.left_video_id).order("created_at DESC")
+    # @left_video_comment = VideoComment.new
+    #
+    # @right_video_comments = VideoComment.where(video_id: @battle.right_video_id).order("created_at DESC")
+    # @right_video_comment = VideoComment.new
 
-    @right_video_comments = VideoComment.where(video_id: @battle.right_video_id).order("created_at DESC")
-    @right_video_comment = VideoComment.new
+    @battle_comments = BattleComment.where(battle_id: @battle.id)
+    @battle_comment = BattleComment.new
     end
   end
 
