@@ -94,11 +94,11 @@
             <% if current_user %>
               <% if current_user.has_follow_right?(@battle) %>
                 <%= link_to unfollow_right_video_battle_path(@battle), :method => :post do %>
-                  <i class="fa fa-thumbs-up fa-lg" aria-hidden="true" ></i>
+                  <i class="fa fa-thumbs-up fa-lg" aria-hidden="true" style="color:#ff5722;"></i>
                 <% end %>
               <% else %>
                 <%= link_to follow_right_video_battle_path(@battle), :method => :post do %>
-                    <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true" ></i>
+                    <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true" style="color:#ff5722;"></i>
                 <% end %>
               <% end %>
             <% end %>
