@@ -8,4 +8,7 @@ class Battle < ApplicationRecord
   #has_many :right_followers, through: :favor_videos_relationships, source: :user
   has_many :favor_right_video_relationships
   has_many :right_followers, through: :favor_right_video_relationships, source: :user
+
+  has_many :battle_comments
+  has_many :comments_from_user, through: :battle_comments, source: :user
 end

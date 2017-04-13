@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :video_comments
   has_many :comments_for_videos, through: :video_comments, source: :video
 
+  has_many :battle_comments
+  has_many :comments_for_battles, through: :battle_comments, source: :battle
+
   has_many :favor_left_video_relationships
   has_many :favor_left_videos, through: :favor_left_video_relationships, source: :battle
 

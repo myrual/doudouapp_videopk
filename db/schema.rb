@@ -12,6 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20170412154842) do
 
+  create_table "battle_comments", force: :cascade do |t|
+    t.integer  "battle_id"
+    t.integer  "user_id"
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+
   create_table "battles", force: :cascade do |t|
     t.string   "title"
     t.text     "description"

@@ -11,18 +11,20 @@ Rails.application.routes.draw do
       post :unfollow_right_video
     end
 
-    #resources :video_comments, only: [:new, :create]
-    resources :videos do
-      resources :video_comments, only: [:new, :create]
-    end
+    # resources :videos do
+    #   resources :video_comments, only: [:new, :create]
+    # end
+    resources :battle_comments, only: [:new, :create]
   end
 
   namespace :admin do
     resources :videos do
-      resources :video_comments
+      #resources :video_comments
     end
 
-    resources :battles
+    resources :battles do
+      resources :battle_comments
+    end
   end
 
 end
