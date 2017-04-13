@@ -1,71 +1,75 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-6" style="width: 100%">
-        <div class=" panel" style="background-color: #efefef; margin-top: 20px;">
-          <% if @battle.present? %>
-            <h2><%= @battle.title %></h2>
-            <p style="height: 30px; "><%= simple_format(@battle.description) %></p>
-          <% else %>
-              <h2>PK赛尚未开始，敬请期待！</h2>
-          <% end %>
+    <div class="row">
+        <div class="col-md-6" style="width: 100%">
+            <div class=" panel" style="background-color: #efefef; margin-top: 20px;">
+                <% if @battle.present? %>
+                <h2><%= @battle.title %></h2>
+                <p style="height: 30px; "><%= simple_format(@battle.description) %></p>
+            <% else %>
+                <h2>PK赛尚未开始，敬请期待！</h2>
+                <% end %>
+            </div>
         </div>
     </div>
+    <% if @battle.present? %>
+    <div class="row">
+        <div class="col-md-3" style="width: 50%">
+            <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 300px; height :50px;">
+                <ul style="list-style-type:none">
+                    <% if @left_video.image.present? %>
+                    <%= image_tag(current_user.avatar.url(:thumb), :size => "45x45", class: "pull-left") %>
+                <% else %>
+                    <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "thumbnail") %>
+                    <% end %>
+                    <a class="user-name">
+                        <%= @left_video.user.name %>
+                        <% if current_user %>
+                        <% if current_user.has_follow_left?(@battle) %>
+                        <%= link_to unfollow_left_video_battle_path(@battle), :method => :post do %>
+                        <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
+                        <% end %>
+                    <% else %>
+                        <%= link_to follow_left_video_battle_path(@battle), :method => :post do %>
+                        <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
+                        <% end %>
+                        <% end %>
+                        <% end %>
+                        <%= @battle.left_followers.count %>
+                    </a>
+                </ul>
+            </div>
+            <%= video_tag([@left_video.video_url.to_s], :size => "300x300", :controls =>true) %>
+            
+        </div>
+        <div class="col-md-3" style="width: 50%">
+            <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 300px;">
+                <ul style="list-style-type:none">
+                    <% if @right_video.image.present? %>
+                    <%= image_tag(current_user.avatar.url(:thumb), :size => "45x45", class: "pull-left") %>
+                <% else %>
+                    <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "thumbnail") %>
+                    <% end %>
+                    <a class="user-name">
+                        <%= @right_video.user.name %>
+                        <% if current_user %>
+                        <% if current_user.has_follow_right?(@battle) %>
+                        <%= link_to unfollow_right_video_battle_path(@battle), :method => :post do %>
+                        <i class="fa fa-thumbs-up fa-2x" aria-hidden="true" style="color:#ff5722;"></i>
+                        <% end %>
+                    <% else %>
+                        <%= link_to follow_right_video_battle_path(@battle), :method => :post do %>
+                        <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" style="color:#ff5722;"></i>
+                        <% end %>
+                        <% end %>
+                        <% end %>
+                        <%= @battle.right_followers.count %>
+                      </a>
+                    </ul>
+                </div>
+                <%= video_tag([@right_video.video_url.to_s], :size => "300x300", :controls =>true) %>
+     </div>           
   </div>
-  <% if @battle.present? %>
-  <div class="row">
-    <div class="col-md-3" style="width: 50%">
-      <div class="panel" style="background-color: #efefef; margin-top: 20px;">
-          <p><%= @left_video.title %></p>
-          <p>
-          <%= @left_video.user.email %>
-          <% if current_user %>
-            <% if current_user.has_follow_left?(@battle) %>
-              <%= link_to unfollow_left_video_battle_path(@battle), :method => :post do %>
-                <i class="fa fa-thumbs-up fa-lg" aria-hidden="true" ></i>
-              <% end %>
-            <% else %>
-              <%= link_to follow_left_video_battle_path(@battle), :method => :post do %>
-                  <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true" ></i>
-              <% end %>
-            <% end %>
-          <% end %>
-          <%= @battle.left_followers.count %>
-          </p>
-      </div>
-      <% if @left_video.image.present? %>
-        <%= image_tag(@left_video.image.medium.url, class: "thumbnail") %>
-      <% else %>
-        <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
-      <% end %>
-      <%= video_tag(@left_video.video_url.to_s, :controls =>true) %>
-    </div>
-    <div class="col-md-3" style="width: 50%">
-      <div class="panel" style="background-color: #efefef; margin-top: 20px;">
-          <p><%= @right_video.title %></p>
-          <p>
-            <%= @right_video.user.email %>
-            <% if current_user %>
-              <% if current_user.has_follow_right?(@battle) %>
-                <%= link_to unfollow_right_video_battle_path(@battle), :method => :post do %>
-                  <i class="fa fa-thumbs-up fa-lg" aria-hidden="true" ></i>
-                <% end %>
-              <% else %>
-                <%= link_to follow_right_video_battle_path(@battle), :method => :post do %>
-                    <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true" ></i>
-                <% end %>
-              <% end %>
-            <% end %>
-            <%= @battle.right_followers.count %>
-          </p>
-      </div>
-      <% if @right_video.image.present? %>
-        <%= image_tag(@right_video.image.medium.url, class: "thumbnail") %>
-      <% else %>
-        <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
-      <% end %>
-      <%= video_tag(@right_video.video_url.to_s, :controls =>true) %>
-    </div>
-  </div>
+  
 
   <div class="row">
     <div class="col-md-6" style="width: 100%">
@@ -116,5 +120,5 @@
       </div>
     </div>
   </div>
-  <% end %>
-</div>
+        <% end %>
+    </div>

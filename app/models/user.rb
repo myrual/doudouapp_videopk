@@ -8,6 +8,9 @@ class User < ApplicationRecord
     is_admin
   end
 
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
   has_many :videos
   has_many :video_comments
   has_many :comments_for_videos, through: :video_comments, source: :video
