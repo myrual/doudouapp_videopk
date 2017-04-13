@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20170412154842) do
     t.datetime "updated_at", null: false
   end
 
-
   create_table "battles", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
