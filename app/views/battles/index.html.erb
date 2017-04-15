@@ -17,64 +17,75 @@
             <th>
                 <div class="col-md-3" style="width: 50%">
                     <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 300px; ">
-                        <ul style="list-style-type:none">
+                        <!-- <ul style="list-style-type:none"> -->
+                          <span class="pull-left">
                             <% if @left_video.user.avatar_file_name.present? %>
-                            <%= image_tag(@left_video.user.avatar.url(:thumb), :size => "45x45", class: "pull-left img-circle") %>
-                        <% else %>
-                            <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "thumbnail") %>
+                              <%= image_tag(@left_video.user.avatar.url(:thumb), :size => "35x35", class: "img-circle") %>
+                            <% else %>
+                              <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "thumbnail") %>
                             <% end %>
+
                             <!-- <a class="user-name"> -->
                             <%= @left_video.user.name %>
+                          </span>
+
+                          <span class="pull-right">
                             <% if current_user %>
-                            <% if current_user.has_follow_left?(@battle) %>
-                            <%= link_to unfollow_left_video_battle_path(@battle), :method => :post do %>
-                            <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
+                              <% if current_user.has_follow_left?(@battle) %>
+                                <%= link_to unfollow_left_video_battle_path(@battle), :method => :post do %>
+                                  <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
+                                <% end %>
+                              <% else %>
+                                <%= link_to follow_left_video_battle_path(@battle), :method => :post do %>
+                                  <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
+                                <% end %>
+                              <% end %>
+                            <% else %>
+                              <%= link_to new_user_session_path, :method => :post do %>
+                                <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
+                              <% end %>
                             <% end %>
-                        <% else %>
-                            <%= link_to follow_left_video_battle_path(@battle), :method => :post do %>
-                            <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
-                            <% end %>
-                            <% end %>
-                        <% else %>
-                            <%= link_to new_user_session_path, :method => :post do %>
-                            <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
-                            <% end %>
-                            <% end %>
-                            <%= @battle.left_followers.count %>
+
+                          <%= @battle.left_followers.count %>
+                          </span>
                             <!-- </a> -->
-                        </ul>
+                        <!-- </ul> -->
                     </div>
                 </th>
                 <th class="word">vs</th>
                 <th>
                     <div class="col-md-3" style="width: 50%">
                         <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 300px;">
-                            <ul style="list-style-type:none">
+                            <!-- <ul style="list-style-type:none"> -->
+                            <span class="pull-left">
                                 <% if @right_video.user.avatar_file_name.present? %>
-                                <%= image_tag(@right_video.user.avatar.url(:thumb), :size => "45x45", class: "pull-left img-circle") %>
-                            <% else %>
-                                <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "thumbnail") %>
+                                  <%= image_tag(@right_video.user.avatar.url(:thumb), :size => "35x35", class: "img-circle") %>
+                                <% else %>
+                                  <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "thumbnail") %>
                                 <% end %>
                                 <!-- <a class="user-name"> -->
                                 <%= @right_video.user.name %>
+                            </span>
+                            <span class="pull-right">
                                 <% if current_user %>
-                                <% if current_user.has_follow_right?(@battle) %>
-                                <%= link_to unfollow_right_video_battle_path(@battle), :method => :post do %>
-                                <i class="fa fa-thumbs-up fa-2x" aria-hidden="true" style="color:#ff5722;"></i>
-                                <% end %>
-                            <% else %>
-                                <%= link_to follow_right_video_battle_path(@battle), :method => :post do %>
-                                <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" style="color:#ff5722;"></i>
-                                <% end %>
-                                <% end %>
-                            <% else %>
-                                <%= link_to new_user_session_path, :method => :post do %>
-                                <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" style="color:#ff5722;"></i>
-                                <% end %>
+                                  <% if current_user.has_follow_right?(@battle) %>
+                                    <%= link_to unfollow_right_video_battle_path(@battle), :method => :post do %>
+                                      <i class="fa fa-thumbs-up fa-2x" aria-hidden="true" style="color:#ff5722;"></i>
+                                    <% end %>
+                                  <% else %>
+                                    <%= link_to follow_right_video_battle_path(@battle), :method => :post do %>
+                                    <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" style="color:#ff5722;"></i>
+                                    <% end %>
+                                  <% end %>
+                                <% else %>
+                                  <%= link_to new_user_session_path, :method => :post do %>
+                                    <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" style="color:#ff5722;"></i>
+                                  <% end %>
                                 <% end %>
                                 <%= @battle.right_followers.count %>
+                              </span>
                                 <!-- </a> -->
-                            </ul>
+                            <!-- </ul> -->
                         </div>
                     </th>
                 </tr>
@@ -111,11 +122,16 @@
                                                 <li class="list-group-item">
                                                     <div class="row">
                                                         <div class="col-md-2" style="color: #bcbaba">
+                                                          
+                                                          <% if comment.user.name.present? %>
+                                                            <%= comment.user.name %>
+                                                          <% else %>
                                                             <%= comment.user.email %>
+                                                          <% end %>
                                                         </div>
                                                         <br>
-                                                        <div class="col-md-8">
-                                                            <%= comment.comment %>
+                                                        <div class="col-md-2">
+                                                            <%= simple_format(comment.comment) %>
                                                         </div>
                                                     </div>
                                                 </li>

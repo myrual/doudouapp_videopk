@@ -12,13 +12,14 @@
     <%= image_tag(@video.image.thumb.url) %>
     <% end %>
     <div class="group">
-        <%= f.input :image, as: :file %>
+        <%#= f.input :image, as: :file %>
+        <%= f.file_field :image %>（视频封面）<br>
     </div>
     <div class="group">
-        <%=f.file_field :video %>
+        <%=f.file_field :video %> （视频）<br>
     </div>
 
-    <%= f.submit "Submit" , disable_with: "Submiting...", class: "btn btn-primary" %>
-    <%= link_to "Cancel", admin_videos_path, class: "btn btn-primary"%>
+    <%= f.submit "提交" , disable_with: "Submiting...", class: "btn btn-primary" %>
+    <%= link_to "取消", admin_videos_path, class: "btn btn-primary"%>
 </div>
 <% end %>
