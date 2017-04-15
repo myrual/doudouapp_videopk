@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'battles#index'
 
+  get 'about' => 'battles#about'
+
   resources :battles do
     member do
       post :follow_left_video

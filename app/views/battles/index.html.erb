@@ -3,7 +3,7 @@
         <div class="col-md-6" style="width: 100%">
             <div class=" panel" style="background-color: #efefef; margin-top: 20px;">
                 <% if @battle.present? %>
-                <h2 style="margin-left: 10px;"><%= @battle.title %></h2>
+                <h2 style="margin-left: 10px; margin-bottom: 20px;"><%= @battle.title %></h2>
                 <p class="pull-left" style="margin-left: 10px; height: 30px;"><%= simple_format(@battle.description) %></p>
             <% else %>
                 <h2 style="margin-left: 10px;">PK赛尚未开始，敬请期待！</h2>
@@ -20,7 +20,7 @@
                             <% if @left_video.user.avatar_file_name.present? %>
                               <%= image_tag(@left_video.user.avatar.url(:thumb), :size => "35x35", class: "img-circle") %>
                             <% else %>
-                              <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "thumbnail") %>
+                              <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "img-circle") %>
                             <% end %>
                             <%= @left_video.user.name %>
                           </span>
@@ -38,7 +38,7 @@
                       <% if @right_video.user.avatar_file_name.present? %>
                         <%= image_tag(@right_video.user.avatar.url(:thumb), :size => "35x35", class: "img-circle") %>
                       <% else %>
-                        <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "thumbnail img-circle") %>
+                        <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "img-circle") %>
                       <% end %>
 
                   </span>

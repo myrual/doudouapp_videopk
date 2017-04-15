@@ -1,38 +1,39 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6" style="width: 80%">
-        <div class=" panel" style="background-color: #efefef; margin-top: 20px;">
-            <h2><%= @battle.title %></h2>
-            <p style="height: 30px;"><%= simple_format(@battle.description) %></p>
+        <div class="panel" style="background-color: #efefef; margin-top: 20px;">
+            <h2 style="margin-left: 10px; margin-bottom: 20px;"><%= @battle.title %></h2>
+            <p class="pull-left" style="margin-left: 10px; height: 30px;">
+              <%= simple_format(@battle.description) %></p>
         </div>
 
     </div>
   </div>
   <div class="row">
-    <table>
-      <tr>
-          <td>
-              <div class="col-md-3" style="width: 50%">
+    <!-- <table> -->
+      <!-- <tr> -->
+          <!-- <td > -->
+              <div class="col-md-3" style="width: 40%;">
                   <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 300px; ">
                     <span class="pull-left">
                         <%= link_to(@left_video.title, admin_video_path(@left_video)) %> 共计<%= @battle.left_followers.count %>票
                     </span>
                   </div>
                </div>
-          </td>
+          <!-- </td> -->
 
-          <td class="word_light">vs</td>
-              <td>
-                  <div class="col-md-3" style="width: 50%">
+          <!-- <td class="word_light">vs</td> -->
+              <!-- <td> -->
+                  <div class="col-md-3" style="width: 40%;">
                       <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 300px;">
                           <span class="pull-left">
                               <%= link_to(@right_video.title, admin_video_path(@right_video)) %> 共计<%= @battle.right_followers.count %>票
                           </span>
                       </div>
                     </div>
-                  </td>
-              </tr>
-          </table>
+                  <!-- </td> -->
+              <!-- </tr> -->
+          <!-- </table> -->
         </div>
     <div class="row">
         <!-- <table> -->

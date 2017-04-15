@@ -40,6 +40,9 @@ class BattlesController < ApplicationController
     redirect_to :back
   end
 
+  def about
+  end
+
   private
   def find_battle
     @battle = Battle.find(params[:id])
