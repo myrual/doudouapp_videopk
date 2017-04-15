@@ -6,8 +6,8 @@
     <thead>
         <td>PK编号</td>
         <td>PK名称</td>
-        <td>视频一</td>
-        <td>视频二</td>
+        <td>视频一得票数</td>
+        <td>视频二得票数</td>
         <td>留言总数</td>
         <td>操作选项</td>
         <td>发布日期</td>
@@ -19,8 +19,14 @@
             <%= link_to(b.title, admin_battle_path(b)) %>
         </td>
 
-        <td><%= link_to(Video.find(b.left_video_id).title, admin_video_path(b.left_video_id)) %></td>
-        <td><%= link_to(Video.find(b.right_video_id).title, admin_video_path(b.right_video_id)) %></td>
+        <td>
+          <%#= link_to(Video.find(b.left_video_id).title, admin_video_path(b.left_video_id)) %>
+          <%= b.left_followers.count %>
+        </td>
+        <td>
+          <%#= link_to(Video.find(b.right_video_id).title, admin_video_path(b.right_video_id)) %>
+          <%= b.right_followers.count %>
+        </td>
         <td><%= link_to(b.battle_comments.count, admin_battle_battle_comments_path(b)) %></td>
         <td>
             <%= link_to edit_admin_battle_path(b), class: 'btn btn-info btn-xs' do %>

@@ -19,9 +19,11 @@
 @import "bootstrap";
 @import "font-awesome";
 
-.like-upvote {
- width:300px;
+body {
+    //background: #e2dede;
+    //background-image: linear-gradient(45deg, rgba(194, 233, 221, 0.5) 1%, rgba(104, 119, 132, 0.5) 100%), linear-gradient(-45deg, #494d71 0%, rgba(217, 230, 185, 0.5) 80%);
 }
+
 .round-image-50 {
     background-color: white;
     border: 1px solid #d9d9d9;
@@ -44,10 +46,54 @@
 }
 
 .fa-2x {
-  padding-left: 100px;
+  padding-left: 10px;
   padding-top: 10px;
+}
 
+.fa-2x {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.flip {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
 }
 .word {
   font-size: 60px;
+}
+.word_light {
+  font-size: 30px;
+}
+
+.thumbnail {
+    padding:0px;
+}
+.panel {
+	position:relative;
+}
+.panel>.panel-heading:after,.panel>.panel-heading:before{
+	position:absolute;
+	top:11px;left:-16px;
+	right:100%;
+	width:0;
+	height:0;
+	display:block;
+	content:" ";
+	border-color:transparent;
+	border-style:solid solid outset;
+	pointer-events:none;
+}
+.panel>.panel-heading:after{
+	border-width:7px;
+	border-right-color:#f7f7f7;
+	margin-top:1px;
+	margin-left:2px;
+}
+.panel>.panel-heading:before{
+	border-right-color:#ddd;
+	border-width:8px;
 }

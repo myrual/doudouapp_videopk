@@ -21,7 +21,6 @@ class BattlesController < ApplicationController
   end
 
   def follow_left_video
-
     current_user.follow_left!(@battle)
     redirect_to :back
   end

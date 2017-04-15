@@ -12,6 +12,9 @@ class Admin::BattlesController < ApplicationController
     @battle = Battle.find(params[:id])
     @left_video = Video.find(@battle.left_video_id)
     @right_video = Video.find(@battle.right_video_id)
+
+    @left_followers = FavorLeftVideoRelationship.where(battle_id: @battle.id)
+    @right_followers = FavorRightVideoRelationship.where(battle_id: @battle.id)
   end
 
   def new
