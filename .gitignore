@@ -26,3 +26,5 @@ public/uploads
 
 #ignore user pictures
 public/system/users
+
+config/database.yml
