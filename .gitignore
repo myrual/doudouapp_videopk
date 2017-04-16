@@ -28,3 +28,4 @@ public/uploads
 public/system/users
 
 config/database.yml
+config/secrets.yml
