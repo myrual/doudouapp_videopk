@@ -49,30 +49,35 @@
        </table>
        <table width="100%">
          <tr>
-           <td width="10%">
+           <td width="15%">
              <div class="panel" style="margin-left:10px;">
                <span class="pull-left">
                             <% if current_user %>
                               <% if current_user.has_follow_left?(@battle) %>
-                                <%= link_to unfollow_left_video_battle_path(@battle), :method => :post do %>
+                                <!-- <%#= link_to unfollow_left_video_battle_path(@battle), :method => :post do %>
                                   <i class="fa fa-thumbs-up fa-2x" aria-hidden="true" style="color:blue;"></i>
-                                <% end %>
+                                <%# end %> -->
+                                <%= link_to("投票给TA", unfollow_left_video_battle_path(@battle), :method => :post,
+                                              :class => "btn btn-default vote_left") %>
                               <% else %>
-                                <%= link_to follow_left_video_battle_path(@battle), :method => :post do %>
+                                <!-- <%#= link_to follow_left_video_battle_path(@battle), :method => :post do %>
                                   <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" style="color:blue;"></i>
-                                <% end %>
+                                <%# end %> -->
+                                <%= link_to("投票给TA", follow_left_video_battle_path(@battle), :method => :post,
+                                              :class => "btn btn-default vote_left") %>
                               <% end %>
                             <% else %>
-                              <%= link_to new_user_session_path, :method => :post do %>
+                              <!-- <%#= link_to new_user_session_path, :method => :post do %>
                                 <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" style="color:blue;"></i>
-                              <% end %>
+                              <%# end %> -->
+                              <%= link_to("投票给TA", new_user_session_path, :method => :post, :class => "btn btn-default vote_left") %>
                             <% end %>
 
                           <%= @battle.left_followers.count %>
                         </span>
                   </div>
            </td>
-           <td width="80%">
+           <td width="70%">
              <div class="progress" style="margin-top: 20px;">
                <div id="leftBar" class="progress-bar" role="progressbar" style="width:<%= render_left_width(@battle)%>%;
                         background-color:blue; color:blue;">
@@ -84,24 +89,29 @@
                </div>
             </div>
            </td>
-           <td width="10%">
+           <td width="15%">
              <div class="panel" style="margin-right:10px;">
                <span class="pull-right">
                  <%= @battle.right_followers.count %>
                                 <% if current_user %>
                                   <% if current_user.has_follow_right?(@battle) %>
-                                    <%= link_to unfollow_right_video_battle_path(@battle), :method => :post do %>
+                                    <!-- <%#= link_to unfollow_right_video_battle_path(@battle), :method => :post do %>
                                       <i class="fa fa-thumbs-up fa-2x flip" aria-hidden="true" style="color:red;"></i>
-                                    <% end %>
+                                    <%# end %> -->
+                                    <%= link_to("投票给TA", unfollow_right_video_battle_path(@battle), :method => :post,
+                                                  :class => "btn btn-default vote_right") %>
                                   <% else %>
-                                    <%= link_to follow_right_video_battle_path(@battle), :method => :post do %>
+                                    <!-- <%#= link_to follow_right_video_battle_path(@battle), :method => :post do %>
                                     <i class="fa fa-thumbs-o-up fa-2x flip" aria-hidden="true" style="color:red;"></i>
-                                    <% end %>
+                                    <%# end %> -->
+                                    <%= link_to("投票给TA", follow_right_video_battle_path(@battle), :method => :post,
+                                                  :class => "btn btn-default vote_right") %>
                                   <% end %>
                                 <% else %>
-                                  <%= link_to new_user_session_path, :method => :post do %>
+                                  <!-- <%#= link_to new_user_session_path, :method => :post do %>
                                     <i class="fa fa-thumbs-o-up fa-2x flip" aria-hidden="true" style="color:red;"></i>
-                                  <% end %>
+                                  <%# end %> -->
+                                  <%= link_to("投票给TA", new_user_session_path, :method => :post, :class => "btn btn-default vote_right") %>
                                 <% end %>
                               </span>
                 </div>

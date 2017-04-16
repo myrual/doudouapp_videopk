@@ -43,6 +43,9 @@ class BattlesController < ApplicationController
   def about
   end
 
+  def contact
+  end
+
   private
   def find_battle
     @battle = Battle.find(params[:id])

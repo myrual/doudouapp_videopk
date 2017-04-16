@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'about' => 'battles#about'
 
+  get 'contact' => 'battles#contact'
+
   resources :battles do
     member do
       post :follow_left_video

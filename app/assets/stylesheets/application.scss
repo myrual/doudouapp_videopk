@@ -19,10 +19,6 @@
 @import "bootstrap";
 @import "font-awesome";
 
-body {
-    //background: #e2dede;
-    //background-image: linear-gradient(45deg, rgba(194, 233, 221, 0.5) 1%, rgba(104, 119, 132, 0.5) 100%), linear-gradient(-45deg, #494d71 0%, rgba(217, 230, 185, 0.5) 80%);
-}
 
 .navbar {
   margin-bottom: 0px;
@@ -103,13 +99,39 @@ body {
 	border-width:8px;
 }
 
+.vote_left {
+  background: blue;
+  // padding: 1.2em 1.5em;
+  border: none;
+  //font-weight: bold;
+  color: #fff;
+  -webkit-transition: background .3s ease;
+          transition: background .3s ease;
+}
+
+.vote_left:hover {
+    background: #2d3fc6;
+    color: #fff; }
+
+.vote_right {
+      background: red;
+      // padding: 1.2em 1.5em;
+      border: none;
+      //font-weight: bold;
+      color: #fff;
+      -webkit-transition: background .3s ease;
+              transition: background .3s ease;
+    }
+
+.vote_right:hover {
+        background: #b71919;
+        color: #fff; }
+
 .page-footer {
-  width: 50%;
   margin: 0 auto;
   padding-top: 30px;
   padding-bottom: 30px;
   border-top: 1px solid #D3D3D3;
   background-color: #f9f9f9;
-  width: 100%
-  // background-color:
+  width: 100%;
 }
