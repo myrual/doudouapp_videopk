@@ -78,6 +78,7 @@
                   </div>
            </td>
            <td width="70%">
+             <% if @battle.left_followers.count > 0 || @battle.right_followers.count > 0 %>
              <div class="progress" style="margin-top: 20px;">
                <div id="leftBar" class="progress-bar" role="progressbar" style="width:<%= render_left_width(@battle)%>%;
                         background-color:blue; color:blue;">
@@ -88,6 +89,12 @@
                  Right
                </div>
             </div>
+            <% else %>
+            <div class="progress" style="margin-top: 20px;">
+              <div id="leftBar" class="progress-bar" role="progressbar" style="width:100%; background-color:#efefef;">
+              </div>
+            </div>
+            <% end %>
            </td>
            <td width="15%">
              <div class="panel" style="margin-right:10px;">
