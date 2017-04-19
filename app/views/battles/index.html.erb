@@ -144,13 +144,13 @@
 <tr>
     <th>
         <div class="col-md-3">
-            <%= video_tag([@left_video.video_url.to_s], :size => "450x450", :controls =>true) %>
+            <%= video_tag([@left_video.video_url.to_s], :poster => @left_video.image_url, :controls =>true) %>
         </div>
     </th>
     <!-- <th class="word"></th> -->
     <th>
         <div class="col-md-3">
-            <%= video_tag([@right_video.video_url.to_s], :size => "450x450", :controls =>true) %>
+            <%= video_tag([@right_video.video_url.to_s], :poster => @right_video.image_url, :controls =>true) %>
         </div>
     </th>
 </tr>

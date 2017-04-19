@@ -23,7 +23,7 @@ body {
   position: relative;
   min-height: 100%;
   margin-top: 50px;
-  margin-bottom: 100px; //和footer的高度一样
+  margin-bottom: 80px; //和footer的高度一样
 }
 
 .navbar {
@@ -143,10 +143,10 @@ body {
 .page-footer {
   position: fixed;
   bottom: 0;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border-top: 1px solid #D3D3D3;
   background-color: #f9f9f9;
   width: 100%;
-  height: 100px;
+  height: 80px;
 }
