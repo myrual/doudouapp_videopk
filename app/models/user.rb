@@ -47,4 +47,8 @@ class User < ApplicationRecord
   def unfollow_right!(battle)
     favor_right_videos.delete(battle)
   end
+
+  def display_name
+    self.email.split("@").first
+  end
 end

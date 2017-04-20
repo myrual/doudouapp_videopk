@@ -1,4 +1,4 @@
-<div class="form-group" style="width: 800px; ">
+<div class="form-group">
     <%= simple_form_for [:admin, @video] do |f| %>
     <div class="group">
         <%= f.input :title, :label => "视频名称" %>
@@ -18,8 +18,10 @@
     <div class="group">
         <%=f.file_field :video %> （视频）<br>
     </div>
-
-    <%= f.submit "提交" , disable_with: "Submiting...", class: "btn btn-primary" %>
-    <%= link_to "取消", admin_videos_path, class: "btn btn-primary"%>
+    <br>
+    <div class="form-actions">
+      <%= f.submit "提交" , disable_with: "Submiting...", class: "btn btn-success" %> 
+      <%= link_to "取消", admin_videos_path, class: "btn btn-default"%>
+    </div>
 </div>
 <% end %>
