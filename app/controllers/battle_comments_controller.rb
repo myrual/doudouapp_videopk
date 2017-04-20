@@ -10,7 +10,7 @@ class BattleCommentsController < ApplicationController
 
     battle = Battle.find(params[:battle_id])
     @battle_comment.battle = battle
-    @battle_comment.save
+    @battle_comment.save!
 
     redirect_to :back
   end

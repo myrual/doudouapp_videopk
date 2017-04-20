@@ -21,7 +21,7 @@ class Admin::VideosController < ApplicationController
       @video = Video.create(video_params)
       @video.user = current_user
 
-      if @video.save
+      if @video.save!
         redirect_to admin_videos_path, notice: 'Video Created!'
       else
         render :new
