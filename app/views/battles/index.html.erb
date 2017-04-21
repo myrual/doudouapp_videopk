@@ -131,11 +131,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading" style="color: #bcbaba">
                                 <strong>
-                                    <% if comment.user.name.present? %>
                                     <%= comment.user.display_name %>
-                                <% else %>
-                                    <%= comment.user.email %>
-                                    <% end %>
                                 </strong>
                             </div>
                             <div class="panel-body">
