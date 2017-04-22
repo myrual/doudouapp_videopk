@@ -97,49 +97,49 @@
 
 <br><br>
 <div class="row comments">
-  <div class="col-xs-12 ">
-    <div class="comments-title">
-      精选留言
-      <span class="pull-right">
-        <%= link_to new_battle_battle_comment_path(@battle) do %>
-          写评论 <i class="fa fa-pencil" aria-hidden="true"></i>
-        <% end %>
-      </span>
-    </div>
-    <br><br>
-    <% if @battle_comments.blank? %>
-      还没有人评论 ~
-    <% else %>
-    <% @battle_comments.each do |comment| %>
-    <div class="row comment-list">
-      <div class="col-xs-2">
-        <div class="thumbnail1" style="margin-top:5px;">
-            <% if comment.user.avatar_file_name.present? %>
-            <%= image_tag(comment.user.avatar.url(:thumb), :size => "30x30", class: "img-circle") %>
-        <% else %>
-            <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "img-circle") %>
-            <% end %>
-        </div>
+   <div class="col-xs-12 ">
+     <div class="comments-title">
+       精选留言
+       <span class="pull-right">
+         <%= link_to new_battle_battle_comment_path(@battle) do %>
+           写评论 <i class="fa fa-pencil" aria-hidden="true"></i>
+         <% end %>
+       </span>
+     </div>
+     <br><br>
+     <% if @battle_comments.blank? %>
+       还没有人评论 ~
+     <% else %>
+     <% @battle_comments.each do |comment| %>
+     <div class="row comment-list">
+       <div class="col-xs-2">
+         <div class="thumbnail1" style="margin-top:5px;">
+             <% if comment.user.avatar_file_name.present? %>
+             <%= image_tag(comment.user.avatar.url(:thumb), :size => "30x30", class: "img-circle") %>
+         <% else %>
+             <%= image_tag("http://placehold.it/100x100&text=No Pic", class: "img-circle") %>
+             <% end %>
+          </div>
+       </div>
+       <div class="col-xs-10">
+         <p>
+           <% if comment.user.name.present? %>
+             <%= comment.user.name %>
+           <% else %>
+             <%= comment.user.display_name %>
+           <% end %>
+         </p>
+         <p>
+           <%= simple_format(comment.comment) %>
+         </p>
+         <p>
+           <%= comment.created_at.strftime("%Y年%-m月%d日") %>
+         </p>
+       </div>
       </div>
-      <div class="col-xs-10">
-        <p>
-          <% if comment.user.name.present? %>
-            <%= comment.user.name %>
-          <% else %>
-            <%= comment.user.display_name %>
-          <% end %>
-        </p>
-        <p>
-          <%= simple_format(comment.comment) %>
-        </p>
-        <p>
-          <%= comment.created_at.strftime("%Y年%-m月%d日") %>
-        </p>
-      </div>
-    </div>
-    <% end %>
-    <% end %>
-  </div>
+     <% end %>
+     <% end %>
+   </div>
 </div>
 
 <% end %>

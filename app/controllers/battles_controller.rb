@@ -21,7 +21,11 @@ class BattlesController < ApplicationController
   end
 
   def follow_left_video
-    current_user.follow_left!(@battle)
+    if current_user.has_follow_right?(@battle)
+      flash[:warning] = "您以及给右边视频投票！不能同时投两边！"
+    else
+      current_user.follow_left!(@battle)
+    end
     redirect_to :back
   end
 
@@ -31,7 +35,11 @@ class BattlesController < ApplicationController
   end
 
   def follow_right_video
-    current_user.follow_right!(@battle)
+    if current_user.has_follow_left?(@battle)
+      flash[:warning] = "您以及给左边视频投票！不能同时投两边！"
+    else
+      current_user.follow_right!(@battle)
+    end
     redirect_to :back
   end
 
