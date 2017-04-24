@@ -1,12 +1,13 @@
 CarrierWave.configure do |config|
   if Rails.env.production?
-    config.storage = :upyun
-    config.upyun_username = ENV["UPYUN_OPERATOR_ID"]
-    config.upyun_password = ENV["UPYUN_OPERATOR_PASSWORD"]
-    config.upyun_bucket = ENV["UPYUN_BUCKET"]
-  # upyun_bucket_domain 以后将会弃用，请改用 upyun_bucket_host
-  # config.upyun_bucket_domain = "my_bucket.files.example.com"
-    config.upyun_bucket_host = ENV["UPYUN_HOST"]
+    config.fog_credentials = {
+      provider:               'AWS',
+      aws_access_key_id:      ENV["AWS_ACCESS_KEY_ID"],
+      aws_secret_access_key:  ENV["AWS_SECRET_ACCESS_KEY"],
+      region:                 ENV["AWS_REGION"]
+    }
+    config.storage :fog
+    config.fog_directory = ENV["AWS_BUCKET_NAME"]
   else
     config.storage :file
   end
