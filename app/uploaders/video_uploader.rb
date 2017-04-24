@@ -9,7 +9,8 @@ class VideoUploader < CarrierWave::Uploader::Base
   # storage :fog
 
   if Rails.env.production?
-      storage :fog
+      #storage :fog
+      storage :upyun
     elsif Rails.env.development?
       storage :file
     end
