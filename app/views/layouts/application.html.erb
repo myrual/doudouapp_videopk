@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <title>短视频对战</title>
+    <title>斗斗短视频，不服来战！</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -77,6 +77,9 @@
   </head>
 
   <body>
+    <div style='display:none;'>
+     <img src="<%= image_url 'logo.jpeg' %>" />
+    </div>
     <div class="container-fluid">
       <%= render "common/navbar" %>
       <%= render "common/flashes" %>
