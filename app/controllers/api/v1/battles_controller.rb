@@ -1,4 +1,10 @@
 class Api::V1::BattlesController < ApplicationController
+  skip_before_action :verify_authenticity_token, if: :json_request?
+
+
+  def json_request?
+    request.format.json?
+  end
   #before_action :authenticate_user!, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
   before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
   acts_as_token_authentication_handler_for User , only: [:index, :show, :follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
