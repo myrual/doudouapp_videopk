@@ -38,6 +38,10 @@ class Api::V1::BattlesController < ApplicationController
         status: 400
       }
 
+    elsif current_user.has_follow_left?(@battle)
+      render json: {
+        status: 204
+      }
     else
       current_user.follow_left!(@battle)
       render json: {
@@ -60,7 +64,10 @@ class Api::V1::BattlesController < ApplicationController
         error: "already vote left, can not vote again",
         status: 400
       }
-
+    elsif current_user.has_follow_right?(@battle)
+      render json: {
+        status: 204
+      }
     else
       current_user.follow_right!(@battle)
       render json: {
