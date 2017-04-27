@@ -31,6 +31,7 @@ class Api::V1::BattlesController < ApplicationController
   end
 
   def follow_left_video
+    respond_to :json
     if current_user.has_follow_right?(@battle)
       render json: {
         error: "already vote right, can not vote again",
@@ -43,7 +44,6 @@ class Api::V1::BattlesController < ApplicationController
         status: 200
       }
     end
-    redirect_to :back
   end
 
   def unfollow_left_video
