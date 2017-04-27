@@ -32,23 +32,32 @@ class Api::V1::BattlesController < ApplicationController
 
   def follow_left_video
     if current_user.has_follow_right?(@battle)
-      flash[:warning] = "已经给右边视频投票！不能同时投两边！"
+      render json: {
+        error: "already vote right, can not vote again",
+        status: 400
+      }
+
     else
       current_user.follow_left!(@battle)
+      render json: {
+        status: 200
+      }
     end
     redirect_to :back
   end
 
   def unfollow_left_video
     current_user.unfollow_left!(@battle)
-    redirect_to :back
+      render json: {
+        status: 200
+      }
   end
 
   def follow_right_video
     respond_to :json
     if current_user.has_follow_left?(@battle)
       render json: {
-        error: "already vote left, can not vote right again",
+        error: "already vote left, can not vote again",
         status: 400
       }
 
@@ -63,7 +72,9 @@ class Api::V1::BattlesController < ApplicationController
 
   def unfollow_right_video
     current_user.unfollow_right!(@battle)
-    redirect_to :back
+      render json: {
+        status: 200
+      }
   end
 
   def about
