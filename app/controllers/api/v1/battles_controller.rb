@@ -44,9 +44,11 @@ class Api::V1::BattlesController < ApplicationController
       }
     else
       current_user.follow_left!(@battle)
-      render json: {
-        status: 200
-      }
+      @left_video = Video.find(@battle.left_video_id)
+      @right_video = Video.find(@battle.right_video_id)
+
+      @latestBattle = {id:@battle.id, title:@battle.title, leftImage:@left_video.image.thumb.to_s, leftVideo:@left_video.video_url.to_s, rightImage:@right_video.image.thumb.to_s, rightVideo:@right_video.video_url.to_s, leftCount: @battle.left_followers.count, rightCount:@battle.right_followers.count,  status: 200}
+      render json: @latestBattle
     end
   end
 
@@ -70,9 +72,11 @@ class Api::V1::BattlesController < ApplicationController
       }
     else
       current_user.follow_right!(@battle)
-      render json: {
-        status: 200
-      }
+      @left_video = Video.find(@battle.left_video_id)
+      @right_video = Video.find(@battle.right_video_id)
+
+      @latestBattle = {id:@battle.id, title:@battle.title, leftImage:@left_video.image.thumb.to_s, leftVideo:@left_video.video_url.to_s, rightImage:@right_video.image.thumb.to_s, rightVideo:@right_video.video_url.to_s, leftCount: @battle.left_followers.count, rightCount:@battle.right_followers.count,  status: 200}
+      render json: @latestBattle
     end
 
   end
