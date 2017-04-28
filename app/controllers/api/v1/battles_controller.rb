@@ -13,22 +13,27 @@ class Api::V1::BattlesController < ApplicationController
 
 
   def index
-    respond_to :json
-    @battle = Battle.recent.first
+    if verify_api_only == true
+      respond_to :json
+      @battle = Battle.recent.first
 
-    if @battle.present?
-    @left_video = Video.find(@battle.left_video_id)
-    @right_video = Video.find(@battle.right_video_id)
+      if @battle.present?
+        @left_video = Video.find(@battle.left_video_id)
+        @right_video = Video.find(@battle.right_video_id)
 
-    @latestBattle = {id:@battle.id, title:@battle.title, leftImage:@left_video.image.thumb.to_s, leftVideo:@left_video.video_url.to_s, rightImage:@right_video.image.thumb.to_s, rightVideo:@right_video.video_url.to_s, leftCount: @battle.left_followers.count, rightCount:@battle.right_followers.count}
-    # @left_video_comments = VideoComment.where(video_id: @battle.left_video_id).order("created_at DESC")
-    # @left_video_comment = VideoComment.new
-    #
-    # @right_video_comments = VideoComment.where(video_id: @battle.right_video_id).order("created_at DESC")
-    # @right_video_comment = VideoComment.new
+        @latestBattle = {id:@battle.id, title:@battle.title, leftImage:@left_video.image.thumb.to_s, leftVideo:@left_video.video_url.to_s, rightImage:@right_video.image.thumb.to_s, rightVideo:@right_video.video_url.to_s, leftCount: @battle.left_followers.count, rightCount:@battle.right_followers.count}
+        # @left_video_comments = VideoComment.where(video_id: @battle.left_video_id).order("created_at DESC")
+        # @left_video_comment = VideoComment.new
+        #
+        # @right_video_comments = VideoComment.where(video_id: @battle.right_video_id).order("created_at DESC")
+        # @right_video_comment = VideoComment.new
 
-    @battle_comments = BattleComment.where(battle_id: @battle.id)
-    @battle_comment = BattleComment.new
+        @battle_comments = BattleComment.where(battle_id: @battle.id)
+        @battle_comment = BattleComment.new
+      end
+
+    else
+      render status: :unauthorized
     end
   end
 
