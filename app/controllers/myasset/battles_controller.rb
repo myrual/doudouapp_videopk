@@ -23,6 +23,7 @@ class Myasset::BattlesController < ApplicationController
 
   def create
     @battle = Battle.create(battle_params)
+    @battle.user_id = current_user.id
 
     if @battle.save
       redirect_to myasset_battles_path, notice: 'Battle Created!'
