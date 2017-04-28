@@ -16,7 +16,7 @@
               <div class="col-md-3" style="width: 40%;">
                   <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 300px; ">
                     <span class="pull-left">
-                        <%= link_to(@left_video.title, admin_video_path(@left_video)) %> 共计<%= @battle.left_followers.count %>票
+                        <%= link_to(@left_video.title, myasset_video_path(@left_video)) %> 共计<%= @battle.left_followers.count %>票
                     </span>
                   </div>
                </div>
@@ -27,7 +27,7 @@
                   <div class="col-md-3" style="width: 40%;">
                       <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 300px;">
                           <span class="pull-left">
-                              <%= link_to(@right_video.title, admin_video_path(@right_video)) %> 共计<%= @battle.right_followers.count %>票
+                              <%= link_to(@right_video.title, myasset_video_path(@right_video)) %> 共计<%= @battle.right_followers.count %>票
                           </span>
                       </div>
                     </div>

@@ -4,6 +4,7 @@ class Battle < ApplicationRecord
   validates :right_video_id, presence: true
 
   scope :recent, -> { order('created_at desc') }
+  belongs_to :user
 
   has_many :favor_left_video_relationships
   has_many :left_followers, through: :favor_left_video_relationships, source: :user

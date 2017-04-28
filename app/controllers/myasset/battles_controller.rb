@@ -1,11 +1,10 @@
-class Admin::BattlesController < ApplicationController
+class Myasset::BattlesController < ApplicationController
   before_action :authenticate_user!
-  before_action :admin_required
 
-  layout "admin"
+  layout "myasset"
 
   def index
-    @battles = Battle.all
+    @battles = Battle.where(user_id: current_user.id)
   end
 
   def show
@@ -24,9 +23,10 @@ class Admin::BattlesController < ApplicationController
 
   def create
     @battle = Battle.create(battle_params)
+    @battle.user_id = current_user.id
 
     if @battle.save
-      redirect_to admin_battles_path, notice: 'Battle Created!'
+      redirect_to myasset_battles_path, notice: 'Battle Created!'
     else
       render :new
     end
@@ -41,7 +41,7 @@ class Admin::BattlesController < ApplicationController
     @battle = Battle.find(params[:id])
 
     if @battle.update(battle_params)
-      redirect_to admin_battles_path, notice: 'Battle updated!'
+      redirect_to myasset_battles_path, notice: 'Battle updated!'
     else
       render :edit
     end
@@ -51,7 +51,7 @@ class Admin::BattlesController < ApplicationController
     @battle = Battle.find(params[:id])
     @battle.destroy
 
-    redirect_to admin_battles_path,  alert: 'Battle deleted!'
+    redirect_to myasset_battles_path,  alert: 'Battle deleted!'
   end
 
   private
