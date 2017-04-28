@@ -6,8 +6,10 @@ class Api::V1::BattlesController < ApplicationController
     request.format.json?
   end
   #before_action :authenticate_user!, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
+  
+  before_action :verify_api_only, only:[:index, :show]
   before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
-  acts_as_token_authentication_handler_for User , only: [:index, :show, :follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
+  acts_as_token_authentication_handler_for User , only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
 
 
   def index
@@ -97,5 +99,8 @@ class Api::V1::BattlesController < ApplicationController
   private
   def find_battle
     @battle = Battle.find(params[:id])
+  end
+  def verify_api_only
+     params[:appid].present? and params[:appsecret].present?
   end
 end
