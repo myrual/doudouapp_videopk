@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6" style="width: 80%">
+        <div class="panel" style="background-color: #efefef; margin-top: 20px;">
+            <h2 style="margin-left: 10px; margin-bottom: 20px;"><%= @battle.title %></h2>
+            <p class="pull-left" style="margin-left: 10px; height: 30px;">
+              <%= simple_format(@battle.description) %></p>
+        </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <!-- <table> -->
+      <!-- <tr> -->
+          <!-- <td > -->
+              <div class="col-md-3" style="width: 40%;">
+                  <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 300px; ">
+                    <span class="pull-left">
+                        <%= link_to(@left_video.title, admin_video_path(@left_video)) %> 共计<%= @battle.left_followers.count %>票
+                    </span>
+                  </div>
+               </div>
+          <!-- </td> -->
+
+          <!-- <td class="word_light">vs</td> -->
+              <!-- <td> -->
+                  <div class="col-md-3" style="width: 40%;">
+                      <div class="panel" style="background-color: #efefef; margin-top: 20px; width: 300px;">
+                          <span class="pull-left">
+                              <%= link_to(@right_video.title, admin_video_path(@right_video)) %> 共计<%= @battle.right_followers.count %>票
+                          </span>
+                      </div>
+                    </div>
+                  <!-- </td> -->
+              <!-- </tr> -->
+          <!-- </table> -->
+        </div>
+    <div class="row">
+        <!-- <table> -->
+              <!-- <tr> -->
+                  <!-- <td> -->
+                      <div class="col-md-3" style="width: 40%;">
+                        <div>
+                          <%= video_tag([@left_video.video_url.to_s], :size => "300x300", :poster => @left_video.image_url, :controls =>true) %>
+                        </div>
+                        <div class="panel with-nav-tabs panel-default" style="width: 50%";>
+                            <div class="panel-heading">
+                                投票人
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane active">
+                                    <% @left_followers.each do |left_follower| %>
+                                    <div class="reviews">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <%= left_follower.user.email %>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  <!-- </td> -->
+                  <!-- <td class="word_light"></td> -->
+                  <!-- <td> -->
+                      <div class="col-md-3" style="width: 40%";>
+                        <div>
+                          <%= video_tag([@right_video.video_url.to_s], :size => "300x300", :poster => @right_video.image_url, :controls =>true) %>
+                        </div>
+                        <div class="panel with-nav-tabs panel-default" style="width: 50%";>
+                            <div class="panel-heading">
+                                投票人
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane active">
+                                    <% @right_followers.each do |right_follower| %>
+                                    <div class="reviews">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <%= right_follower.user.email %>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  <!-- </td> -->
+                <!-- </tr> -->
+    <!-- </talbe> -->
+  </div>
+</div>

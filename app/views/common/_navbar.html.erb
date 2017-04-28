@@ -43,6 +43,8 @@
                     <ul class="dropdown-menu">
                         <% if current_user.admin? %>
                         <li><%= link_to("管理员选单", admin_videos_path) %></li>
+                        <% else %>
+                        <li><%= link_to("我的视频和PK选单", myasset_videos_path) %></li>
                         <% end %>
                         <li><%= link_to '修改个人资料',edit_user_registration_path %></li>
                         <li><%= link_to("退出", destroy_user_session_path, method: :delete) %></li>
