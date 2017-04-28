@@ -1,0 +1,40 @@
+<div>
+  <span class="pull-right" style="margin-top:-25px; margin-bottom: 10px;">
+      <%= link_to("添加视频", new_myasset_video_path, :class => "btn btn-xs btn-default") %>
+  </span>
+  <br>
+  <% @videos.each do |v| %>
+  <div class="row">
+    <div class="col-xs-8">
+      <p><%= link_to(v.title, myasset_video_path(v)) %></td></p>
+      <p>
+        <%= link_to myasset_video_path(v) do %>
+          <% if v.image.present? %>
+            <%= image_tag(v.image.thumb.url, class: "thumbnail") %>
+          <% else %>
+            <%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail") %>
+          <% end %>
+        <% end %>
+      </p>
+    </div>
+    <div class="col-xs-4" style="padding-top: 60px;">
+      <p>
+        <%= link_to edit_myasset_video_path(v), class: 'btn btn-default btn-xs' do %>
+          <i class="fa fa-pencil"></i>
+        <% end %>
+        <%= link_to myasset_video_path(v), :method => :delete, :data => {:confirm => "Are your sure?" }, class: 'btn btn-danger btn-xs' do %>
+          <i class="fa fa-trash-o"></i>
+        <% end %>
+      </p>
+      <p>
+        <%= v.user.display_name %>
+      </p>
+
+      <p>
+        <%= v.user.created_at.strftime("%d %b. %Y") %>
+      </p>
+    </div>
+
+  </div>
+  <% end %>
+</div>
