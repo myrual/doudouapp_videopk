@@ -7,9 +7,9 @@
   <p><%= simple_format(c.comment) %></p>
   <p class="pull-right">
     <%= c.created_at.strftime("%d %b. %Y") %>
-    <%= link_to edit_admin_battle_battle_comment_path(@battle, c), class: 'btn btn-info btn-xs' do %>
+    <%= link_to edit_myasset_battle_battle_comment_path(@battle, c), class: 'btn btn-info btn-xs' do %>
     <i class="fa fa-pencil"></i><% end %>
-    <%= link_to admin_battle_battle_comment_path(@battle, c), :method => :delete, :data => {:confirm => "确定删除评论吗?" }, class: 'btn btn-danger btn-xs' do %>
+    <%= link_to myasset_battle_battle_comment_path(@battle, c), :method => :delete, :data => {:confirm => "确定删除评论吗?" }, class: 'btn btn-danger btn-xs' do %>
     <i class="fa fa-trash-o"></i>
     <% end %>
   </p>
@@ -17,6 +17,6 @@
   <% end %>
   <br>
   <div class="pull-right" style="margin-top: 10px; margin-bottom:10px;">
-    <%= link_to "返回", admin_battles_path, class: "btn btn-default" %>
+    <%= link_to "返回", myasset_battles_path, class: "btn btn-default" %>
   </div>
 </div>
