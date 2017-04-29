@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <%= csrf_meta_tags %>
+  <title>短视频对战管理</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container-fluid admin-panel">
+    <%= render "common/navbar" %>
+
+    <div class="row">
+      <div class="col-xs-8 lists">
+        <span> <%= link_to("我的视频列表", myasset_videos_path) %> </span> |
+        <span> <%= link_to("我的PK列表", myasset_battles_path) %> </span>  |
+      </div>
+      <div class="col-xs-12">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+  <%= render "common/footer" %>
+</body>
+</html>

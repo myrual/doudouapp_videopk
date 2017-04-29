@@ -34,6 +34,18 @@ Rails.application.routes.draw do
 
     resources :users
   end
+  namespace :myasset do
+    resources :videos do
+      #resources :video_comments
+    end
+
+    resources :battles do
+      resources :battle_comments
+    end
+
+    resources :users
+  end
+
   namespace :api do
     namespace :v1 do
       resources :battles do

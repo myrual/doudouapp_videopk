@@ -1,0 +1,19 @@
+<div class="form-group" style="width: 800px; ">
+    <%= simple_form_for [:myasset, @battle] do |f| %>
+    <div class="group">
+        <%= f.input :title, :label => "PK赛名称" %>
+    </div>
+    <div class="group">
+        <%= f.input :description, :label => "PK赛介绍" %>
+    </div>
+    <div class="group">
+      <%= f.input :left_video_id, :label => "左边视频", :collection => Video.all.map{ |x| [x.title, x.id] },  :prompt => ""  %>
+    </div>
+    <div class="group">
+      <%= f.input :right_video_id, :label => "右边视频", :collection => Video.all.map{ |x| [x.title, x.id] },  :prompt => "" %>
+    </div>
+    <br>
+    <%= f.submit "提交" , disable_with: "Submiting...", class: "btn btn-primary" %>
+    <%= link_to "取消", myasset_battles_path, class: "btn btn-primary"%>
+</div>
+<% end %>
