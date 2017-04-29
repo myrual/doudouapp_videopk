@@ -1,6 +1,14 @@
 <footer class="container page-footer">
-    <p class="text-center">Copyright ©2017 短视频对战
+    <!-- <p class="text-center">Copyright ©2017 短视频对战
         <br> All Rights Reserved.
         <a href="https://github.com/jiezhon/videopk" target=_new>Github</a>
-    </p>
+    </p> -->
+    <div class="row">
+      <div class="col-xs-6 text-center">
+        <%= link_to("上传视频", new_myasset_video_path) %>
+      </div>
+      <div class="col-xs-6 text-center">
+        <%= link_to("发起PK", new_myasset_battle_path) %>
+      </div>
+    </div>
 </footer>
