@@ -22,10 +22,14 @@
       PK发布于： <%= b.created_at.strftime("%d %b. %Y") %>
     </div>
     <div class="col-xs-4 text-center">
-      <%= link_to edit_myasset_battle_path(b), class: 'btn btn-default btn-xs' do %>
-      <i class="fa fa-pencil"></i><% end %>
-      <%= link_to myasset_battle_path(b), :method => :delete, :data => {:confirm => "Are your sure?" }, class: 'btn btn-danger btn-xs' do %>
-      <i class="fa fa-trash-o"></i>
+      <% if b.is_hidden %>
+        <%= link_to edit_myasset_battle_path(b), class: 'btn btn-default btn-xs' do %>
+        <i class="fa fa-pencil"></i><% end %>
+        <%= link_to myasset_battle_path(b), :method => :delete, :data => {:confirm => "Are your sure?" }, class: 'btn btn-danger btn-xs' do %>
+        <i class="fa fa-trash-o"></i>
+        <% end %>
+      <% else %>
+        比赛正在进行中
       <% end %>
     </div>
   </div>

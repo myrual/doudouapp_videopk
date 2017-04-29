@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     end
 
     resources :battles do
+      member do
+        post :publish
+        post :hidden
+      end
       resources :battle_comments
     end
 
@@ -43,7 +47,7 @@ Rails.application.routes.draw do
       resources :battle_comments
     end
 
-    resources :users
+    #resources :users
   end
 
   namespace :api do

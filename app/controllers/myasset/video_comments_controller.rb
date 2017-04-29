@@ -1,6 +1,6 @@
-class Admin::VideoCommentsController < ApplicationController
+class Myasset::VideoCommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :admin_required
+  #before_action :admin_required
 
   def index
     @video = Video.find(params[:video_id])

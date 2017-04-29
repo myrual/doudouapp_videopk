@@ -3,7 +3,7 @@ class BattlesController < ApplicationController
   before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
 
   def index
-    @battle = Battle.recent.first
+    @battle = Battle.published.recent.first
 
     if @battle.present?
     @left_video = Video.find(@battle.left_video_id)

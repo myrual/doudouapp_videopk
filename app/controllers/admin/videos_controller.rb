@@ -22,7 +22,7 @@ class Admin::VideosController < ApplicationController
       @video.user = current_user
 
       if @video.save!
-        redirect_to admin_videos_path, notice: 'Video Created!'
+        redirect_to admin_videos_path, notice: '视频已创建!'
       else
         render :new
       end
@@ -36,16 +36,21 @@ class Admin::VideosController < ApplicationController
       @video = Video.find(params[:id])
 
       if @video.update(video_params)
-        redirect_to admin_videos_path, notice: 'Video updated!'
+        redirect_to admin_videos_path, notice: '视频已更新!'
       else
         render :edit
       end
     end
 
     def destroy
-      @video = Video.find(params[:id])
-      @video.destroy
-      redirect_to admin_videos_path, alert: 'Video deleted'
+      @battles = Battle.where("left_video_id = ? OR right_video_id = ?", params[:id], params[:id])
+      if @battles.present?
+        redirect_to admin_videos_path, alert: '视频已经被用于比赛， 不能直接删除！'
+      else
+        @video = Video.find(params[:id])
+        @video.destroy
+        redirect_to admin_videos_path, alert: '视频已删除'
+      end
     end
 
     private

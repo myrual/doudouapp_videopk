@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170428091510) do
+ActiveRecord::Schema.define(version: 20170429050846) do
 
   create_table "battle_comments", force: :cascade do |t|
     t.integer  "battle_id"
@@ -25,9 +25,10 @@ ActiveRecord::Schema.define(version: 20170428091510) do
     t.text     "description"
     t.integer  "left_video_id"
     t.integer  "right_video_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "user_id"
+    t.boolean  "is_hidden",      default: true
     t.index ["user_id"], name: "index_battles_on_user_id"
   end
 
