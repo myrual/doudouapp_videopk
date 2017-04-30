@@ -10,12 +10,8 @@
 <div class="row">
     <div class="col-xs-12" style="width: 100%">
         <div class="panel1">
-            <% if battle.present? %>
-                <h4 align="center"><%= battle.title %></h4>
-                <!-- <p class="pull-left" style="margin-left: 10px; height: 30px;"><%#= simple_format(battle.description) %></p> -->
-            <% else %>
-                <h2 style="margin-left: 10px; color: #999;">PK赛尚未开始，敬请期待！</h2>
-            <% end %>
+            <h4 align="center"><%= battle.title %></h4>
+            <!-- <p class="pull-left" style="margin-left: 10px; height: 30px;"><%#= simple_format(battle.description) %></p> -->
         </div>
     </div>
 </div>
@@ -154,5 +150,12 @@
 <div class="text-center">
   <%= will_paginate @battles, :previous_label => t("上一页"), :next_label => t("下一页") %>
 </div>
-
+<% else %>
+<div class="row">
+    <div class="col-xs-12" style="width: 100%">
+        <div class="panel1">
+            <h2 style="margin-left: 10px; color: #999;">PK赛尚未开始，敬请期待！</h2>
+        </div>
+    </div>
+</div>
 <% end %>
