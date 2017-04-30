@@ -22,6 +22,13 @@
       PK发布于： <%= b.created_at.strftime("%d %b. %Y") %>
     </div>
     <div class="col-xs-4 text-center">
+      <% if b.is_hidden %>
+        <%= link_to publish_admin_battle_path(b), :method => :post, :class => "btn btn-xs btn-success" do %>
+        <i class="fa fa-eye"></i><% end %>
+      <% else %>
+        <%= link_to hidden_admin_battle_path(b), :method => :post, :class => "btn btn-xs btn-warning" do %>
+        <i class="fa fa-eye-slash"></i><% end %>
+      <% end %>
       <%= link_to edit_admin_battle_path(b), class: 'btn btn-default btn-xs' do %>
       <i class="fa fa-pencil"></i><% end %>
       <%= link_to admin_battle_path(b), :method => :delete, :data => {:confirm => "Are your sure?" }, class: 'btn btn-danger btn-xs' do %>

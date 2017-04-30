@@ -1,6 +1,6 @@
-class Admin::BattleCommentsController < ApplicationController
+class Myasset::BattleCommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :admin_required
+  #before_action :admin_required
 
   def index
     @battle = Battle.find(params[:battle_id])

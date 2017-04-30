@@ -14,4 +14,16 @@ class Battle < ApplicationRecord
 
   has_many :battle_comments
   has_many :comments_from_user, through: :battle_comments, source: :user
+
+  def publish!
+    self.is_hidden = false
+    self.save
+  end
+
+  def hide!
+    self.is_hidden = true
+    self.save
+  end
+
+  scope :published, -> { where(is_hidden: false) }
 end

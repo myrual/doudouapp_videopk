@@ -3,11 +3,12 @@ class BattlesController < ApplicationController
   before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
 
   def index
-    @battle = Battle.recent.first
+    #@battle = Battle.published.recent.first
+    @battles = Battle.published.recent.paginate(:page => params[:page], :per_page => 3)
 
-    if @battle.present?
-    @left_video = Video.find(@battle.left_video_id)
-    @right_video = Video.find(@battle.right_video_id)
+    # if @battle.present?
+    # @left_video = Video.find(@battle.left_video_id)
+    # @right_video = Video.find(@battle.right_video_id)
 
     # @left_video_comments = VideoComment.where(video_id: @battle.left_video_id).order("created_at DESC")
     # @left_video_comment = VideoComment.new
@@ -15,9 +16,9 @@ class BattlesController < ApplicationController
     # @right_video_comments = VideoComment.where(video_id: @battle.right_video_id).order("created_at DESC")
     # @right_video_comment = VideoComment.new
 
-    @battle_comments = BattleComment.where(battle_id: @battle.id)
+    #@battle_comments = BattleComment.where(battle_id: @battle.id)
     @battle_comment = BattleComment.new
-    end
+    #end
   end
 
   def follow_left_video
