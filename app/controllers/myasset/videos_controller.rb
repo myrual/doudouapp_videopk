@@ -5,7 +5,6 @@ class Myasset::VideosController < ApplicationController
 
     def index
       @videos = Video.where(user_id: current_user.id)
-
     end
 
     def show

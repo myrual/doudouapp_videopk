@@ -4,34 +4,35 @@
   </span>
   <br>
   <% @battles.each do |b| %>
+
   <div class="row" style="margin-bottom: 20px;">
-    <p class="text-center"><b><%= b.id %>组 <%= link_to(b.title, myasset_battle_path(b)) %></b></p>
+    <h4 class="text-center myasset-battle-title"><%= link_to(b.title, myasset_battle_path(b)) %></h4>
     <hr>
-    <div class="col-xs-4 text-center">
-      1号得票：<%= b.left_followers.count %>
-    </div>
-    <div class="col-xs-4 text-center">
-      2号得票：<%= b.right_followers.count %>
-    </div>
-    <div class="col-xs-4 text-center">
-      留言：<%= link_to(b.battle_comments.count, myasset_battle_battle_comments_path(b)) %>条
-    </div>
-  </div>
-  <div class="row" style="margin-bottom: 20px;">
-    <div class="col-xs-8 text-center">
-      PK发布于： <%= b.created_at.strftime("%d %b. %Y") %>
-    </div>
-    <div class="col-xs-4 text-center">
+    <div class="pull-right">
       <% if b.is_hidden %>
         <%= link_to edit_myasset_battle_path(b), class: 'btn btn-default btn-xs' do %>
         <i class="fa fa-pencil"></i><% end %>
         <%= link_to myasset_battle_path(b), :method => :delete, :data => {:confirm => "Are your sure?" }, class: 'btn btn-danger btn-xs' do %>
         <i class="fa fa-trash-o"></i>
         <% end %>
+        <small class="btn btn-default btn-xs">等待审核中</small>
       <% else %>
-        比赛正在进行中
+        <small class="btn btn-warning btn-xs">比赛正在进行中</small>
       <% end %>
     </div>
+    <br><br>
+    <div class="col-xs-4">
+      1号得票：<%= b.left_followers.count %>
+    </div>
+    <div class="col-xs-4">
+      2号得票：<%= b.right_followers.count %>
+    </div>
+    <div class="col-xs-4">
+      留言：<%= link_to(b.battle_comments.count, myasset_battle_battle_comments_path(b)) %>条
+    </div>
   </div>
+  <p>
+    PK发布于： <%= b.created_at.strftime("%Y年%-m月%d日") %>
+  </p>
   <% end %>
 </div>
