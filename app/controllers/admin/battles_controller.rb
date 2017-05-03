@@ -24,6 +24,7 @@ class Admin::BattlesController < ApplicationController
 
   def create
     @battle = Battle.create(battle_params)
+    @battle.user = current_user
 
     if @battle.save
       redirect_to admin_battles_path, notice: '比赛已创建!'

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visitorID: MyText
+  battle: one
+  voteLeft: false
+
+two:
+  visitorID: MyText
+  battle: two
+  voteLeft: false
