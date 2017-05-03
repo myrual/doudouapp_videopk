@@ -14,7 +14,7 @@ class Battle < ApplicationRecord
 
   has_many :battle_comments
   has_many :comments_from_user, through: :battle_comments, source: :user
-
+  has_many :visitor_votes
   def publish!
     self.is_hidden = false
     self.save

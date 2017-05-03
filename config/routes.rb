@@ -15,6 +15,12 @@ Rails.application.routes.draw do
       post :unfollow_left_video
       post :follow_right_video
       post :unfollow_right_video
+      post :visitor_vote_left
+      post :visitor_vote_right
+      post :undo_visitor_vote_left
+      post :undo_visitor_vote_right
+      
+      
     end
 
     # resources :videos do
