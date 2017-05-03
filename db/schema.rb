@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170429050846) do
+ActiveRecord::Schema.define(version: 20170503050525) do
 
   create_table "battle_comments", force: :cascade do |t|
     t.integer  "battle_id"
@@ -96,6 +96,15 @@ ActiveRecord::Schema.define(version: 20170429050846) do
     t.integer  "user_id"
     t.string   "video"
     t.string   "image"
+  end
+
+  create_table "visitor_votes", force: :cascade do |t|
+    t.text     "visitorID"
+    t.integer  "battle_id"
+    t.boolean  "voteLeft"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["battle_id"], name: "index_visitor_votes_on_battle_id"
   end
 
 end
