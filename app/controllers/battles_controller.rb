@@ -1,12 +1,12 @@
 class BattlesController < ApplicationController
   before_action :authenticate_user!, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
   before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video, :visitor_vote_left, :visitor_vote_right, :undo_visitor_vote_right, :undo_visitor_vote_left
-  
+
   ]
 
   def index
     #@battle = Battle.published.recent.first
-    @battles = Battle.published.recent.paginate(:page => params[:page], :per_page => 3)
+    @battles = Battle.published.recent #.paginate(:page => params[:page], :per_page => 3)
 
 
     # if @battle.present?
@@ -65,7 +65,7 @@ class BattlesController < ApplicationController
     flash[:warning] = "投票成功"
 
     thisVote = @battle.visitor_votes.build(visitorID:visitorID,voteLeft:false)
-    #thisVote = VisitorVote.create(battle:@battle, visitorID:visitorID,voteLeft:false)  
+    #thisVote = VisitorVote.create(battle:@battle, visitorID:visitorID,voteLeft:false)
     thisVote.save
     redirect_to root_path
   end
