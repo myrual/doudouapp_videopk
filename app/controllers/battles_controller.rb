@@ -1,6 +1,6 @@
 class BattlesController < ApplicationController
   before_action :authenticate_user!, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
-  before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video, :visitor_vote_left, :visitor_vote_right, :undo_visitor_vote_right, :undo_visitor_vote_left
+  before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video, :visitor_vote_left, :visitor_vote_right, :undo_visitor_vote_right, :undo_visitor_vote_left, :visitor_turn_left_from_right, :visitor_turn_right_from_left
   
   ]
 
@@ -54,7 +54,7 @@ class BattlesController < ApplicationController
     redirect_to :back
   end
 
-  def visitor_vote_right
+  def find_visitor_vote_forLeft(isLeft = true)
     visitorID = ""
     if(visitor_id_incookie = cookies.signed[:visitorID])
       visitorID = visitor_id_incookie
@@ -62,50 +62,57 @@ class BattlesController < ApplicationController
       visitorID = Time.now.to_s
       cookies.permanent.signed[:visitorID] = visitorID
     end
+    flash[:warning] = "后悔成功"
+    @battle.visitor_votes.find_by(visitorID:visitorID,voteLeft:isLeft)
+  end
+  def visitor_vote_for(isLeft = true)
+    visitorID = ""
+    if(visitor_id_incookie = cookies.signed[:visitorID])
+      visitorID = visitor_id_incookie
+    else
+      visitorID = Time.now.to_s
+      cookies.permanent.signed[:visitorID] = visitorID
+    end
+    @battle.visitor_votes.build(visitorID:visitorID,voteLeft:isLeft)
+  end
+  def visitor_vote_right
     flash[:warning] = "投票成功"
-
-    thisVote = @battle.visitor_votes.build(visitorID:visitorID,voteLeft:false)
+    thisVote = visitor_vote_for(false)#@battle.visitor_votes.build(visitorID:visitorID,voteLeft:false)
     #thisVote = VisitorVote.create(battle:@battle, visitorID:visitorID,voteLeft:false)  
     thisVote.save
     redirect_to root_path
   end
+  
   def visitor_vote_left
-    visitorID = ""
-    if(visitor_id_incookie = cookies.signed[:visitorID])
-      visitorID = visitor_id_incookie
-    else
-      visitorID = Time.now.to_s
-      cookies.permanent.signed[:visitorID] = visitorID
-    end
     flash[:warning] = "投票成功"
-    thisVote = @battle.visitor_votes.build(visitorID:visitorID,voteLeft:true)
+    thisVote = visitor_vote_for(true)#@battle.visitor_votes.build(visitorID:visitorID,voteLeft:false)
     thisVote.save
     redirect_to root_path
   end
   def undo_visitor_vote_right
-    visitorID = ""
-    if(visitor_id_incookie = cookies.signed[:visitorID])
-      visitorID = visitor_id_incookie
-    else
-      visitorID = Time.now.to_s
-      cookies.permanent.signed[:visitorID] = visitorID
-    end
-    flash[:warning] = "后悔成功"
-    thisVote = @battle.visitor_votes.find_by(visitorID:visitorID,voteLeft:false)
+    flash[:warning] = "服用后悔药成功"
+    thisVote = find_visitor_vote_forLeft(false)
     thisVote.delete
     redirect_to root_path
   end
   def undo_visitor_vote_left
-    visitorID = ""
-    if(visitor_id_incookie = cookies.signed[:visitorID])
-      visitorID = visitor_id_incookie
-    else
-      visitorID = Time.now.to_s
-      cookies.permanent.signed[:visitorID] = visitorID
-    end
-    flash[:warning] = "后悔成功"
-    thisVote = @battle.visitor_votes.find_by(visitorID:visitorID,voteLeft:true)
+    flash[:warning] = "服用后悔药成功"
+    thisVote = find_visitor_vote_forLeft(true)
     thisVote.delete
+    redirect_to root_path
+  end
+  def visitor_turn_right_from_left
+    thisVote = find_visitor_vote_forLeft(true)
+    thisVote.voteLeft = false
+    thisVote.save
+    flash[:warning] = "换阵营成功"
+    redirect_to root_path
+  end
+  def visitor_turn_left_from_right
+    thisVote = find_visitor_vote_forLeft(false)
+    thisVote.voteLeft = true
+    thisVote.save
+    flash[:warning] = "换阵营成功"
     redirect_to root_path
   end
   def about
