@@ -1,12 +1,12 @@
 class BattlesController < ApplicationController
   before_action :authenticate_user!, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
+
   before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video, :visitor_vote_left, :visitor_vote_right, :undo_visitor_vote_right, :undo_visitor_vote_left, :visitor_turn_left_from_right, :visitor_turn_right_from_left
-  
   ]
 
   def index
     #@battle = Battle.published.recent.first
-    @battles = Battle.published.recent.paginate(:page => params[:page], :per_page => 3)
+    @battles = Battle.published.recent #.paginate(:page => params[:page], :per_page => 3)
 
 
     # if @battle.present?
@@ -62,7 +62,6 @@ class BattlesController < ApplicationController
       visitorID = Time.now.to_s
       cookies.permanent.signed[:visitorID] = visitorID
     end
-    flash[:warning] = "后悔成功"
     @battle.visitor_votes.find_by(visitorID:visitorID,voteLeft:isLeft)
   end
   def visitor_vote_for(isLeft = true)
