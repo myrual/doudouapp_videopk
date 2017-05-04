@@ -4,7 +4,7 @@ module ApplicationHelper
         if page_title.empty?
             base_title
         else
-            base_title + " | " + page_title
+            "斗斗" + " | " + page_title
         end
     end
 end
