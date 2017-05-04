@@ -34,7 +34,7 @@
                       <%= link_to("不投TA", undo_visitor_vote_left_battle_path(battle), :method => :post, :class => "btn btn-default vote_right") %>
                     <% else %>
                       <% if battle.visitor_votes.find_by(visitorID: cookies.signed[:visitorID], voteLeft: false) %>
-                        <%= link_to("改投TA", visitor_turn_left_from_right_battle_path(battle), :method => :post, :class => "btn btn-default disable vote_left") %>
+                        <%= link_to("改投TA", visitor_turn_left_from_right_battle_path(battle), :method => :post, :class => "btn btn-default vote_left") %>
                       <% else %>
                         <%= link_to("匿名顶TA", visitor_vote_left_battle_path(battle), :method => :post, :class => "btn btn-default vote_left") %>
                       <% end %>                      
@@ -67,7 +67,7 @@
                       <%= link_to("不投TA", undo_visitor_vote_right_battle_path(battle), :method => :post, :class => "btn btn-default vote_right") %>
                     <% else %>
                       <% if battle.visitor_votes.find_by(visitorID: cookies.signed[:visitorID], voteLeft: true) %>
-                        <%= link_to("改投TA", visitor_turn_right_from_left_battle_path(battle), :method => :post, :class => "btn btn-default disable vote_right") %>
+                        <%= link_to("改投TA", visitor_turn_right_from_left_battle_path(battle), :method => :post, :class => "btn btn-default vote_right") %>
                       <% else %>
                         <%= link_to("匿名顶TA", visitor_vote_right_battle_path(battle), :method => :post, :class => "btn btn-default vote_right") %>
                       <% end %>
