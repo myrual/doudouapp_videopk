@@ -23,7 +23,10 @@ class BattlesController < ApplicationController
     @battle_comment = BattleComment.new
     #end
   end
-
+  def show
+    @battle = Battle.find(params[:id])
+    @title = @battle.title
+  end
   def follow_left_video
     if current_user.has_follow_right?(@battle)
       flash[:warning] = "已经给右边视频投票！不能同时投两边！"
@@ -79,40 +82,40 @@ class BattlesController < ApplicationController
     thisVote = visitor_vote_for(false)#@battle.visitor_votes.build(visitorID:visitorID,voteLeft:false)
     #thisVote = VisitorVote.create(battle:@battle, visitorID:visitorID,voteLeft:false)  
     thisVote.save
-    redirect_to root_path
+    redirect_to :back
   end
   
   def visitor_vote_left
     flash[:warning] = "投票成功"
     thisVote = visitor_vote_for(true)#@battle.visitor_votes.build(visitorID:visitorID,voteLeft:false)
     thisVote.save
-    redirect_to root_path
+    redirect_to :back
   end
   def undo_visitor_vote_right
     flash[:warning] = "服用后悔药成功"
     thisVote = find_visitor_vote_forLeft(false)
     thisVote.delete
-    redirect_to root_path
+    redirect_to :back
   end
   def undo_visitor_vote_left
     flash[:warning] = "服用后悔药成功"
     thisVote = find_visitor_vote_forLeft(true)
     thisVote.delete
-    redirect_to root_path
+    redirect_to :back
   end
   def visitor_turn_right_from_left
     thisVote = find_visitor_vote_forLeft(true)
     thisVote.voteLeft = false
     thisVote.save
     flash[:warning] = "换阵营成功"
-    redirect_to root_path
+    redirect_to :back
   end
   def visitor_turn_left_from_right
     thisVote = find_visitor_vote_forLeft(false)
     thisVote.voteLeft = true
     thisVote.save
     flash[:warning] = "换阵营成功"
-    redirect_to root_path
+    redirect_to :back
   end
   def about
   end
