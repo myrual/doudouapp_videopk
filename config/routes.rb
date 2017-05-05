@@ -19,7 +19,8 @@ Rails.application.routes.draw do
       post :visitor_vote_right
       post :undo_visitor_vote_left
       post :undo_visitor_vote_right
-      
+      post :visitor_turn_left_from_right
+      post :visitor_turn_right_from_left
       
     end
 
