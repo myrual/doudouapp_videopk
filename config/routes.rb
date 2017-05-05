@@ -65,6 +65,7 @@ Rails.application.routes.draw do
           post :unfollow_left_video
           post :follow_right_video
           post :unfollow_right_video
+          post :get_battle
         end
 
     # resources :videos do
