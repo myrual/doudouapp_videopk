@@ -117,6 +117,44 @@ class BattlesController < ApplicationController
     flash[:warning] = "换阵营成功"
     redirect_to :back
   end
+  
+  def vote_for_left
+    if current_user
+      if current_user.has_follow_right?(@battle)
+        current_user.unfollow_right!(@battle)
+        current_user.follow_left!(@battle)
+        flash[:warning] = "换阵营成功"
+        redirect_to :back
+        return
+      end
+      
+      if current_user.has_follow_left?(@battle)
+        current_user.unfollow_left!(@battle)
+        flash[:warning] = "后悔药服用完毕"
+        redirect_to :back
+        return
+      end
+      
+      current_user.follow_left!(@battle)
+      flash[:warning] = "投票成功"
+      redirect_to :back
+    else
+      #visitor click left vote button
+      visitorID = find_visitor_id
+      visitorVoteForTheBattle = @battle.visitor_votes.find_by(visitorID:visitorID)
+      if visitorVoteForTheBattle
+        if visitorVoteForTheBattle.voteLeft
+          visitorVoteForTheBattle.delete
+        else
+          visitorVoteForTheBattle.voteLeft = true
+        end
+      else
+        newVote = @battle.visitor_votes.build(visitorID:visitorID,voteLeft:true)
+        newVote.save
+      end
+      redirect_to :back
+    end
+  end
   def about
   end
 
@@ -126,5 +164,15 @@ class BattlesController < ApplicationController
   private
   def find_battle
     @battle = Battle.find(params[:id])
+  end
+  def find_visitor_id
+    visitorID = ""
+    if(visitor_id_incookie = cookies.signed[:visitorID])
+      visitorID = visitor_id_incookie
+    else
+      visitorID = Time.now.to_s
+      cookies.permanent.signed[:visitorID] = visitorID
+    end
+    visitorID
   end
 end
