@@ -1,12 +1,19 @@
 class BattlesController < ApplicationController
   before_action :authenticate_user!, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video]
 
-  before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video, :visitor_vote_left, :visitor_vote_right, :undo_visitor_vote_right, :undo_visitor_vote_left, :visitor_turn_left_from_right, :visitor_turn_right_from_left
-  ]
+  before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video, :visitor_vote_left, :visitor_vote_right, :undo_visitor_vote_right, :undo_visitor_vote_left, :visitor_turn_left_from_right, :visitor_turn_right_from_left, :vote_for_left, :vote_for_right]
 
   def index
     #@battle = Battle.published.recent.first
+    @battle_collections = []
     @battles = Battle.published.recent #.paginate(:page => params[:page], :per_page => 3)
+    @battles.each do |each_battle|
+      left_vote_link_text = "投票给TA"
+      left_vote_link_text = "已经投TA" if left_is_voted(each_battle)
+      right_vote_link_text = "投票给TA"
+      right_vote_link_text = "已经投TA" if right_is_voted(each_battle)
+      @battle_collections << {:battle => each_battle, :left_vote_link_text => left_vote_link_text, :right_vote_link_text => right_vote_link_text}
+    end
 
 
     # if @battle.present?
@@ -26,6 +33,11 @@ class BattlesController < ApplicationController
   def show
     @battle = Battle.find(params[:id])
     @title = @battle.title
+    @left_vote_link_text = "投票给TA"
+    @left_vote_link_text = "已经投TA" if left_is_voted(@battle)
+    @right_vote_link_text = "投票给TA"
+    @right_vote_link_text = "已经投TA" if right_is_voted(@battle)
+    
   end
   def follow_left_video
     if current_user.has_follow_right?(@battle)
@@ -121,16 +133,13 @@ class BattlesController < ApplicationController
   def vote_for_left
     if current_user
       if current_user.has_follow_right?(@battle)
-        current_user.unfollow_right!(@battle)
-        current_user.follow_left!(@battle)
-        flash[:warning] = "换阵营成功"
+        flash[:warning] = "已经投了右边"
         redirect_to :back
         return
       end
       
       if current_user.has_follow_left?(@battle)
-        current_user.unfollow_left!(@battle)
-        flash[:warning] = "后悔药服用完毕"
+        flash[:warning] = "不能再投了"
         redirect_to :back
         return
       end
@@ -144,12 +153,49 @@ class BattlesController < ApplicationController
       visitorVoteForTheBattle = @battle.visitor_votes.find_by(visitorID:visitorID)
       if visitorVoteForTheBattle
         if visitorVoteForTheBattle.voteLeft
-          visitorVoteForTheBattle.delete
+          flash[:warning] = "不能再投了"
         else
-          visitorVoteForTheBattle.voteLeft = true
+          flash[:warning] = "已经投了右边"
         end
       else
         newVote = @battle.visitor_votes.build(visitorID:visitorID,voteLeft:true)
+        flash[:warning] = "投票成功"
+        newVote.save
+      end
+      redirect_to :back
+    end
+  end
+  
+  def vote_for_right
+    if current_user
+      if current_user.has_follow_left?(@battle)
+        flash[:warning] = "已经投了左边"
+        redirect_to :back
+        return
+      end
+      
+      if current_user.has_follow_right?(@battle)
+        flash[:warning] = "不能再投了"
+        redirect_to :back
+        return
+      end
+      
+      current_user.follow_right!(@battle)
+      flash[:warning] = "投票成功"
+      redirect_to :back
+    else
+      #visitor click left vote button
+      visitorID = find_visitor_id
+      visitorVoteForTheBattle = @battle.visitor_votes.find_by(visitorID:visitorID)
+      if visitorVoteForTheBattle
+        if visitorVoteForTheBattle.voteLeft == false
+          flash[:warning] = "不能再投了"
+        else
+          flash[:warning] = "已经投了左边"
+        end
+      else
+        newVote = @battle.visitor_votes.build(visitorID:visitorID,voteLeft:false)
+        flash[:warning] = "投票成功"
         newVote.save
       end
       redirect_to :back
@@ -174,5 +220,21 @@ class BattlesController < ApplicationController
       cookies.permanent.signed[:visitorID] = visitorID
     end
     visitorID
+  end
+  def right_is_voted(battle)
+    if current_user
+      current_user.has_follow_right?(battle)
+    else
+      visitorID = find_visitor_id
+      battle.visitor_votes.find_by(visitorID:visitorID, voteLeft:false) != nil
+    end
+  end  
+  def left_is_voted(battle)
+    if current_user
+      current_user.has_follow_left?(battle)
+    else
+      visitorID = find_visitor_id
+      battle.visitor_votes.find_by(visitorID:visitorID, voteLeft:true) != nil
+    end
   end
 end
