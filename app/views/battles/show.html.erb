@@ -30,7 +30,7 @@
     </div>
   </div>
   <div class="row">
-  <% if @battle.left_followers.count > 0 || @battle.right_followers.count > 0 %>
+  <% if total_votes(@battle) >0 %>
     <div class="progress" style="margin-top: 20px;">
         <div id="leftBar" class="progress-bar" role="progressbar" style="width:<%= render_left_width(@battle)%>%;
                         background-color:#79e8d0; color:#79e8d0;">
