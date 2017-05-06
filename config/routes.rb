@@ -21,6 +21,9 @@ Rails.application.routes.draw do
       post :undo_visitor_vote_right
       post :visitor_turn_left_from_right
       post :visitor_turn_right_from_left
+      post :vote_for_left
+      post :vote_for_right
+      
       
     end
 
@@ -65,7 +68,6 @@ Rails.application.routes.draw do
           post :unfollow_left_video
           post :follow_right_video
           post :unfollow_right_video
-          post :get_battle
         end
 
     # resources :videos do

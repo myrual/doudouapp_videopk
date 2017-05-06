@@ -19,40 +19,14 @@
 
   <div class="row">
     <div class="col-sm-6 col-xs-6">
-                        <%= link_to("不投TA了", vote_for_left_battle_path(@battle), :method => :post,
+                        <%= link_to(@left_vote_link_text, vote_for_left_battle_path(@battle), :method => :post,
                                               :class => "btn btn-default vote_left") %>
                 <%= @battle.left_followers.count +  @battle.visitor_votes.where(voteLeft: true).count %>
     </div>
     <div class="col-sm-6 col-xs-6" style="text-align:right">
                     <%= @battle.right_followers.count + @battle.visitor_votes.where(voteLeft: false).count %>
-                    <% if current_user %>
-                    <% if current_user.has_follow_right?(@battle) %>
-                    <!-- <%#= link_to unfollow_right_video_battle_path(battle), :method => :post do %>
-                                      <i class="fa fa-thumbs-up fa-2x flip" aria-hidden="true" style="color:red;"></i>
-                                    <%# end %> -->
-                    <%= link_to("不投TA了", unfollow_right_video_battle_path(@battle), :method => :post,
-                                                  :class => "btn btn-default vote_right") %>
-                <% else %>
-                    <!-- <%#= link_to follow_right_video_battle_path(battle), :method => :post do %>
-                                    <i class="fa fa-thumbs-o-up fa-2x flip" aria-hidden="true" style="color:red;"></i>
-                                    <%# end %> -->
-                    <%= link_to("投票给TA", follow_right_video_battle_path(@battle), :method => :post,
-                                                  :class => "btn btn-default vote_right") %>
-                    <% end %>
-                <% else %>
-                    <!-- <%#= link_to new_user_session_path, :method => :post do %>
-                                    <i class="fa fa-thumbs-o-up fa-2x flip" aria-hidden="true" style="color:red;"></i>
-                                  <%# end %> -->
-                    <% if @battle.visitor_votes.find_by(visitorID: cookies.signed[:visitorID], voteLeft: false) %>
-                      <%= link_to("不投TA", undo_visitor_vote_right_battle_path(@battle), :method => :post, :class => "btn btn-default vote_right") %>
-                    <% else %>
-                      <% if @battle.visitor_votes.find_by(visitorID: cookies.signed[:visitorID], voteLeft: true) %>
-                        <%= link_to("改投TA", visitor_turn_right_from_left_battle_path(@battle), :method => :post, :class => "btn btn-default vote_right") %>
-                      <% else %>
-                        <%= link_to("匿名顶TA", visitor_vote_right_battle_path(@battle), :method => :post, :class => "btn btn-default vote_right") %>
-                      <% end %>
-                    <% end %>
-                    <% end %>
+                        <%= link_to(@right_vote_link_text, vote_for_right_battle_path(@battle), :method => :post,
+                                              :class => "btn btn-default vote_right") %>
     </div>
   </div>
   <div class="row">
