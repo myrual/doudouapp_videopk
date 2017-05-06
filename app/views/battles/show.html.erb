@@ -19,26 +19,8 @@
 
   <div class="row">
     <div class="col-sm-6 col-xs-6">
-                <% if current_user %>
-                    <% if current_user.has_follow_left?(@battle) %>
-                        <%= link_to("不投TA了", unfollow_left_video_battle_path(@battle), :method => :post,
+                        <%= link_to("不投TA了", vote_for_left_battle_path(@battle), :method => :post,
                                               :class => "btn btn-default vote_left") %>
-                    <% else %>
-                        <%= link_to("投票给TA", follow_left_video_battle_path(@battle), :method => :post,
-                                              :class => "btn btn-default vote_left") %>
-                    <% end %>
-                <% else %>
-                    <% if @battle.visitor_votes.find_by(visitorID: cookies.signed[:visitorID], voteLeft: true) %>
-                      <%= link_to("不投TA", undo_visitor_vote_left_battle_path(@battle), :method => :post, :class => "btn btn-default vote_right") %>
-                    <% else %>
-                      <% if @battle.visitor_votes.find_by(visitorID: cookies.signed[:visitorID], voteLeft: false) %>
-                        <%= link_to("改投TA", visitor_turn_left_from_right_battle_path(@battle), :method => :post, :class => "btn btn-default vote_left") %>
-                      <% else %>
-                        <%= link_to("匿名顶TA", visitor_vote_left_battle_path(@battle), :method => :post, :class => "btn btn-default vote_left") %>
-                      <% end %>                      
-                    <% end %>
-                <% end %>
-
                 <%= @battle.left_followers.count +  @battle.visitor_votes.where(voteLeft: true).count %>
     </div>
     <div class="col-sm-6 col-xs-6" style="text-align:right">
