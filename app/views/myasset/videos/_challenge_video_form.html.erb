@@ -3,6 +3,15 @@
     <div class="group">
         <%= f.input :title, :label => "我的视频名称" %>
     </div>
+    <% if @video.image.present? %>
+    <span>视频封面</span>
+    <br>
+    <%= image_tag(@video.image.thumb.url) %>
+    <% end %>
+    <div class="group">
+        <%#= f.input :image, as: :file %>
+        <%= f.file_field :image %>（视频封面）<br>
+    </div>
     <div class="group">
         <%=f.file_field :video %> （视频）<br>
         <%=f.hidden_field :challenge_video, value: @challenge_video.id %>
