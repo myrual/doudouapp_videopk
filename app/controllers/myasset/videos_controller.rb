@@ -22,6 +22,7 @@ class Myasset::VideosController < ApplicationController
       battle_title = params["video"]["battle_title"]
       @video = Video.create(video_params)
       @video.user = current_user
+      
       if @video.save!
         if targetVideo
           newBattle = Battle.new
