@@ -8,6 +8,13 @@ module BattlesHelper
   end
 
    def total_votes(battle)
-     battle.left_followers.count+battle.right_followers.count+battle.visitor_votes.where(voteLeft: true).count+battle.visitor_votes.where(voteLeft: false).count
+     left_votes(battle) + right_votes(battle)
+   end
+   
+   def left_votes(battle)
+      battle.left_followers.count + battle.visitor_votes.where(voteLeft: true).count
+   end
+   def right_votes(battle)
+      battle.right_followers.count + battle.visitor_votes.where(voteLeft: false).count
    end
 end
