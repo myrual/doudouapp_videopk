@@ -21,14 +21,6 @@ class Myasset::BattlesController < ApplicationController
     @videos = Video.all.map { |v| [v.title, v.id] }
     @myvideos = Video.where(user_id: current_user.id).map { |v| [v.title, v.id] }
   end
-  
-  def challenge
-    @battle = Battle.new
-    @right_video = Video.find(params[:right_video])
-  end
-  
-  def createchallenge
-  end
 
   def create
     @battle = Battle.create(battle_params)
