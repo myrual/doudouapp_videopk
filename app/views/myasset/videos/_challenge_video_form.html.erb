@@ -17,6 +17,8 @@
     </div>
     <div class="group">
         <%=f.file_field :video %> （视频）<br>
+        <%=f.hidden_field :challenge_video, value: @challenge_video.id %>
+        <%=f.hidden_field :battle_title, value: @battle.title %>
     </div>
     <br>
     <div class="form-actions">

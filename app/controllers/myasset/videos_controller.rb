@@ -13,14 +13,27 @@ class Myasset::VideosController < ApplicationController
 
     def new
       @video = Video.new
+      @challenge_video = Video.find(params[:challenge_video])
+      @battle = Battle.find(params[:battle])
     end
 
     def create
+      targetVideo = params["video"]["challenge_video"]
+      battle_title = params["video"]["battle_title"]
       @video = Video.create(video_params)
       @video.user = current_user
-
       if @video.save!
-        redirect_to myasset_videos_path, notice: '视频已创建!'
+        if targetVideo
+          newBattle = Battle.new
+          newBattle.title = battle_title
+          newBattle.left_video_id = @video.id
+          newBattle.right_video_id = targetVideo
+          newBattle.user = current_user
+          newBattle.save
+          redirect_to myasset_battles_path, notice: '比赛已创建!'
+        else
+          redirect_to myasset_videos_path, notice: '视频已创建!'
+        end
       else
         render :new
       end
