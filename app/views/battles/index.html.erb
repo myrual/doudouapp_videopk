@@ -2,11 +2,8 @@
 
 
 
-<% if @battle_collections.present? %>
-<% @battle_collections.each do |battle_collect| %>
-<% battle = battle_collect[:battle]%>
-<% left_vote_link_text = battle_collect[:left_vote_link_text]%>
-<% right_vote_link_text = battle_collect[:right_vote_link_text]%>
+<% if @battles.present? %>
+<% @battles.each do |battle| %>
 <% left_video = Video.find(battle.left_video_id) %>
 <% right_video = Video.find(battle.right_video_id) %>
 
@@ -23,17 +20,7 @@
 
 <div class="container">
 
-  <div class="row">
-    <div class="col-sm-6 col-xs-6">
-                <%= link_to(left_vote_link_text, vote_for_left_battle_path(battle), :method => :post,
-                                              :class => "btn btn-default vote_left", :remote => true) %>
-    </div>
-    <div class="col-sm-6 col-xs-6" style="text-align:right">
-                <%= link_to(right_vote_link_text, vote_for_right_battle_path(battle), :method => :post,
-                                              :class => "btn btn-default vote_right") %>
-    </div>
-  </div>
-  <div class="row" id="<%= "votebar_battle_#{battle.id}"%>">
+  <div id="<%= "votebar_battle_#{battle.id}"%>">
 
     <%= render :partial => "votebar_battle", locals: {battle: battle}%>
   </div>

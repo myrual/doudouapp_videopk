@@ -5,15 +5,7 @@ class BattlesController < ApplicationController
 
   def index
     #@battle = Battle.published.recent.first
-    @battle_collections = []
-    battles = Battle.published.recent #.paginate(:page => params[:page], :per_page => 3)
-    battles.each do |each_battle|
-      left_vote_link_text = "投票给TA"
-      left_vote_link_text = "已经投TA" if left_is_voted(each_battle)
-      right_vote_link_text = "投票给TA"
-      right_vote_link_text = "已经投TA" if right_is_voted(each_battle)
-      @battle_collections << {:battle => each_battle, :left_vote_link_text => left_vote_link_text, :right_vote_link_text => right_vote_link_text}
-    end
+    @battles = Battle.published.recent #.paginate(:page => params[:page], :per_page => 3)
 
 
     # if @battle.present?
@@ -122,19 +114,28 @@ class BattlesController < ApplicationController
     if current_user
       if current_user.has_follow_left?(@battle)
         flash[:warning] = "已经投了左边" if request.format.html?
-        redirect_to :back
+        respond_to do |format|
+          format.html {redirect_to :back}
+          format.js
+        end
         return
       end
       
       if current_user.has_follow_right?(@battle)
         flash[:warning] = "不能再投了" if request.format.html?
-        redirect_to :back
+        respond_to do |format|
+          format.html {redirect_to :back}
+          format.js
+        end
         return
       end
       
       current_user.follow_right!(@battle)
       flash[:warning] = "投票成功" if request.format.html?
-      redirect_to :back
+        respond_to do |format|
+          format.html {redirect_to :back}
+          format.js
+        end
     else
       #visitor click left vote button
       visitorID = find_visitor_id
@@ -176,20 +177,5 @@ class BattlesController < ApplicationController
     end
     visitorID
   end
-  def right_is_voted(battle)
-    if current_user
-      current_user.has_follow_right?(battle)
-    else
-      visitorID = find_visitor_id
-      battle.visitor_votes.find_by(visitorID:visitorID, voteLeft:false) != nil
-    end
-  end  
-  def left_is_voted(battle)
-    if current_user
-      current_user.has_follow_left?(battle)
-    else
-      visitorID = find_visitor_id
-      battle.visitor_votes.find_by(visitorID:visitorID, voteLeft:true) != nil
-    end
-  end
+
 end
