@@ -41,9 +41,9 @@ class BattlesController < ApplicationController
   end
   def follow_left_video
     if current_user.has_follow_right?(@battle)
-      flash[:warning] = "已经给右边视频投票！不能同时投两边！"
+      flash[:warning] = "已经给右边视频投票！不能同时投两边！" if request.format.html?
     else
-    flash[:warning] = "投票成功"
+    flash[:warning] = "投票成功" if request.format.html?
       current_user.follow_left!(@battle)
     end
     redirect_to :back
@@ -56,9 +56,9 @@ class BattlesController < ApplicationController
 
   def follow_right_video
     if current_user.has_follow_left?(@battle)
-      flash[:warning] = "已经给左边视频投票！不能同时投两边！"
+      flash[:warning] = "已经给左边视频投票！不能同时投两边！" if request.format.html?
     else
-    flash[:warning] = "投票成功"
+    flash[:warning] = "投票成功" if request.format.html?
       current_user.follow_right!(@battle)
     end
     redirect_to :back
@@ -72,55 +72,68 @@ class BattlesController < ApplicationController
   def vote_for_left
     if current_user
       if current_user.has_follow_right?(@battle)
-        flash[:warning] = "已经投了右边"
-        redirect_to :back
+
+        flash[:warning] = "已经投了右边" if request.format.html?
+        respond_to do |format|
+          format.html {redirect_to :back}
+          format.js
+        end
         return
       end
       
       if current_user.has_follow_left?(@battle)
-        flash[:warning] = "不能再投了"
-        redirect_to :back
+        flash[:warning] = "不能再投了" if request.format.html?
+        respond_to do |format|
+          format.html {redirect_to :back}
+          format.js
+        end
         return
       end
       
       current_user.follow_left!(@battle)
-      flash[:warning] = "投票成功"
-      redirect_to :back
+      flash[:warning] = "投票成功" if request.format.html?
+        respond_to do |format|
+          format.html {redirect_to :back}
+          format.js
+        end
     else
       #visitor click left vote button
       visitorID = find_visitor_id
       visitorVoteForTheBattle = @battle.visitor_votes.find_by(visitorID:visitorID)
       if visitorVoteForTheBattle
         if visitorVoteForTheBattle.voteLeft
-          flash[:warning] = "不能再投了"
+          flash[:warning] = "不能再投了" if request.format.html?
         else
-          flash[:warning] = "已经投了右边"
+          flash[:warning] = "已经投了右边"  if request.format.html?
         end
       else
         newVote = @battle.visitor_votes.build(visitorID:visitorID,voteLeft:true)
-        flash[:warning] = "投票成功"
+        flash[:warning] = "投票成功" if request.format.html?
         newVote.save
       end
-      redirect_to :back
+      respond_to do |format|
+        format.html {redirect_to :back}
+        format.js
+      end
     end
   end
   
   def vote_for_right
     if current_user
       if current_user.has_follow_left?(@battle)
-        flash[:warning] = "已经投了左边"
+        flash[:warning] = "已经投了左边" if request.format.html?
         redirect_to :back
         return
       end
       
       if current_user.has_follow_right?(@battle)
-        flash[:warning] = "不能再投了"
+        flash[:warning] = "不能再投了" if request.format.html?
         redirect_to :back
         return
       end
       
       current_user.follow_right!(@battle)
-      flash[:warning] = "投票成功"
+      flash[:warning] = "投票成功" if request.format.html?
       redirect_to :back
     else
       #visitor click left vote button
@@ -128,16 +141,19 @@ class BattlesController < ApplicationController
       visitorVoteForTheBattle = @battle.visitor_votes.find_by(visitorID:visitorID)
       if visitorVoteForTheBattle
         if visitorVoteForTheBattle.voteLeft == false
-          flash[:warning] = "不能再投了"
+          flash[:warning] = "不能再投了" if request.format.html?
         else
-          flash[:warning] = "已经投了左边"
+          flash[:warning] = "已经投了左边" if request.format.html?
         end
       else
         newVote = @battle.visitor_votes.build(visitorID:visitorID,voteLeft:false)
-        flash[:warning] = "投票成功"
+        flash[:warning] = "投票成功" if request.format.html?
         newVote.save
       end
-      redirect_to :back
+      respond_to do |format|
+        format.html {redirect_to :back}
+        format.js
+      end
     end
   end
   def about

@@ -1,0 +1,1 @@
+$("#votebar_battle_<%= @battle.id %>").html('<%= escape_javascript("#{render :partial => "votebardebug_battle", locals: {battle: @battle}}").html_safe %>');
