@@ -25,10 +25,6 @@ class BattlesController < ApplicationController
   def show
     @battle = Battle.find(params[:id])
     @title = @battle.title
-    @left_vote_link_text = "投票给TA"
-    @left_vote_link_text = "已经投TA" if left_is_voted(@battle)
-    @right_vote_link_text = "投票给TA"
-    @right_vote_link_text = "已经投TA" if right_is_voted(@battle)
     
   end
   def follow_left_video
