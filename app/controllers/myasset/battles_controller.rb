@@ -32,7 +32,42 @@ class Myasset::BattlesController < ApplicationController
       render :new
     end
   end
+    def challenge_left
+      @video = Video.new
+      @challenge_battle = Battle.find(params[:battle_id])
+      @challenge_video = Video.find(@challenge_battle.left_video_id)
+    end
+    def challenge_right
+      @video = Video.new
+      @challenge_battle = Battle.find(params[:battle_id])
+      @challenge_video = Video.find(@challenge_battle.right_video_id)
+    end
+    def createChallenge
+      targetVideo = params["video"]["challenge_video"]
+      battle_title = params["video"]["battle_title"]
+      video_params = params["video"]
 
+      @video = Video.new
+      @video.user = current_user
+      @video.title = video_params["title"]
+      @video.video = video_params["video"]
+      
+      if @video.save!
+        if targetVideo
+          newBattle = Battle.new
+          newBattle.title = battle_title
+          newBattle.left_video_id = @video.id
+          newBattle.right_video_id = targetVideo
+          newBattle.user = current_user
+          newBattle.save
+          redirect_to myasset_battles_path, notice: '比赛已创建!'
+        else
+          redirect_to myasset_videos_path, notice: '视频已创建!'
+        end
+      else
+        render :new
+      end
+    end
   def edit
     @battle = Battle.find(params[:id])
     @videos = Video.all.map { |v| [v.title, v.id] }
