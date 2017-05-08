@@ -13,8 +13,10 @@ class Myasset::VideosController < ApplicationController
 
     def new
       @video = Video.new
-      @challenge_video = Video.find(params[:challenge_video])
-      @battle = Battle.find(params[:battle])
+      if params[:challenge_video] and params[:battle]
+        @challenge_video = Video.find(params[:challenge_video])
+        @battle = Battle.find(params[:battle])
+      end
     end
 
     def create
