@@ -6,7 +6,6 @@
     <div class="group">
         <%= f.input :title, :label => "我的视频名称" %>
     </div>
-
     <% if @video.image.present? %>
     <span>视频封面</span>
     <br>
@@ -18,9 +17,8 @@
     </div>
     <div class="group">
         <%=f.file_field :video %> （视频）<br>
-        <%=f.hidden_field :challenge_video, value: @challenge_video.id %>
-        <%=f.hidden_field :battle_title, value: @challenge_battle.title %>
     </div>
+    
     <br>
     <div class="form-actions">
       <%= f.submit "提交" , disable_with: "Submiting...", class: "btn btn-success", :style => "border: none;color:white;width:49%;background-color:#74d4b3;" %>

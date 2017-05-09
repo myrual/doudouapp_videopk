@@ -51,7 +51,8 @@ Rails.application.routes.draw do
       resources :battle_comments
       get :challenge_left
       get :challenge_right
-      post :createChallenge
+      post :createChallenge_left
+      post :createChallenge_right
     end
 
     #resources :users

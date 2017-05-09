@@ -16,10 +16,9 @@ class Myasset::VideosController < ApplicationController
     end
 
     def create
-      @video = Video.new
+      @video = Video.create(video_params)
       @video.user = current_user
-      @video.title = video_params["title"]
-      @video.video = video_params["video"]
+
       if @video.save!
           redirect_to myasset_videos_path, notice: '视频已创建!'
       else
