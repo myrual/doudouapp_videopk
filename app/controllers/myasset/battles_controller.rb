@@ -32,30 +32,56 @@ class Myasset::BattlesController < ApplicationController
       render :new
     end
   end
+  
     def challenge_left
       @video = Video.new
       @challenge_battle = Battle.find(params[:battle_id])
       @challenge_video = Video.find(@challenge_battle.left_video_id)
     end
+    
     def challenge_right
       @video = Video.new
       @challenge_battle = Battle.find(params[:battle_id])
       @challenge_video = Video.find(@challenge_battle.right_video_id)
     end
-    def createChallenge
-      targetVideo = params["video"]["challenge_video"]
-      battle_title = params["video"]["battle_title"]
-      video_params = params["video"]
-
-      @video = Video.new
-      @video.user = current_user
-      @video.title = video_params["title"]
-      @video.video = video_params["video"]
+    
+    def createChallenge_left
+    
+      battle = Battle.find(params[:battle_id])
+      targetVideo = battle.left_video_id
       
+      debugger
+      @video = Video.create(video_params)
+      @video.user = current_user
+      debugger
       if @video.save!
         if targetVideo
           newBattle = Battle.new
-          newBattle.title = battle_title
+          newBattle.title = battle.title
+          newBattle.left_video_id = @video.id
+          newBattle.right_video_id = targetVideo
+          newBattle.user = current_user
+          newBattle.save
+          redirect_to myasset_battles_path, notice: '比赛已创建!'
+        else
+          redirect_to myasset_videos_path, notice: '视频已创建!'
+        end
+      else
+        render :new
+      end
+    end
+    def createChallenge_right
+      
+
+      battle = Battle.find(params[:battle_id])
+      targetVideo = battle.right_video_id
+      
+      @video = Video.create(video_params)
+      @video.user = current_user
+      if @video.save!
+        if targetVideo
+          newBattle = Battle.new
+          newBattle.title = battle.title
           newBattle.left_video_id = @video.id
           newBattle.right_video_id = targetVideo
           newBattle.user = current_user
@@ -95,4 +121,7 @@ class Myasset::BattlesController < ApplicationController
   def battle_params
     params.require(:battle).permit(:title, :description, :left_video_id, :right_video_id)
   end
+    def video_params
+      params.require(:video).permit(:title, :description, :video, :image)
+    end
 end
