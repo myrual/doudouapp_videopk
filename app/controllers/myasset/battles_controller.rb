@@ -50,10 +50,8 @@ class Myasset::BattlesController < ApplicationController
       battle = Battle.find(params[:battle_id])
       targetVideo = battle.left_video_id
       
-      debugger
       @video = Video.create(video_params)
       @video.user = current_user
-      debugger
       if @video.save!
         if targetVideo
           newBattle = Battle.new
