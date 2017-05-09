@@ -6,7 +6,8 @@
 
     <div class="form-inputs">
       <%= f.input :name, label: "昵称", autofocus: true %>
-      <%= f.input :avatar, label: "头像" %>
+      头像 <%= f.file_field :avatar_file_name %> </br>
+
       <%= f.input :email, label: "邮箱", required: true%>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
