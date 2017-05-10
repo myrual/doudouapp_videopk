@@ -10,8 +10,10 @@ class User < ApplicationRecord
     is_admin
   end
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  # has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
+  # validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
+  mount_uploader :avatar_file_name, AvatarUploader
 
   has_many :videos
   has_many :video_comments
@@ -55,13 +57,13 @@ class User < ApplicationRecord
   def display_name
     self.email.split("@").first
   end
-  
-  
+
+
    def reset_authentication_token!
      self.authentication_token = generate_authentication_token("")
      self.save
    end
- 
+
   private
   def generate_authentication_token(token_generator)
     loop do

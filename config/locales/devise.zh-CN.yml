@@ -12,6 +12,8 @@ zh-CN:
               taken: "邮箱已被注册。"
             password:
               too_short: "密码长度太短。（最少6位字符）"
+            password_confirmation:
+              confirmation: "两次密码输入不一致"
   devise:
     confirmations:
       confirmed: "您的帐号已经确认，您现在已登录。"
