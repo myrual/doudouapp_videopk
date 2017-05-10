@@ -1,7 +1,7 @@
     <!-- <div class="container"> -->
-<% provide(:title , "about") %>    
-    
-    
+<% provide(:title , "about") %>
+
+
 <% left_video = Video.find(@battle.left_video_id) %>
 <% right_video = Video.find(@battle.right_video_id) %>
 
@@ -35,8 +35,24 @@
       </video>
     </div>
   </div>
-  
 
+  <div class="row">
+
+    <div class="col-sm-6 col-xs-6 text-center">
+            <% if !current_user %>
+              <%= link_to("挑战左边", new_user_session_path) %>
+            <% else %>
+              <%= link_to("挑战左边", myasset_battle_challenge_left_path(@battle)) %>
+            <% end %>
+    </div>
+    <div class="col-sm-6 col-xs-6 text-center">
+            <% if !current_user %>
+              <%= link_to("挑战右边", new_user_session_path) %>
+            <% else %>
+              <%= link_to("挑战右边", myasset_battle_challenge_right_path(@battle)) %>
+            <% end %>
+    </div>
+  </div>
 
 
 </div>
@@ -63,7 +79,8 @@
       <div class="col-xs-2">
         <div class="thumbnail1" style="margin-top:5px;">
             <% if comment.user.avatar_file_name.present? %>
-            <%= image_tag(comment.user.avatar.url(:thumb), :size => "30x30", class: "img-circle") %>
+            <%#= image_tag(comment.user.avatar.url(:thumb), :size => "30x30", class: "img-circle") %>
+            <%= image_tag(comment.user.avatar_file_name.url(:thumb), :size => "30x30", class: "img-circle") %>
         <% else %>
             <%#= image_tag("http://placehold.it/100x100&text=No Pic", :size => "30x30", class: "img-circle") %>
             <%= image_tag "logo.jpeg", :size => "30x30", class: "img-circle" %>
@@ -88,26 +105,3 @@
     </div>
     <% end %>
     <% end %>
-    
-<footer class="container page-footer">
-    <!-- <p class="text-center">Copyright ©2017 短视频对战
-        <br> All Rights Reserved.
-        <a href="https://github.com/jiezhon/videopk" target=_new>Github</a>
-    </p> -->
-    <div class="row page-footer" style="width: 100%">
-    <div class="col-sm-6 col-xs-6 text-center">
-            <% if !current_user %>
-              <%= link_to("挑战左边", new_user_session_path) %>
-            <% else %>
-              <%= link_to("挑战左边", myasset_battle_challenge_left_path(@battle)) %>
-            <% end %>
-    </div>
-    <div class="col-sm-6 col-xs-6 text-center">
-            <% if !current_user %>
-              <%= link_to("挑战右边", new_user_session_path) %>
-            <% else %>
-              <%= link_to("挑战右边", myasset_battle_challenge_right_path(@battle)) %>
-            <% end %>      
-    </div>
-    </div>
-</footer>
