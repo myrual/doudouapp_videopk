@@ -13,7 +13,7 @@
 
   <% if battle %>
   <div class="row">
-    <div class="col-sm-1 col-xs-1">
+    <div class="col-sm-2 col-xs-2">
      <% if left_is_voted(battle) || !right_is_voted(battle)%>
 
                 <%= link_to vote_for_left_battle_path(battle), :method => :post,
@@ -22,7 +22,7 @@
                 <% end %>
     <% end %>
     </div>
-    <div class = "col-sm-10 col-xs-10">
+    <div class = "col-sm-8 col-xs-8">
         <% if total_votes(battle) >0 %>
             <div class="progress" style="margin-top: 20px;">
                 <div id="leftBar" class="progress-bar" role="progressbar" style="width:<%= render_left_width(battle)%>%;
@@ -43,7 +43,7 @@
               </div>
         <% end %>
     </div>
-    <div class="col-sm-1 col-xs-1" style="text-align:right">
+    <div class="col-sm-2 col-xs-2" style="text-align:right">
     <%if right_is_voted(battle) || !left_is_voted(battle)%>
                 <%= link_to vote_for_right_battle_path(battle), :method => :post,
                                                :remote => true do %>
