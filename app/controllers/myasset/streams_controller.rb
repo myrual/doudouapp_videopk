@@ -28,7 +28,7 @@ class Myasset::StreamsController < ApplicationController
   def create
     @stream = current_user.streams.new(stream_params)
     @stream.approved = false
-    @stream.running = false
+    @stream.running = true
     
 
     respond_to do |format|
