@@ -13,6 +13,7 @@
 
   <% if battle %>
   <div class="row">
+     <% if left_is_voted(battle) || !right_is_voted(battle)%>
 
     <div class="col-sm-6 col-xs-6">
                 <%= link_to vote_for_left_battle_path(battle), :method => :post,
@@ -20,12 +21,15 @@
                         <i class= "<%= "#{left_vote_link_text}"%>" aria-hidden="true" style="color:#79e8d0;"></i>
                 <% end %>
     </div>
+    <% end %>
+    <%if right_is_voted(battle) || !left_is_voted(battle)%>
     <div class="col-sm-6 col-xs-6" style="text-align:right">
                 <%= link_to vote_for_right_battle_path(battle), :method => :post,
                                                :remote => true do %>
                         <i class= "<%= "#{right_vote_link_text}"%>" aria-hidden="true" style="color:#ff7073;"></i>
                 <% end %>
     </div>
+    <% end %>
   </div>
   <div class="row">
 
