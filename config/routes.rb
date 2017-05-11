@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :multivotes
   resources :streams
   devise_for :users, controllers: {
     sessions: 'users/sessions'
@@ -57,6 +58,8 @@ Rails.application.routes.draw do
     end
     
     resources :streams do
+    end
+    resources :multivotes do
     end
 
     #resources :users

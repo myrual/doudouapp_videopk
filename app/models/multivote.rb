@@ -1,0 +1,2 @@
+class Multivote < ApplicationRecord
+end
