@@ -23,8 +23,8 @@
       <tr>
         <% stream.multivotes.each do |relation| %>
           <tr>
-          <td>battle : <%= relation.battle.title%> </td>
-          <td>    order  :<%= relation.order%> </td>
+          <td><%= relation.order%> : </td>
+          <td> <%= relation.battle.title%> </td>
           </tr>
         <% end %>
       </tr>

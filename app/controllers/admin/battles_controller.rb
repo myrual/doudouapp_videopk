@@ -8,6 +8,8 @@ class Admin::BattlesController < ApplicationController
     @battles = Battle.all
     @battles_waiting_prove = Battle.all.where(is_hidden: true)
     @battles_proved        = Battle.all.where(is_hidden: false)
+    @streams_waiting_prove  = Stream.all.where(approved: false)
+    @streams_proved  = Stream.all.where(approved: false)
   end
 
   def show

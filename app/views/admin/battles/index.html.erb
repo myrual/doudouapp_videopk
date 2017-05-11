@@ -73,4 +73,15 @@
     </div>
   </div>
   <% end %>
+  <div >待审批</div>
+  <% @streams_waiting_prove.each do |b| %>
+  <div class="row" style="margin-bottom: 20px;">
+    <div class="col-xs-8 text-center">
+      PK发布于： <%= b.created_at.strftime("%d %b. %Y") %>
+    </div>
+    <div>
+      <%= b.title %>
+    </div>
+  </div>
+  <% end %>
 </div>
