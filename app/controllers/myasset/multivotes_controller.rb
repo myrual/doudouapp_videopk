@@ -1,6 +1,8 @@
 class Myasset::MultivotesController < ApplicationController
   before_action :set_multivote, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
+  layout "myasset"
   # GET /multivotes
   # GET /multivotes.json
   def index
@@ -15,6 +17,8 @@ class Myasset::MultivotesController < ApplicationController
   # GET /multivotes/new
   def new
     @multivote = Multivote.new
+    @streams = current_user.streams.all.map { |v| [v.title, v.id] }
+    @battles = current_user.battles.all.map { |v| [v.title, v.id] }
   end
 
   # GET /multivotes/1/edit
@@ -25,7 +29,7 @@ class Myasset::MultivotesController < ApplicationController
   # POST /multivotes.json
   def create
     @multivote = Multivote.new(multivote_params)
-
+    @multivote.user = current_user
     respond_to do |format|
       if @multivote.save
         format.html { redirect_to myasset_multivote_url(@multivote), notice: 'Multivote was successfully created.' }
@@ -64,11 +68,11 @@ class Myasset::MultivotesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_multivote
-      @multivote = Multivote.find(params[:id])
+      @multivote = Multivote.find(params[:id], )
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def multivote_params
-      params.fetch(:multivote, {})
+      params.require(:multivote).permit(:battle_id, :stream_id)
     end
 end

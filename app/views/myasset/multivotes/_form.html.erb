@@ -1,9 +1,15 @@
 <%= simple_form_for([:myasset, @multivote]) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
+  <div class="group">
+    <%= f.input :stream_id, :label => "选择连发", :collection => @streams, :prompt => ""  %>
   </div>
-
+  <div class="group">
+    <%= f.input :battle_id, :label => "选择Battle", :collection => @battles,  :prompt => "" %>
+  </div>
+  <div class="group">
+    <%= f.input :order, :label => "顺序", :collection => 1..10 %>
+  </div>
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
