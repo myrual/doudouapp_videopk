@@ -41,6 +41,13 @@ Rails.application.routes.draw do
       end
       resources :battle_comments
     end
+    
+    resources :streams do
+      member do
+        post :approve
+        post :rollback
+      end
+    end
 
     resources :users
   end

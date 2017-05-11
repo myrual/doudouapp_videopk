@@ -1,0 +1,13 @@
+  <% b = local_assigns[:stream] %>
+    <div>
+        <% b.multivotes.each do |relation| %>
+          <div class="row">
+            <div class= "col-xs-3">
+              <%= relation.order%>
+            </div>
+            <div class= "col-xs-3">
+            <%= relation.battle.title%>
+            </div>
+          </div>
+        <% end %>
+    </div>
