@@ -30,6 +30,7 @@ class User < ApplicationRecord
   has_many :favor_right_video_relationships
   has_many :favor_right_videos, through: :favor_right_video_relationships, source: :battle
 
+  has_many :streams
   def has_follow_left?(battle)
     favor_left_videos.include?(battle)
   end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :streams
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
@@ -53,6 +54,9 @@ Rails.application.routes.draw do
       get :challenge_right
       post :createChallenge_left
       post :createChallenge_right
+    end
+    
+    resources :streams do
     end
 
     #resources :users
