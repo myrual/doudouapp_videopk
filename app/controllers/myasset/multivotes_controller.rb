@@ -73,6 +73,6 @@ class Myasset::MultivotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def multivote_params
-      params.require(:multivote).permit(:battle_id, :stream_id)
+      params.require(:multivote).permit(:battle_id, :stream_id, :order)
     end
 end
