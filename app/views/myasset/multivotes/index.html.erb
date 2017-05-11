@@ -12,6 +12,10 @@
   <tbody>
     <% @multivotes.each do |multivote| %>
       <tr>
+        <td><%= multivote.stream.title %></td>
+        <td><%= multivote.battle.title %></td>
+        <td><%= multivote.stream.title %></td>
+
         <td><%= link_to 'Show', myasset_multivote_path(multivote) %></td>
         <td><%= link_to 'Edit', edit_myasset_multivote_path(multivote) %></td>
         <td><%= link_to 'Destroy', myasset_multivote_path(multivote), method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511120759) do
+ActiveRecord::Schema.define(version: 20170511130445) do
 
   create_table "battle_comments", force: :cascade do |t|
     t.integer  "battle_id"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20170511120759) do
     t.integer  "user_id"
     t.integer  "battle_id"
     t.integer  "stream_id"
+    t.integer  "order"
     t.index ["battle_id"], name: "index_multivotes_on_battle_id"
     t.index ["stream_id"], name: "index_multivotes_on_stream_id"
     t.index ["user_id"], name: "index_multivotes_on_user_id"
