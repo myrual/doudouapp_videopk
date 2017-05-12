@@ -3,64 +3,74 @@
 <h1>Streams</h1>
 
   <div ><h2>待审批</h2></div>
+  <div>
   <% @streams_waiting_prove.each do |stream| %>
-  <div class="row" style="margin-bottom: 20px;">
+    <div class="row" style="margin-bottom: 20px;">
 
-    <div class="col-xs-2">
-      <% if stream.approved %>
-        <%= link_to rollback_admin_stream_path(stream), :method => :post, :class => "btn btn-xs btn-success" do %>
-        <i class="fa fa-eye"></i><% end %>
-      <% else %>
-        <%= link_to approve_admin_stream_path(stream), :method => :post, :class => "btn btn-xs btn-warning" do %>
-        <i class="fa fa-eye-slash"></i><% end %>
-      <% end %>
+      <div class="col-xs-2">
+        <% if stream.approved %>
+          <%= link_to rollback_admin_stream_path(stream), :method => :post, :class => "btn btn-xs btn-success" do %>
+          <i class="fa fa-eye"></i><% end %>
+        <% else %>
+          <%= link_to approve_admin_stream_path(stream), :method => :post, :class => "btn btn-xs btn-warning" do %>
+          <i class="fa fa-eye-slash"></i><% end %>
+        <% end %>
+      </div>
+      <div class="col-xs-8">
+        <%= link_to stream.title, admin_stream_path(stream) %>
+      </div>
     </div>
-    <div class="col-xs-8">
-      <%= link_to stream.title, admin_stream_path(stream) %>
-    </div>
-    </div>
-    <%= render :partial => "common/battleinstream", locals: {stream: stream}%>
-    <% end %>
-  </div>
-  <div ><h2>已经审批</h2></div>
-  <% @streams_proved.each do |stream| %>
-  <div class="row" style="margin-bottom: 20px;">
-
-    <div class="col-xs-2">
-      <% if stream.approved %>
-        <%= link_to rollback_admin_stream_path(stream), :method => :post, :class => "btn btn-xs btn-success" do %>
-        <i class="fa fa-eye"></i><% end %>
-      <% else %>
-        <%= link_to approve_admin_stream_path(stream), :method => :post, :class => "btn btn-xs btn-warning" do %>
-        <i class="fa fa-eye-slash"></i><% end %>
-      <% end %>
-    </div>
-    <div class="col-xs-8">
-      <%= link_to stream.title, admin_stream_path(stream) %>
-    </div>
-    </div>
-        <% stream.multivotes.each do |relation| %>
+    <% stream.multivotes.each do |relation| %>
             <div class="row">
-              <div class= "col-xs-3">
                 <%= relation.order%>
-              </div>
             </div>
-            <div class="container" id="<%= "singlebattle_#{battle.id}"%>">
-
-              <div id="<%= "votebar_battle_#{battle.id}"%>">
+            <div class="container" id="<%= "singlebattle_#{relation.battle.id}"%>">
                 <div class="row">
                   <div class="col-xs-12" style="width: 100%">
                     <div class="panel1">
-                      <h4 align="center"><%= @battle.title %></h4>
+                      <h4 align="center"><%= relation.battle.title %></h4>
                       <!-- <p class="pull-left" style="margin-left: 10px; height: 30px;"><%#= simple_format(battle.description) %></p> -->
                     </div>
                   </div>
                 </div>
-                <%= render :partial => "common/bar_battle", locals: {battle: battle}%>
-                <%= render :partial => "common/video_battle", locals: {battle: battle}%>
-              </div>
+                <%= render :partial => "common/bar_battle", locals: {battle: relation.battle}%>
+                <%= render :partial => "common/video_battle", locals: {battle: relation.battle}%>
 
             </div>        
-<% end %>  
-<% end %>
+      <% end %>      
+    <% end %>
+  </div>
+  <div ><h2>已经审批</h2></div>
+  <div>
+  <% @streams_proved.each do |stream| %>
+    <div class="row" style="margin-bottom: 20px;">
+
+      <div class="col-xs-2">
+        <% if stream.approved %>
+          <%= link_to rollback_admin_stream_path(stream), :method => :post, :class => "btn btn-xs btn-success" do %>
+          <i class="fa fa-eye"></i><% end %>
+        <% else %>
+          <%= link_to approve_admin_stream_path(stream), :method => :post, :class => "btn btn-xs btn-warning" do %>
+          <i class="fa fa-eye-slash"></i><% end %>
+        <% end %>
+      </div>
+      <div class="col-xs-8">
+        <%= link_to stream.title, admin_stream_path(stream) %>
+      </div>
+    </div>
+    <% stream.multivotes.each do |relation| %>
+      <div class="row">
+          <%= relation.order%>
+      </div>
+      <div class="container" id="<%= "singlebattle_#{relation.battle.id}"%>">
+        <div id="<%= "votebar_battle_#{relation.battle.id}"%>">
+            <div class="row col-xs-12" style="width: 100%">
+                <h4 align="center"><%= relation.battle.title %></h4>
+            </div>
+            <%= render :partial => "common/bar_battle", locals: {battle: relation.battle}%>
+            <%= render :partial => "common/video_battle", locals: {battle: relation.battle}%>
+        </div>
+      </div>        
+    <% end %>  
+  <% end %>
   </div>
