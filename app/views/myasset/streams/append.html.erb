@@ -1,6 +1,15 @@
-<h1>向Stream添加battle</h1>
+<h1>向<%= @stream.title %>添加battle</h1>
 
-<%= render 'form', stream: @stream %>
+
+
+<%= form_tag(myasset_stream_appended_path(@stream), method: "post") do %>
+    <%= label_tag(:battle, "battle") %>
+    <%= select_tag(:battle, options_for_select(@battles)) %>
+    <%= label_tag(:order, "顺序") %>
+    <%= select_tag(:order, options_for_select(1...6)) %>
+    <%= submit_tag("添加") %>
+
+<% end %>
 
 <%= link_to 'Show', myasset_stream_path(@stream) %> |
 <%= link_to 'Back', myasset_streams_path %>

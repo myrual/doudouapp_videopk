@@ -26,10 +26,22 @@ class Myasset::StreamsController < ApplicationController
   # GET /streams/1/append
   def append
     @stream = Stream.find(params["stream_id"])
+    @battles = current_user.battles.all.map { |v| [v.title, v.id] }
   end
   # POST /streams/1/appended
   def appended
     @stream = Stream.find(params["stream_id"])
+    @battle = Battle.find(params["battle"])
+    order = params["order"]
+    @multivote = Multivote.new
+    @multivote.stream = @stream
+    @multivote.battle = @battle
+    @multivote.order = order
+    if @multivote.save
+      redirect_to myasset_stream_url(@stream)
+    else
+      redirect_to myasset_streams_url
+    end
   end
 
   # GET /streams/1/reordered
