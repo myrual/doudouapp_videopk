@@ -1,0 +1,16 @@
+<% battle = local_assigns[:battle] %>
+<div class="container" id="<%= "singlebattle_#{battle.id}"%>">
+
+  <div id="<%= "votebar_battle_#{battle.id}"%>">
+    <div class="row">
+    <div class="col-xs-12" style="width: 100%">
+        <div class="panel1">
+            <h4 align="center"><%= @battle.title %></h4>
+            <!-- <p class="pull-left" style="margin-left: 10px; height: 30px;"><%#= simple_format(battle.description) %></p> -->
+        </div>
+    </div>
+    </div>
+    <%= render :partial => "common/votebar_battle", locals: {battle: battle}%>
+  </div>
+    <%= render :partial => "common/video_battle", locals: {battle: battle}%>
+</div>

@@ -9,7 +9,15 @@
   <strong>Content:</strong>
   <%= @stream.content %>
 </p>
-    <%= render :partial => "common/battleinstream", locals: {stream: @stream}%>
-
+    <div>
+        <% b.multivotes.each do |relation| %>
+            <div class="row">
+              <div class= "col-xs-3">
+                <%= relation.order%>
+              </div>
+            </div>
+            <%= render :partial => "common/singlebattle", locals: {battle: relation.battle}%>
+        <% end %>
+    </div>
 <%= link_to 'Edit', edit_myasset_stream_path(@stream) %> |
 <%= link_to 'Back', myasset_streams_path %>
