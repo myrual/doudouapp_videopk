@@ -26,7 +26,12 @@ class Myasset::StreamsController < ApplicationController
   # GET /streams/1/append
   def append
     @stream = Stream.find(params["stream_id"])
-    @battles = current_user.battles.all.map { |v| [v.title, v.id] }
+    battles_in_stream = @stream.inside_battles.all
+    battles_all = current_user.battles.all
+    battles_not_in_stream = battles_all.select do |battle|
+      battles_in_stream.exclude? battle
+    end
+    @battles = battles_not_in_stream.map { |v| [v.title, v.id] }
   end
   # POST /streams/1/appended
   def appended
