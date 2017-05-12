@@ -22,13 +22,9 @@
     </div>
     <% stream.multivotes.each do |relation| %>
             <div class="row">
-              <div class= "col-xs-3">
                 <%= relation.order%>
-              </div>
             </div>
             <div class="container" id="<%= "singlebattle_#{relation.battle.id}"%>">
-
-              <div id="<%= "votebar_battle_#{relation.battle.id}"%>">
                 <div class="row">
                   <div class="col-xs-12" style="width: 100%">
                     <div class="panel1">
@@ -39,10 +35,9 @@
                 </div>
                 <%= render :partial => "common/bar_battle", locals: {battle: relation.battle}%>
                 <%= render :partial => "common/video_battle", locals: {battle: relation.battle}%>
-              </div>
 
             </div>        
-        <% end %>      
+      <% end %>      
     <% end %>
   </div>
   <div ><h2>已经审批</h2></div>
@@ -65,19 +60,12 @@
     </div>
     <% stream.multivotes.each do |relation| %>
       <div class="row">
-        <div class= "col-xs-3">
           <%= relation.order%>
-        </div>
       </div>
       <div class="container" id="<%= "singlebattle_#{relation.battle.id}"%>">
         <div id="<%= "votebar_battle_#{relation.battle.id}"%>">
-            <div class="row">
-              <div class="col-xs-12" style="width: 100%">
-                <div class="panel1">
-                  <h4 align="center"><%= relation.battle.title %></h4>
-                      <!-- <p class="pull-left" style="margin-left: 10px; height: 30px;"><%#= simple_format(battle.description) %></p> -->
-                </div>
-              </div>
+            <div class="row col-xs-12" style="width: 100%">
+                <h4 align="center"><%= relation.battle.title %></h4>
             </div>
             <%= render :partial => "common/bar_battle", locals: {battle: relation.battle}%>
             <%= render :partial => "common/video_battle", locals: {battle: relation.battle}%>
