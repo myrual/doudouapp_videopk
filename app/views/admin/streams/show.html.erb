@@ -9,15 +9,19 @@
   <strong>Content:</strong>
   <%= @stream.content %>
 </p>
-    <div>
-        <% b.multivotes.each do |relation| %>
-            <div class="row">
-              <div class= "col-xs-3">
-                <%= relation.order%>
-              </div>
+    <% @stream.multivotes.each do |relation| %>
+      <div class="row">
+          <%= relation.order%>
+      </div>
+      <div class="container" id="<%= "singlebattle_#{relation.battle.id}"%>">
+        <div id="<%= "votebar_battle_#{relation.battle.id}"%>">
+            <div class="row col-xs-12" style="width: 100%">
+                <h4 align="center"><%= relation.battle.title %></h4>
             </div>
-            <%= render :partial => "common/singlebattle", locals: {battle: relation.battle}%>
-        <% end %>
-    </div>
+            <%= render :partial => "common/bar_battle", locals: {battle: relation.battle}%>
+            <%= render :partial => "common/video_battle", locals: {battle: relation.battle}%>
+        </div>
+      </div>        
+    <% end %>  
 <%= link_to 'Edit', edit_myasset_stream_path(@stream) %> |
 <%= link_to 'Back', myasset_streams_path %>
