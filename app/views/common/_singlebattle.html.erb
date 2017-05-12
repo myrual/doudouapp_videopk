@@ -1,6 +1,7 @@
 <% battle = local_assigns[:battle] %>
 <div class="container" id="<%= "singlebattle_#{battle.id}"%>">
 
+  
   <div id="<%= "votebar_battle_#{battle.id}"%>">
     <div class="row">
       
@@ -8,11 +9,10 @@
           <div class="panel1">
                           <%= link_to(battle.title, battle_path(battle),
                                               :class => "h4 center") %>
-              <!-- <p class="pull-left" style="margin-left: 10px; height: 30px;"><%#= simple_format(battle.description) %></p> -->
           </div>
       </div>
     </div>
+    <%= render :partial => "common/video_battle", locals: {battle: battle}%>
     <%= render :partial => "common/votebar_battle", locals: {battle: battle}%>
   </div>
-    <%= render :partial => "common/video_battle", locals: {battle: battle}%>
 </div>

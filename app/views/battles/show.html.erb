@@ -16,12 +16,12 @@
 <br>
 
 <div class="container">
-
+    <%= render :partial => "common/video_battle", locals: {battle: @battle}%>
   <div id="<%= "votebar_battle_#{@battle.id}"%>">
 
     <%= render :partial => "common/votebar_battle", locals: {battle: @battle}%>
   </div>
-    <%= render :partial => "common/video_battle", locals: {battle: @battle}%>
+
 
 
   <div class="row">
