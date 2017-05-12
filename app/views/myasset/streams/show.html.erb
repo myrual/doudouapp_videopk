@@ -10,9 +10,6 @@
   <%= @stream.content %>
 </p>
       <% @stream.multivotes.each do |relation| %>
-        <div class="row">
-            <%= relation.order%>
-        </div>
         <div class="container" id="<%= "singlebattle_#{relation.battle.id}"%>">
           <div id="<%= "votebar_battle_#{relation.battle.id}"%>">
               <div class="row col-xs-12" style="width: 100%">
