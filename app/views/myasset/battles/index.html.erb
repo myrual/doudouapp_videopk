@@ -38,11 +38,9 @@
       </div>      
     </div>
 
-    <div class="container">
-      <div class="row">
-        <%= render :partial => "singlebattle", locals: {battle: b}%>
-      </div>
-    </div>
+
+    <%= render :partial => "common/bar_battle", locals: {battle: b}%>
+    <%= render :partial => "common/video_battle", locals: {battle: b}%>
 
   <% end %>
 </div>

@@ -20,7 +20,7 @@
     </div>
     </div>
     <%= render :partial => "common/battleinstream", locals: {stream: stream}%>
-  <% end %>
+    <% end %>
   </div>
   <div ><h2>已经审批</h2></div>
   <% @streams_proved.each do |stream| %>
@@ -39,6 +39,28 @@
       <%= link_to stream.title, admin_stream_path(stream) %>
     </div>
     </div>
-    <%= render :partial => "common/battleinstream", locals: {stream: stream}%>
-  <% end %>
+        <% stream.multivotes.each do |relation| %>
+            <div class="row">
+              <div class= "col-xs-3">
+                <%= relation.order%>
+              </div>
+            </div>
+            <div class="container" id="<%= "singlebattle_#{battle.id}"%>">
+
+              <div id="<%= "votebar_battle_#{battle.id}"%>">
+                <div class="row">
+                  <div class="col-xs-12" style="width: 100%">
+                    <div class="panel1">
+                      <h4 align="center"><%= @battle.title %></h4>
+                      <!-- <p class="pull-left" style="margin-left: 10px; height: 30px;"><%#= simple_format(battle.description) %></p> -->
+                    </div>
+                  </div>
+                </div>
+                <%= render :partial => "common/bar_battle", locals: {battle: battle}%>
+                <%= render :partial => "common/video_battle", locals: {battle: battle}%>
+              </div>
+
+            </div>        
+<% end %>  
+<% end %>
   </div>
