@@ -15,12 +15,12 @@
   <div class="row">
     <div class="col-sm-2 col-xs-2">
      <% if left_is_voted(battle)%>
-        <i class= "<%= "#{left_vote_link_text}"%>" aria-hidden="true" style="color:#79e8d0;"></i>
+        <i class= "<%= "#{left_vote_link_text}"%>" aria-hidden="true" style="color:#00314f;"></i>
 
     <% elsif !right_is_voted(battle)%>
                 <%= link_to vote_for_left_battle_path(battle), :method => :post,
                                                :remote => true do %>
-                        <i class= "<%= "#{left_vote_link_text}"%>" aria-hidden="true" style="color:#79e8d0;"></i>
+                        <i class= "<%= "#{left_vote_link_text}"%>" aria-hidden="true" style="color:#00314f;"></i>
                 <% end %>    
     <% end %>
     </div>
@@ -28,31 +28,31 @@
         <% if total_votes(battle) >0 %>
             <div class="progress" style="margin-top: 20px;">
                 <div id="leftBar" class="progress-bar" role="progressbar" style="width:<%= render_left_width(battle)%>%;
-                        background-color:#79e8d0; color:black;">
+                        background-color:#00314f; color:black;">
           
                     <p><%= left_votes(battle) %></p>
                 </div>
                 <div id="rightBar" class="progress-bar" role="progressbar" style="width:<%= render_right_width(battle)%>%;
-                            background-color:#ff7073; color:white;" >
+                            background-color:#d71a21; color:white;" >
                     <p><%= right_votes(battle) %></p>
                 </div>
 
             </div>
         <% else %>
             <div class="progress" style="margin-top: 20px;">
-                <div id="leftBar" class="progress-bar" role="progressbar" style="width:100%; background-color:#efefef;">
+                <div id="leftBar" class="progress-bar" role="progressbar" style="width:100%; background-color:#d71a21;">
                 </div>
               </div>
         <% end %>
     </div>
     <div class="col-sm-2 col-xs-2" style="text-align:right">
     <%if right_is_voted(battle)%>
-                        <i class= "<%= "#{right_vote_link_text}"%>" aria-hidden="true" style="color:#ff7073;"></i>
+                        <i class= "<%= "#{right_vote_link_text}"%>" aria-hidden="true" style="color:#d71a21;"></i>
                 
     <% elsif  !left_is_voted(battle)%>
                 <%= link_to vote_for_right_battle_path(battle), :method => :post,
                                                :remote => true do %>
-                        <i class= "<%= "#{right_vote_link_text}"%>" aria-hidden="true" style="color:#ff7073;"></i>
+                        <i class= "<%= "#{right_vote_link_text}"%>" aria-hidden="true" style="color:#d71a21;"></i>
                 <% end %>
     <% end %>
     </div>
