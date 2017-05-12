@@ -5,7 +5,6 @@ class StreamsController < ApplicationController
   # GET /streams/1
   # GET /streams/1.json
   def show
-      debugger
       if !@stream.approved or !@stream.running
         redirect_to root_url
       end
