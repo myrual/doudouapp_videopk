@@ -68,7 +68,7 @@ Rails.application.routes.draw do
       get :append
       get :reorder
       post :appended
-      post :reorder
+      post :reordered
     end
     resources :multivotes do
     end

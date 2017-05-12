@@ -1,0 +1,18 @@
+<h1>调整<%= @stream.title %>里面battle的顺序</h1>
+
+<% @stream.multivotes.each do |relation| %>
+    <div class="container" id="<%= "singlebattle_#{relation.battle.id}"%>">
+        <%= form_tag(myasset_stream_reordered_path(@stream), method: "post") do %>
+            <%= label_tag(relation.battle.id, relation.battle.title) %>
+            <%= label_tag(:order, "顺序") %>
+            <%= select_tag(:order, options_for_select(1...6, relation.order)) %>
+            <%= submit_tag("更改") %>
+            <%= submit_tag("删除") %>
+            <%= hidden_field_tag(:battle, relation.battle.id) %>
+        <% end %>
+    </div>        
+<% end %> 
+
+
+<%= link_to 'Show', myasset_stream_path(@stream) %> |
+<%= link_to 'Back', myasset_streams_path %>
