@@ -2,29 +2,23 @@
 
 <h1>Streams</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
     <% @streams.each do |stream| %>
-      <tr>
-        <td><%= stream.title %></td>
-        <td><%= stream.content %></td>
-        <td><%= link_to 'Show', myasset_stream_path(stream) %></td>
-        <td><%= link_to 'Edit', edit_myasset_stream_path(stream) %></td>
-        <td><%= link_to 'Destroy', myasset_stream_path(stream),  method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-
+      <div class="container">
+      <div class="row">
+        <div class = "col-sm-8 col-xs-8">
+          <%= link_to(stream.title, myasset_stream_path(stream)) %>
+        </div>
+        <div class="pull-right col-sm-4 col-xs-4">
+          <%= link_to 'Show', myasset_stream_path(stream) %>
+          <%= link_to 'Edit', edit_myasset_stream_path(stream) %>
+          <%= link_to 'Destroy', myasset_stream_path(stream),  method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+      </div>
+      <div class="row">
+        <p><%= stream.content %></p>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
 
 <%= link_to 'New Stream', new_myasset_stream_path %>
