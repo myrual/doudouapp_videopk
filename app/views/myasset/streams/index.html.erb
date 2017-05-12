@@ -20,14 +20,8 @@
         <td><%= link_to 'Edit', edit_myasset_stream_path(stream) %></td>
         <td><%= link_to 'Destroy', myasset_stream_path(stream),  method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-      <tr>
-        <% stream.multivotes.each do |relation| %>
-          <tr>
-          <td><%= relation.order%> : </td>
-          <td> <%= relation.battle.title%> </td>
-          </tr>
-        <% end %>
-      </tr>
+      <%= render :partial => "common/battleinstream", locals: {stream: stream}%>
+
     <% end %>
   </tbody>
 </table>

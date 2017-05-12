@@ -9,6 +9,7 @@
   <strong>Content:</strong>
   <%= @stream.content %>
 </p>
+    <%= render :partial => "common/battleinstream", locals: {stream: @stream}%>
 
 <%= link_to 'Edit', edit_myasset_stream_path(@stream) %> |
 <%= link_to 'Back', myasset_streams_path %>

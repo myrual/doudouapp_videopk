@@ -1,0 +1,11 @@
+  <% b = local_assigns[:stream] %>
+    <div>
+        <% b.multivotes.each do |relation| %>
+            <div class="row">
+              <div class= "col-xs-3">
+                <%= relation.order%>
+              </div>
+            </div>
+            <%= render :partial => "common/singlebattle", locals: {battle: relation.battle}%>
+        <% end %>
+    </div>
