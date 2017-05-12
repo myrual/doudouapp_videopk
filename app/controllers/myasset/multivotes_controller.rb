@@ -23,6 +23,8 @@ class Myasset::MultivotesController < ApplicationController
 
   # GET /multivotes/1/edit
   def edit
+    @streams = current_user.streams.all
+    @battles = current_user.battles.all
   end
 
   # POST /multivotes
