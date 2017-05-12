@@ -10,7 +10,11 @@
           <%= link_to(stream.title, myasset_stream_path(stream)) %>
         </div>
         <div class="pull-right col-sm-4 col-xs-4">
-          <%= link_to 'Show', myasset_stream_path(stream) %>
+          <% if stream.approved %>
+            <%= link_to 'Show', stream_path(stream) %>
+          <% else %>
+            <%= link_to 'Show', myasset_stream_path(stream) %>
+          <% end %>
           <%= link_to 'Edit', edit_myasset_stream_path(stream) %>
           <%= link_to 'Destroy', myasset_stream_path(stream),  method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
