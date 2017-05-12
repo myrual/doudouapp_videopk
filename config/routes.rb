@@ -65,9 +65,15 @@ Rails.application.routes.draw do
     end
     
     resources :streams do
+      get :append
+      get :reorder
+      post :appended
+      post :reorder
     end
     resources :multivotes do
     end
+    
+    
 
     #resources :users
   end

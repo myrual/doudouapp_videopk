@@ -21,4 +21,6 @@
         </div>        
       <% end %> 
 <%= link_to 'Edit', edit_myasset_stream_path(@stream) %> |
-<%= link_to 'Back', myasset_streams_path %>
+<%= link_to 'Back', myasset_streams_path %> |
+<%= link_to '添加battle', myasset_stream_append_path(@stream) %> |
+<%= link_to '调整排序', myasset_stream_reorder_path(@stream) %>

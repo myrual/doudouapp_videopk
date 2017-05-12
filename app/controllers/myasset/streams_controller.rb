@@ -23,6 +23,24 @@ class Myasset::StreamsController < ApplicationController
   def edit
   end
 
+  # GET /streams/1/append
+  def append
+    @stream = Stream.find(params["stream_id"])
+  end
+  # POST /streams/1/appended
+  def appended
+    @stream = Stream.find(params["stream_id"])
+  end
+
+  # GET /streams/1/reordered
+  def reorder
+    @stream = Stream.find(params["stream_id"])
+  end
+  # POST /streams/1/reordered
+  def reordered
+    @stream = Stream.find(params["stream_id"])
+  end
+
   # POST /streams
   # POST /streams.json
   def create
