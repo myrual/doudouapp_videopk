@@ -1,5 +1,5 @@
 class StreamsController < ApplicationController
-  before_action :set_stream, only: [:show]
+  before_action :set_stream, only: [:show, :vote_for_left, :vote_for_right]
 
 
   # GET /streams/1
@@ -8,13 +8,70 @@ class StreamsController < ApplicationController
       if !@stream.approved or !@stream.running
         redirect_to root_url
       end
+      battle_order = @stream.multivotes.all.sort_by{|bo| bo.order}
+      @remainBattles = battle_order.map {|v| Battle.find(v.battle_id)}
+      @battle = @remainBattles.first
   end
 
   # GET /streams/new
   def new
     @stream = Stream.new
   end
-
+  def vote_for_left
+    @remainBattles = remain_battles_in_stream(@stream)
+    @battle = @remainBattles.first
+    battle = Battle.find(params["battle"])
+    if current_user
+      current_user.follow_left!(battle)
+      flash[:warning] = "投票成功" if request.format.html?
+      if @battle
+        respond_to do |format|
+          format.html {redirect_to :back}
+          format.js
+        end
+      else
+        redirect_to root_url
+      end
+    else
+      #visitor click left vote button
+      visitorID = find_visitor_id
+      newVote = battle.visitor_votes.build(visitorID:visitorID,voteLeft:true)
+      flash[:warning] = "投票成功" if request.format.html?
+      newVote.save
+      if @battle
+        respond_to do |format|
+          format.html {redirect_to :back}
+          format.js
+        end
+      else
+        redirect_to root_url
+      end
+    end
+  end
+  
+  def vote_for_right
+    @remainBattles = remain_battles_in_stream(@stream)
+    @battle = @remainBattles.first
+    battle = Battle.find(params["battle"])
+    if current_user
+      current_user.follow_right!(battle)
+      flash[:warning] = "投票成功" if request.format.html?
+        respond_to do |format|
+          format.html {redirect_to :back}
+          format.js
+        end
+    else
+      #visitor click left vote button
+      visitorID = find_visitor_id
+      newVote = battle.visitor_votes.build(visitorID:visitorID,voteLeft:false)
+      flash[:warning] = "投票成功" if request.format.html?
+      newVote.save
+      respond_to do |format|
+        format.html {redirect_to :back}
+        format.js
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -26,4 +83,22 @@ class StreamsController < ApplicationController
     def stream_params
       params.require(:stream).permit(:title, :content)
     end
+  def find_visitor_id
+    visitorID = ""
+    if(visitor_id_incookie = cookies.signed[:visitorID])
+      visitorID = visitor_id_incookie
+    else
+      visitorID = Time.now.to_s
+      cookies.permanent.signed[:visitorID] = visitorID
+    end
+    visitorID
+  end
+  
+  def remain_battles_in_stream(stream)
+      battles_in_stream_inorder = stream.multivotes.all.sort_by{|bo| bo.order}
+      remainbattles_in_stream_inorder = battles_in_stream_inorder.select do |battle_order|
+        "#{battle_order.battle_id}" != params["battle"]
+      end
+      remainbattles_in_stream_inorder.map {|v| Battle.find(v.battle_id)}
+  end
 end

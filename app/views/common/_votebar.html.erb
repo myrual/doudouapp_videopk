@@ -1,9 +1,5 @@
   <% battle = local_assigns[:battle] %>
-  <% if battle %>
-  <div class="row">
-    <div class="col-sm-2 col-xs-2">
-    </div>
-    <div class = "col-sm-8 col-xs-8">
+
         <% if total_votes(battle) >0 %>
             <div class="progress" style="margin-top: 20px;">
                 <div id="leftBar" class="progress-bar" role="progressbar" style="width:<%= render_left_width(battle)%>%;
@@ -23,6 +19,3 @@
                 </div>
               </div>
         <% end %>
-    </div>
-    </div>
-  <% end %>

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :multivotes
-  resources :streams
+  resources :streams do
+    member do
+      post :vote_for_left
+      post :vote_for_right
+    end
+  end
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
@@ -69,6 +74,7 @@ Rails.application.routes.draw do
       get :reorder
       post :appended
       post :reordered
+
     end
     resources :multivotes do
     end

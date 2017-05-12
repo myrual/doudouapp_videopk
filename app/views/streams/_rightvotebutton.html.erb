@@ -1,0 +1,16 @@
+  <% battle = local_assigns[:battle] %>
+     <% if right_is_voted(battle) %>
+         <%  right_vote_link_text = "fa fa-thumbs-up fa-2x flip"%>
+     <% else %>
+         <%  right_vote_link_text = "fa fa-thumbs-o-up fa-2x flip"%>
+     <% end %>
+     
+    <%if right_is_voted(battle)%>
+                        <i class= "<%= "#{right_vote_link_text}"%>" aria-hidden="true" style="color:#d71a21;"></i>
+                
+    <% elsif  !left_is_voted(battle)%>
+                <%= link_to vote_for_right_stream_path(@stream, :battle => battle.id), :method => :post,
+                                               :remote => @remainBattles.count > 1 do %>
+                        <i class= "<%= "#{right_vote_link_text}"%>" aria-hidden="true" style="color:#d71a21;"></i>
+                <% end %>
+    <% end %>
