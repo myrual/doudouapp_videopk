@@ -50,7 +50,23 @@ class Myasset::StreamsController < ApplicationController
   end
   # POST /streams/1/reordered
   def reordered
+    
     @stream = Stream.find(params["stream_id"])
+    order = params["order"]
+    if params["commit"] == "删除"
+      multivote = @stream.multivotes.find_by(:battle_id => params["battle"])
+      multivote.delete
+      if @stream.multivotes.all.count > 0
+        redirect_to myasset_stream_url(@stream)
+      else
+        redirect_to myasset_streams_url
+      end
+    else
+      multivote = @stream.multivotes.find_by(:battle_id => params["battle"])
+      multivote.order = order
+      multivote.save
+      redirect_to myasset_stream_url(@stream)
+    end
   end
 
   # POST /streams
