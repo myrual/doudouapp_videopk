@@ -55,20 +55,28 @@ class StreamsController < ApplicationController
     battle = Battle.find(params["battle"])
     if current_user
       current_user.follow_right!(battle)
+      if @battle
       flash[:warning] = "投票成功" if request.format.html?
         respond_to do |format|
           format.html {redirect_to :back}
           format.js
         end
+      else
+        redirect_to root_url
+      end
     else
       #visitor click left vote button
       visitorID = find_visitor_id
       newVote = battle.visitor_votes.build(visitorID:visitorID,voteLeft:false)
-      flash[:warning] = "投票成功" if request.format.html?
       newVote.save
-      respond_to do |format|
-        format.html {redirect_to :back}
-        format.js
+      if @battle      
+        flash[:warning] = "投票成功" if request.format.html?
+        respond_to do |format|
+          format.html {redirect_to :back}
+          format.js
+        end
+      else
+        redirect_to root_url
       end
     end
   end
