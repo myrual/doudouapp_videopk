@@ -41,6 +41,7 @@ class Myasset::VideosController < ApplicationController
           newBattle.right_video_id = toChallenge_video.id
           newBattle.user = current_user
           newBattle.save
+          newBattle.is_hidden = false
           redirect_to myasset_battles_path, notice: '比赛已创建!'
       else
         render :new
