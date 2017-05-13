@@ -9,7 +9,7 @@ class StreamsController < ApplicationController
         redirect_to root_url
       end
       battle_order = @stream.multivotes.all.sort_by{|bo| bo.order}
-      available_battle = battle_order.select |each| do
+      available_battle = battle_order.select do |each| 
         !is_voted(Battle.find(each.battle_id))
       end
       @remainBattles = available_battle.map {|v| Battle.find(v.battle_id)}

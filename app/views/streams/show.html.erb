@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+  <% if @battle %>
     <div class="container" id="<%= "singlebattleinstream"%>">
 
       <div class="row">
@@ -12,3 +13,9 @@
       <%= render :partial => "common/video_battle", locals: {battle: @battle}%>
       <%= render :partial => "votebar_battle", locals: {battle: @battle}%>
     </div>
+  <% else %>
+    <% @stream.inside_battles.each do |b| %>
+      <%= render :partial => "common/singlebattle", locals: {battle: b}%>
+    <% end %>
+  
+  <% end %>
