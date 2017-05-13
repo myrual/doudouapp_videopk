@@ -82,7 +82,7 @@ class Admin::StreamsController < ApplicationController
 
     respond_to do |format|
       if @stream.save
-        format.html { redirect_to myasset_stream_url(@stream), notice: 'Stream was successfully created.' }
+        format.html { redirect_to admin_stream_url(@stream), notice: 'Stream was successfully created.' }
         format.json { render :show, status: :created, location: @stream }
       else
         format.html { render :new }
@@ -110,7 +110,7 @@ class Admin::StreamsController < ApplicationController
   def destroy
     @stream.destroy
     respond_to do |format|
-      format.html { redirect_to myasset_streams_url, notice: 'Stream was successfully destroyed.' }
+      format.html { redirect_to admin_streams_url, notice: 'Stream was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
