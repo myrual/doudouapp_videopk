@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Streams</h1>
-
+<%= link_to 'New Stream', new_admin_stream_path %>
   <div ><h2>待审批</h2></div>
   <div>
   <% @streams_waiting_prove.each do |stream| %>
