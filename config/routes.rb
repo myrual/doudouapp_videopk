@@ -67,6 +67,8 @@ Rails.application.routes.draw do
   end
   namespace :myasset do
     resources :videos do
+      get :challenge
+      post :createchallenge
       #resources :video_comments
     end
 

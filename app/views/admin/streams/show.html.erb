@@ -1,6 +1,4 @@
 <p id="notice"><%= notice %></p>
-
-
 <p>
   <strong>Title:</strong>
   <%= @stream.title %>
@@ -10,6 +8,7 @@
   <strong>Content:</strong>
   <%= @stream.content %>
 </p>
+
 <div class="row">
 <%= link_to 'Edit', edit_admin_stream_path(@stream) %> |
 <%= link_to 'Back', admin_streams_path %> |

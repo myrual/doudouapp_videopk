@@ -30,7 +30,8 @@ class StreamsController < ApplicationController
           format.js
         end
       else
-        redirect_to root_url
+        tochallenge = @stream.inside_videos.first
+        redirect_to myasset_video_challenge_url(tochallenge)
       end
     else
       #visitor click left vote button
@@ -44,7 +45,8 @@ class StreamsController < ApplicationController
           format.js
         end
       else
-        redirect_to root_url
+        tochallenge = @stream.inside_videos.first
+        redirect_to myasset_video_challenge_url(tochallenge)
       end
     end
   end

@@ -44,7 +44,6 @@ class Myasset::BattlesController < ApplicationController
       @challenge_battle = Battle.find(params[:battle_id])
       @challenge_video = Video.find(@challenge_battle.right_video_id)
     end
-    
     def createChallenge_left
     
       battle = Battle.find(params[:battle_id])

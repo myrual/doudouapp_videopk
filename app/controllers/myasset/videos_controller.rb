@@ -25,6 +25,27 @@ class Myasset::VideosController < ApplicationController
         render :new
       end
     end
+    
+    def challenge
+      @video = Video.new
+      @targevideo = Video.find(params[:video_id])
+    end
+    def createchallenge
+      toChallenge_video = Video.find(params[:video_id])
+      @video = Video.create(video_params)
+      @video.user = current_user
+      if @video.save!
+          newBattle = Battle.new
+          newBattle.title = @video.title + " VS " + toChallenge_video.title
+          newBattle.left_video_id = @video.id
+          newBattle.right_video_id = toChallenge_video.id
+          newBattle.user = current_user
+          newBattle.save
+          redirect_to myasset_battles_path, notice: '比赛已创建!'
+      else
+        render :new
+      end
+    end
 
     def edit
       @video = Video.find(params[:id])
