@@ -38,8 +38,7 @@ class StreamsController < ApplicationController
           format.js
         end
       else
-        tochallenge = @stream.inside_videos.first
-        redirect_to myasset_video_challenge_url(tochallenge)
+        redirect_to invitechallenge_stream_url(@stream)
       end
     else
       #visitor click left vote button
@@ -53,8 +52,7 @@ class StreamsController < ApplicationController
           format.js
         end
       else
-        tochallenge = @stream.inside_videos.first
-        redirect_to myasset_video_challenge_url(tochallenge)
+        redirect_to invitechallenge_stream_url(@stream)
       end
     end
   end
@@ -72,8 +70,7 @@ class StreamsController < ApplicationController
           format.js
         end
       else
-        tochallenge = @stream.inside_videos.first
-        redirect_to myasset_video_challenge_url(tochallenge)
+        redirect_to invitechallenge_stream_url(@stream)
       end
     else
       #visitor click left vote button
@@ -87,8 +84,7 @@ class StreamsController < ApplicationController
           format.js
         end
       else
-        tochallenge = @stream.inside_videos.first
-        redirect_to myasset_video_challenge_url(tochallenge)
+        redirect_to invitechallenge_stream_url(@stream)
       end
     end
   end
