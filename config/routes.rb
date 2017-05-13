@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     member do
       post :vote_for_left
       post :vote_for_right
+      get :invitechallenge
     end
   end
   devise_for :users, controllers: {

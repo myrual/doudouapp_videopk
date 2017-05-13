@@ -1,5 +1,5 @@
 class StreamsController < ApplicationController
-  before_action :set_stream, only: [:show, :vote_for_left, :vote_for_right]
+  before_action :set_stream, only: [:show, :vote_for_left, :vote_for_right, :invitechallenge]
 
 
   # GET /streams/1
@@ -12,6 +12,14 @@ class StreamsController < ApplicationController
       @remainBattles = battle_order.map {|v| Battle.find(v.battle_id)}
       @battle = @remainBattles.first
   end
+
+  def invitechallenge
+      if !@stream.approved or !@stream.running
+        redirect_to root_url
+      end
+      @video = @stream.inside_videos.first
+  end
+
 
   # GET /streams/new
   def new

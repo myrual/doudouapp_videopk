@@ -169,10 +169,29 @@ hr {
 
 
 
+.challenge {
+  //background: blue;
+  //background: #bfdbb8;
+  background-color: #135392;
+  // padding: 1.2em 1.5em;
+  border: none;
+  //font-weight: bold;
+  color: #fff;
+  -webkit-transition: background .3s ease;
+          transition: background .3s ease;
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+}
+
+.challenge:hover {
+    background: #c5ecf9;
+    color: #fff; }
+    
 .challenge_left {
   //background: blue;
   //background: #bfdbb8;
-  background: #79e8d0;
+  background: #135392;
   // padding: 1.2em 1.5em;
   border: none;
   //font-weight: bold;
@@ -191,7 +210,7 @@ hr {
 .challenge_right {
       //background: red;
       //background: #f29f3f;
-      background: #ff7073;
+      background: #e02622;
       // padding: 1.2em 1.5em;
       border: none;
       //font-weight: bold;
