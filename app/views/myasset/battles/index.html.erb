@@ -8,7 +8,11 @@
     <% right_video = Video.find(b.right_video_id) %>
     <div class="row">
       <div class = "col-sm-8 col-xs-8">
-        <%= link_to(b.title, myasset_battle_path(b)) %>
+        <% if b.is_hidden %>
+          <%= link_to(b.title, myasset_battle_path(b)) %>
+        <% else %>
+          <%= link_to(b.title, battle_path(b)) %>
+        <% end %>
       </div>
       <div class="pull-right col-sm-4 col-xs-4">
         <% if b.is_hidden %>
