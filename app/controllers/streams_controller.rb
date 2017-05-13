@@ -41,7 +41,11 @@ class StreamsController < ApplicationController
           format.js
         end
       else
-        redirect_to invitechallenge_stream_url(@stream)
+        if @stream.inside_videos.first
+          redirect_to invitechallenge_stream_url(@stream)
+        else
+          redirect_to root_url
+        end
       end
     else
       #visitor click left vote button
@@ -55,7 +59,11 @@ class StreamsController < ApplicationController
           format.js
         end
       else
-        redirect_to invitechallenge_stream_url(@stream)
+        if @stream.inside_videos.first
+          redirect_to invitechallenge_stream_url(@stream)
+        else
+          redirect_to root_url
+        end
       end
     end
   end
@@ -73,7 +81,11 @@ class StreamsController < ApplicationController
           format.js
         end
       else
-        redirect_to invitechallenge_stream_url(@stream)
+        if @stream.inside_videos.first
+          redirect_to invitechallenge_stream_url(@stream)
+        else
+          redirect_to root_url
+        end
       end
     else
       #visitor click left vote button
@@ -87,7 +99,11 @@ class StreamsController < ApplicationController
           format.js
         end
       else
-        redirect_to invitechallenge_stream_url(@stream)
+        if @stream.inside_videos.first
+          redirect_to invitechallenge_stream_url(@stream)
+        else
+          redirect_to root_url
+        end
       end
     end
   end
