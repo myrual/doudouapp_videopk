@@ -9,7 +9,7 @@
 
     <% elsif !right_is_voted(battle)%>
                 <%= link_to vote_for_left_stream_path(@stream, :battle => battle.id), :method => :post,
-                                               :remote => @remainBattles.count > 1 do %>
+                                               :remote => @remainBattles.count > 0 do %>
                         <i class= "<%= "#{left_vote_link_text}"%>" aria-hidden="true" style="color:#00314f;"></i>
                 <% end %>    
     <% end %>
