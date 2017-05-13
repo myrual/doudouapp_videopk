@@ -33,6 +33,9 @@ module BattlesHelper
       battle.visitor_votes.find_by(visitorID:visitorID, voteLeft:true) != nil
     end
   end
+  def is_voted(battle)
+    left_is_voted(battle_params) or right_is_voted(battle)
+  end
   def find_visitor_id
     visitorID = ""
     if(visitor_id_incookie = cookies.signed[:visitorID])

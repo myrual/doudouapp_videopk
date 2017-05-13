@@ -51,6 +51,10 @@ Rails.application.routes.draw do
       member do
         post :approve
         post :rollback
+        get :append
+        get :reorder
+        post :appended
+        post :reordered
       end
     end
 
@@ -68,18 +72,6 @@ Rails.application.routes.draw do
       post :createChallenge_left
       post :createChallenge_right
     end
-    
-    resources :streams do
-      get :append
-      get :reorder
-      post :appended
-      post :reordered
-
-    end
-    resources :multivotes do
-    end
-    
-    
 
     #resources :users
   end

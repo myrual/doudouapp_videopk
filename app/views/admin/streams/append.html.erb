@@ -1,0 +1,13 @@
+<h1>向<%= @stream.title %>添加battle</h1>
+
+<%= form_tag(appended_admin_stream_path(@stream), method: "post") do %>
+    <%= label_tag(:battle, "battle") %>
+    <%= select_tag(:battle, options_for_select(@battles)) %>
+    <%= label_tag(:order, "顺序") %>
+    <%= select_tag(:order, options_for_select(1...6)) %>
+    <%= submit_tag("添加") %>
+
+<% end %>
+
+<%= link_to 'Show', admin_stream_path(@stream) %> |
+<%= link_to 'Back', admin_streams_path %>

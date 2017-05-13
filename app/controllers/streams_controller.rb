@@ -101,11 +101,29 @@ class StreamsController < ApplicationController
     end
     visitorID
   end
-  
+  def right_is_voted(battle)
+    if current_user
+      current_user.has_follow_right?(battle)
+    else
+      visitorID = find_visitor_id
+      battle.visitor_votes.find_by(visitorID:visitorID, voteLeft:false) != nil
+    end
+  end  
+  def left_is_voted(battle)
+    if current_user
+      current_user.has_follow_left?(battle)
+    else
+      visitorID = find_visitor_id
+      battle.visitor_votes.find_by(visitorID:visitorID, voteLeft:true) != nil
+    end
+  end
+  def is_voted(battle)
+    left_is_voted(battle) or right_is_voted(battle)
+  end
   def remain_battles_in_stream(stream)
       battles_in_stream_inorder = stream.multivotes.all.sort_by{|bo| bo.order}
       remainbattles_in_stream_inorder = battles_in_stream_inorder.select do |battle_order|
-        "#{battle_order.battle_id}" != params["battle"]
+        "#{battle_order.battle_id}" != params["battle"] and is_voted(Battle.find(battle_order.battle_id))
       end
       remainbattles_in_stream_inorder.map {|v| Battle.find(v.battle_id)}
   end

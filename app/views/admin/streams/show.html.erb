@@ -9,19 +9,18 @@
   <strong>Content:</strong>
   <%= @stream.content %>
 </p>
-    <% @stream.multivotes.each do |relation| %>
-      <div class="row">
-          <%= relation.order%>
-      </div>
-      <div class="container" id="<%= "singlebattle_#{relation.battle.id}"%>">
-        <div id="<%= "votebar_battle_#{relation.battle.id}"%>">
-            <div class="row col-xs-12" style="width: 100%">
-                <h4 align="center"><%= relation.battle.title %></h4>
-            </div>
-            <%= render :partial => "common/bar_battle", locals: {battle: relation.battle}%>
-            <%= render :partial => "common/video_battle", locals: {battle: relation.battle}%>
-        </div>
-      </div>        
-    <% end %>  
-<%= link_to 'Edit', edit_myasset_stream_path(@stream) %> |
-<%= link_to 'Back', myasset_streams_path %>
+      <% @stream.multivotes.each do |relation| %>
+        <div class="container" id="<%= "singlebattle_#{relation.battle.id}"%>">
+          <div id="<%= "votebar_battle_#{relation.battle.id}"%>">
+              <div class="row col-xs-12" style="width: 100%">
+                  <h4 align="center"><%= relation.battle.title %></h4>
+              </div>
+              <%= render :partial => "common/bar_battle", locals: {battle: relation.battle}%>
+              <%= render :partial => "common/video_battle", locals: {battle: relation.battle}%>
+          </div>
+        </div>        
+      <% end %> 
+<%= link_to 'Edit', edit_admin_stream_path(@stream) %> |
+<%= link_to 'Back', admin_streams_path %> |
+<%= link_to '添加battle', append_admin_stream_path(@stream) %> |
+<%= link_to '调整排序', reorder_admin_stream_path(@stream) %>
