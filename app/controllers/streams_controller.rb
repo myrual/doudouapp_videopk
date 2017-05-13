@@ -127,7 +127,7 @@ class StreamsController < ApplicationController
   def remain_battles_in_stream(stream)
       battles_in_stream_inorder = stream.multivotes.all.sort_by{|bo| bo.order}
       remainbattles_in_stream_inorder = battles_in_stream_inorder.select do |battle_order|
-        !is_voted(Battle.find(battle_order.battle_id))
+        "#{battle_order.battle_id}" != params["battle"] and !is_voted(Battle.find(battle_order.battle_id))
       end
       remainbattles_in_stream_inorder.map {|v| Battle.find(v.battle_id)}
   end
