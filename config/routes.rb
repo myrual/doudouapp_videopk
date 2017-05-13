@@ -55,6 +55,11 @@ Rails.application.routes.draw do
         get :reorder
         post :appended
         post :reordered
+        get :addvideo
+        post :addvideodone
+        get :editvideo
+        post :editvideodone
+        
       end
     end
 

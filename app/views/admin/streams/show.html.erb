@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <strong>Title:</strong>
   <%= @stream.title %>
@@ -9,6 +10,14 @@
   <strong>Content:</strong>
   <%= @stream.content %>
 </p>
+<div class="row">
+<%= link_to 'Edit', edit_admin_stream_path(@stream) %> |
+<%= link_to 'Back', admin_streams_path %> |
+<%= link_to '添加battle', append_admin_stream_path(@stream) %> |
+<%= link_to '调整排序', reorder_admin_stream_path(@stream) %>
+<%= link_to '添加最后挑战video', addvideo_admin_stream_path(@stream) %> |
+<%= link_to '编辑最后挑战video', editvideo_admin_stream_path(@stream) %>
+</div>
       <% @stream.multivotes.each do |relation| %>
         <div class="container" id="<%= "singlebattle_#{relation.battle.id}"%>">
           <div id="<%= "votebar_battle_#{relation.battle.id}"%>">
@@ -20,7 +29,14 @@
           </div>
         </div>        
       <% end %> 
-<%= link_to 'Edit', edit_admin_stream_path(@stream) %> |
-<%= link_to 'Back', admin_streams_path %> |
-<%= link_to '添加battle', append_admin_stream_path(@stream) %> |
-<%= link_to '调整排序', reorder_admin_stream_path(@stream) %>
+      <div>
+      <% if @challenge_video %>
+        <h2><%= @challenge_video.title %></h2>
+          视频介绍：<%= simple_format(@challenge_video.description) %>
+          <div class="col-sm-6 col-xs-6">
+            <video src= <%= @challenge_video.video_url.to_s %> style = "width:100%" poster=<%= @challenge_video.image.thumb.to_s %>  controls>
+            <p>Your browser doesn't support HTML5 video. Here is a <a href="rabbit320.webm">link to the video</a> instead.</p>
+            </video>
+          </div>
+      <% end %>
+      </div>

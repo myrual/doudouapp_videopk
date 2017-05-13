@@ -16,11 +16,47 @@ class Admin::StreamsController < ApplicationController
   # GET /streams/1
   # GET /streams/1.json
   def show
+    @challenge_video = @stream.inside_videos.first
   end
   # GET /streams/1/edit
   def edit
   end
-
+  
+  # GET /stream/1/addvideo
+  def addvideo
+    @stream = Stream.find(params["id"])
+    @videos = Video.all.map { |v| [v.title, v.id] }
+  end
+  def addvideodone
+    @stream = Stream.find(params["id"])
+    video = Video.find(params["video"])
+    challengevideo = Challengevideo.new
+    challengevideo.user = current_user
+    challengevideo.stream = @stream
+    challengevideo.video = video
+    if challengevideo.save
+      redirect_to admin_stream_url(@stream)
+    else
+      redirect_to admin_streams_url
+    end
+  end
+  
+  def editvideo
+    @stream = Stream.find(params["id"])
+    @videos = Video.all.map { |v| [v.title, v.id] }
+  end
+  def editvideodone
+    @stream = Stream.find(params["id"])
+    video_id = params["video"]
+    challenge_video = @stream.challengevideos.first
+    if params["commit"] == "删除"
+      @stream.challengevideos.first.delete
+    else
+      challenge_video.video = Video.find(video_id)
+      challenge_video.save
+    end
+    redirect_to admin_stream_url(@stream)
+  end
   # GET /streams/1/append
   def append
     @stream = Stream.find(params["id"])

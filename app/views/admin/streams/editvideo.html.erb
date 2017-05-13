@@ -1,0 +1,12 @@
+<h1>编辑<%= @stream.title %>添加挑战Video</h1>
+
+<%= form_tag(editvideodone_admin_stream_path(@stream), method: "post") do %>
+    <%= label_tag(:video, "video") %>
+    <%= select_tag(:video, options_for_select(@videos, @stream.inside_videos.first.id)) %>
+    <%= submit_tag("更改") %>
+    <%= submit_tag("删除") %>
+<% end %>
+
+<%= link_to 'Show', admin_stream_path(@stream) %> |
+<%= link_to 'Back', admin_streams_path %>
+
