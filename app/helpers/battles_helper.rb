@@ -38,11 +38,11 @@ module BattlesHelper
   end
   def find_visitor_id
     visitorID = ""
-    if(visitor_id_incookie = cookies.signed[:visitorID])
+    if(visitor_id_incookie = cookies.signed[:doudouapp_vd])
       visitorID = visitor_id_incookie
     else
       visitorID = Time.now.to_s
-      cookies.permanent.signed[:visitorID] = visitorID
+      cookies.permanent.signed[:doudouapp_vd] = visitorID
     end
     visitorID
   end
