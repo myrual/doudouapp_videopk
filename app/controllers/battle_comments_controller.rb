@@ -13,7 +13,7 @@ class BattleCommentsController < ApplicationController
     @battle_comment.battle = battle
     @battle_comment.save!
 
-    redirect_to :back
+    redirect_to root_url
   end
 
   private
