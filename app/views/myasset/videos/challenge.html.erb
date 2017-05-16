@@ -9,7 +9,7 @@
     :url => myasset_video_createchallenge_path(@targevideo),
     :method => 'post' do |f| %>    
     <div class="group">
-        <%= f.hidden_field :title, :value => "VS " + @targevideo.title %>
+        <%= f.hidden_field :title, :value => @targevideo.title %>
     </div>
     <% if @video.image.present? %>
     <span>视频封面</span>

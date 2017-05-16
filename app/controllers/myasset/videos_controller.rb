@@ -36,13 +36,13 @@ class Myasset::VideosController < ApplicationController
       @video.user = current_user
       if @video.save!
           newBattle = Battle.new
-          newBattle.title = @video.title + " VS " + toChallenge_video.title
+          newBattle.title = toChallenge_video.title
           newBattle.left_video_id = @video.id
           newBattle.right_video_id = toChallenge_video.id
           newBattle.is_hidden = false
           newBattle.user = current_user
           newBattle.save
-          redirect_to myasset_battles_path, notice: '比赛已创建!'
+          redirect_to myasset_battle_path(newBattle), notice: '比赛已创建!'
       else
         render :new
       end
