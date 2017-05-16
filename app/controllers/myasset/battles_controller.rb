@@ -59,7 +59,7 @@ class Myasset::BattlesController < ApplicationController
           newBattle.right_video_id = targetVideo
           newBattle.user = current_user
           newBattle.save
-          redirect_to myasset_battles_path, notice: '比赛已创建!'
+          redirect_to myasset_battle_path(newBattle), notice: '比赛已创建!'
         else
           redirect_to myasset_videos_path, notice: '视频已创建!'
         end
@@ -82,8 +82,9 @@ class Myasset::BattlesController < ApplicationController
           newBattle.left_video_id = @video.id
           newBattle.right_video_id = targetVideo
           newBattle.user = current_user
+          newBattle.approved = true
           newBattle.save
-          redirect_to myasset_battles_path, notice: '比赛已创建!'
+          redirect_to battle_path(newBattle), notice: '比赛已创建!'
         else
           redirect_to myasset_videos_path, notice: '视频已创建!'
         end

@@ -11,7 +11,7 @@
     :url => myasset_battle_createChallenge_left_path,
     :method => 'post' do |f| %>    
     <div class="group">
-        <%= f.input :title, :label => "我的视频名称", value => @challenge_video.title %>
+        <%= f.input :title, :label => "我的视频名称", :input_html => { :value => @challenge_video.title} %>
     </div>
     <% if @video.image.present? %>
     <span>视频封面</span>
