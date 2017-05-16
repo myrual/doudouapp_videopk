@@ -36,7 +36,7 @@ class Myasset::VideosController < ApplicationController
       @video.user = current_user
       if @video.save!
           newBattle = Battle.new
-          newBattle.title = @video.title + " VS " + toChallenge_video.title
+          newBattle.title = @video.title
           newBattle.left_video_id = @video.id
           newBattle.right_video_id = toChallenge_video.id
           newBattle.is_hidden = false
