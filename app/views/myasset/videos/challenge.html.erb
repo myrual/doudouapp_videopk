@@ -8,15 +8,14 @@
     
     :url => myasset_video_createchallenge_path(@targevideo),
     :method => 'post' do |f| %>    
-    <span class="btn btn-large btn-warning btn-file">
-      上传视频
-      <%=f.file_field :video, :accept => 'video/mp4'%>
-    </span>
-    <span class="btn btn-large btn-warning btn-file">
-      上传封面
-        <%= f.file_field :image, :accept => 'image/png,image/gif,image/jpeg' %>
-    </span>
+    
+    <div class="group">
+        <%=f.file_field :video, :accept => 'video/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"开始录像", "data-icon"=>"false"%>
 
+    </div>
+    <div class="group">
+          <%= f.file_field :image, :accept => 'image/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"自拍一下", "data-icon"=>"false" %>
+    </div>
     <div class="group">
         <%= f.input :title, :label => "我的视频名称", :input_html => { :value => @targevideo.title} %>
     </div>
