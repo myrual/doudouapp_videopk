@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
-<div class="row col-xs-12">
+<div class="row col-xs-12 col-sm-12">
         <div class="panel1">
             <h4 align="center">  <%= @video.title %></h4>
             <!-- <p class="pull-left" style="margin-left: 10px; height: 30px;"><%#= simple_format(battle.description) %></p> -->
         </div>
 </div>
-<div class="row col-xs-12">
+<div class="row col-xs-12 col-sm-12">
         <div class="panel1">
             <p align="center"><%= @video.description %></p>
             <!-- <p class="pull-left" style="margin-left: 10px; height: 30px;"><%#= simple_format(battle.description) %></p> -->
@@ -23,10 +23,8 @@
               <%= link_to("挑战TA", myasset_video_challenge_url(@video), :class => "btn btn-default challenge_left") %>
     </div>
     
-        <div class="col-xs-12" style="text-align:center">
-            <div class="panel1">
-              <h4 ><%= @stream.title %></h4>
-            </div>
+        <div class="rwow col-xs-12 col-sm-12" style="text-align:center">
+              <h4 ><%= 您已经投了: @stream.title %></h4>
         </div>
     <% @stream.inside_battles.each do |b| %>
       <%= render :partial => "common/video_battle", locals: {battle: b}%>
