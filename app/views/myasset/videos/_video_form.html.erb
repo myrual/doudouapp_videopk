@@ -12,16 +12,16 @@
     <%= image_tag(@video.image.thumb.url) %>
     <% end %>
     <div class="group">
-        <%#= f.input :image, as: :file %>
-        <%= f.file_field :image %>（视频封面）<br>
+        <%=f.file_field :video, :accept => 'video/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"开始录像", "data-icon"=>"false"%>
+
     </div>
     <div class="group">
-        <%=f.file_field :video %> （视频）<br>
+          <%= f.file_field :image, :accept => 'image/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"自拍一下", "data-icon"=>"false" %>
     </div>
     <br>
     <div class="form-actions">
-      <%= f.submit "提交" , disable_with: "Submiting...", class: "btn btn-success", :style => "border: none;color:white;width:49%;background-color:#74d4b3;" %>
-      <%= link_to "取消", myasset_videos_path, class: "btn btn-default", :style => "border: none;color:white;width:49%;background-color:#74d4b3;"%>
+      <%= f.submit "提交" , disable_with: "Submiting...", class: "btn btn-success", :style => "border: none;color:white;width:49%;background-color:#e02622;" %>
+      <%= link_to "取消", myasset_videos_path, class: "btn btn-default", :style => "border: none;color:white;width:49%;background-color:#e02622;"%>
     </div>
 </div>
 <% end %>
