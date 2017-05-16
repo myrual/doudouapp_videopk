@@ -1,4 +1,12 @@
 <div class="container">
+      <% if @battle.is_hidden %>
+        <%= link_to publish_admin_battle_path(@battle), :method => :post, :class => "btn btn-xs btn-success" do %>
+        <p>批准</p><% end %>
+      <% else %>
+        <%= link_to hidden_admin_battle_path(@battle), :method => :post, :class => "btn btn-xs btn-warning" do %>
+        <p>召回</p><% end %>
+      <% end %>
+
   <div class="row">
     <div class="col-md-6" style="width: 80%">
         <div class="panel" style="background-color: #efefef; margin-top: 20px;">
