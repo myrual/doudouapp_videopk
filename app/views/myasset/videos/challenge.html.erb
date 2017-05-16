@@ -8,10 +8,14 @@
     
     :url => myasset_video_createchallenge_path(@targevideo),
     :method => 'post' do |f| %>    
-
-    <div class="group">
-        <%=f.file_field :video %> （视频）<br>
-    </div>
+    <span class="btn btn-large btn-warning btn-file">
+      上传视频
+      <%=f.file_field :video, :accept => 'video/mp4'%>
+    </span>
+    <span class="btn btn-large btn-warning btn-file">
+      上传封面
+        <%= f.file_field :image, :accept => 'image/png,image/gif,image/jpeg' %>
+    </span>
 
     <div class="group">
         <%= f.input :title, :label => "我的视频名称", :input_html => { :value => @targevideo.title} %>
@@ -21,10 +25,6 @@
     <br>
     <%= image_tag(@video.image.thumb.url) %>
     <% end %>
-    <div class="group">
-        <%#= f.input :image, as: :file %>
-        <%= f.file_field :image %>（视频封面）<br>
-    </div>
     
     <br>
     <div class="form-actions">
