@@ -24,7 +24,7 @@
     </div>
     
         <div class="rwow col-xs-12 col-sm-12" style="text-align:center">
-              <h4 ><%= 您已经投了: @stream.title %></h4>
+              <h4 >您已经投了: <%=  @stream.title %></h4>
         </div>
     <% @stream.inside_battles.each do |b| %>
       <%= render :partial => "common/video_battle", locals: {battle: b}%>
