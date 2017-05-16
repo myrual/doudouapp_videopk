@@ -22,3 +22,13 @@
     <div class="col-sm-12 col-xs-12 text-center">
               <%= link_to("挑战TA", myasset_video_challenge_url(@video), :class => "btn btn-default challenge_left") %>
     </div>
+    
+        <div class="col-xs-12" style="text-align:center">
+            <div class="panel1">
+              <h4 ><%= @stream.title %></h4>
+            </div>
+        </div>
+    <% @stream.inside_battles.each do |b| %>
+      <%= render :partial => "common/video_battle", locals: {battle: b}%>
+      <%= render :partial => "common/votebar_battle", locals: {battle: b}%>
+    <% end %>

@@ -20,8 +20,8 @@
             </div>
         </div>
     <% @stream.inside_battles.each do |b| %>
-    <%= render :partial => "common/video_battle", locals: {battle: b}%>
-    <%= render :partial => "common/votebar_battle", locals: {battle: b}%>
+      <%= render :partial => "common/video_battle", locals: {battle: b}%>
+      <%= render :partial => "common/votebar_battle", locals: {battle: b}%>
     <% end %>
   
   <% end %>

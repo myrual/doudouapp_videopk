@@ -14,6 +14,9 @@ class StreamsController < ApplicationController
       end
       @remainBattles = available_battle.map {|v| Battle.find(v.battle_id)}
       @battle = @remainBattles.first
+      if @battle == nil
+        redirect_to invitechallenge_stream_url(@stream)
+      end
   end
 
   def invitechallenge
