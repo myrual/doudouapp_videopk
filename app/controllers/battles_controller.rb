@@ -25,7 +25,6 @@ class BattlesController < ApplicationController
   def show
     @battle = Battle.find(params[:id])
     @title = @battle.title
-    
   end
   def follow_left_video
     if current_user.has_follow_right?(@battle)

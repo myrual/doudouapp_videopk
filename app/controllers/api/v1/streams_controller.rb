@@ -1,26 +1,25 @@
-class StreamsController < ApplicationController
+class Api::V1::StreamsController < ApplicationController
   before_action :set_stream, only: [:show, :vote_for_left, :vote_for_right, :invitechallenge]
-
-
-
-
   def index
-    @streams = Stream.all.recent
+    @streams = Stream.all
   end
   # GET /streams/1
   # GET /streams/1.json
   def show
       if !@stream.approved or !@stream.running
-        redirect_to root_url
-      end
-      battle_order = @stream.multivotes.all.sort_by{|bo| bo.order}
-      available_battle = battle_order.select do |each| 
-        !is_voted(Battle.find(each.battle_id))
-      end
-      @remainBattles = available_battle.map {|v| Battle.find(v.battle_id)}
-      @battle = @remainBattles.first
-      if @battle == nil
-        redirect_to invitechallenge_stream_url(@stream)
+        render status: :no_content
+      else
+        battle_order = @stream.multivotes.all.sort_by{|bo| bo.order}
+        available_battle = battle_order.select do |each| 
+          !is_voted(Battle.find(each.battle_id))
+        end
+        @battles_in_stream = available_battle.map {|v| 
+         b = Battle.find(v.battle_id)
+         lvideo = Video.find(b.left_video_id)
+         rvideo = Video.find(b.right_video_id)
+         
+         {:battle_id => b.id, :left_video_url => lvideo.video_url.to_s, :left_video_poster => lvideo.image.thumb.to_s,:right_video_url => rvideo.video_url.to_s, :right_video_poster => rvideo.image.thumb.to_s}
+        }
       end
   end
 

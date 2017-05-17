@@ -1,4 +1,1 @@
-json.id @battle.id
-json.title @battle.title
-json.left_video_id @battle.left_video_id
-json.right_video_id @battle.rigth_video_id
+json.array! @battles_in_stream, :battle_id, :left_video_url, :left_video_poster, :right_video_url, :right_video_poster 
