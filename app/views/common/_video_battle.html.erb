@@ -5,9 +5,21 @@
 
 
     <div class="col-sm-6 col-xs-6">
-      <%= video_tag([left_video.video_url.to_s],  :poster => left_video.image_url, :controls =>true) %>  
+		<% if left_video.image.thumb.to_s %>
+		  <video src= <%= left_video.video_url.to_s %> style = "width:100%" poster=<%= left_video.image.thumb.to_s %>  controls>
+		  </video>
+	  	<% else %>
+		  <video src= <%= left_video.video_url.to_s %> style = "width:100%" controls>
+		  </video>
+	    <% end %>
     </div>
     <div class="col-sm-6 col-xs-6">
-      <%= video_tag([right_video.video_url.to_s],  :poster => right_video.image_url, :controls =>true) %>  
+		<% if right_video.image.thumb.to_s %>
+		  <video src= <%= right_video.video_url.to_s %> style = "width:100%" poster=<%= right_video.image.thumb.to_s %>  controls>
+		  </video>
+	  	<% else %>
+		  <video src= <%= right_video.video_url.to_s %> style = "width:100%" controls>
+		  </video>
+	    <% end %>
     </div>
   </div>
