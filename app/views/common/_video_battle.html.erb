@@ -5,7 +5,7 @@
 
 
     <div class="col-sm-6 col-xs-6">
-		<% if left_video.image.thumb.to_s %>
+		<% if left_video.image.thumb.to_s != "" %>
 		  <video src= <%= left_video.video_url.to_s %> style = "width:100%" poster=<%= left_video.image.thumb.to_s %>  controls>
 		  </video>
 	  	<% else %>
