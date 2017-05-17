@@ -15,28 +15,26 @@ class Api::V1::BattlesController < ApplicationController
   def index
     if verify_api_only == true
       respond_to :json
-      @battle = Battle.recent.first
-
-      if @battle.present?
-        @left_video = Video.find(@battle.left_video_id)
-        @right_video = Video.find(@battle.right_video_id)
-
-        @latestBattle = {id:@battle.id, title:@battle.title, leftImage:@left_video.image.thumb.to_s, leftVideo:@left_video.video_url.to_s, rightImage:@right_video.image.thumb.to_s, rightVideo:@right_video.video_url.to_s, leftCount: @battle.left_followers.count, rightCount:@battle.right_followers.count}
-        # @left_video_comments = VideoComment.where(video_id: @battle.left_video_id).order("created_at DESC")
-        # @left_video_comment = VideoComment.new
-        #
-        # @right_video_comments = VideoComment.where(video_id: @battle.right_video_id).order("created_at DESC")
-        # @right_video_comment = VideoComment.new
-
-        @battle_comments = BattleComment.where(battle_id: @battle.id)
-        @battle_comment = BattleComment.new
-      end
-
+      battles = Battle.published.recent
+      @battles = battles.map {|each|
+        {:id => each.id, :title => each.title, :left_video_url => Video.find(each.left_video_id).video_url.to_s, :left_video_poster => Video.find(each.left_video_id).image.thumb.to_s,:right_video_url => Video.find(each.right_video_id).video_url.to_s, :right_video_poster => Video.find(each.right_video_id).image.thumb.to_s}
+      }
     else
       render status: :unauthorized
     end
   end
 
+
+  def show
+    if verify_api_only == true
+      respond_to :json
+      each = Battle.find(params[:id])
+      @battle = {:id => each.id, :title => each.title, :left_video_url => Video.find(each.left_video_id).video_url.to_s, :left_video_poster => Video.find(each.left_video_id).image.thumb.to_s,:right_video_url => Video.find(each.right_video_id).video_url.to_s, :right_video_poster => Video.find(each.right_video_id).image.thumb.to_s}
+    else
+      render status: :unauthorized
+    end
+  end
+  
   def follow_left_video
     respond_to :json
     if current_user.has_follow_right?(@battle)

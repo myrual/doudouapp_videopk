@@ -1,5 +1,1 @@
-if @battle.present?
-  json.extract! @latestBattle, :id, :title, :leftImage, :leftVideo, :rightImage, :rightVideo, :leftCount, :rightCount
-else
-  return "no battle"
-end
+json.array! @battles, :id, :title, :left_video_url, :left_video_poster, :right_video_url, :right_video_poster
