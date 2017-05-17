@@ -12,11 +12,11 @@
     <%= image_tag(@video.image.thumb.url) %>
     <% end %>
     <div class="group">
-        <%=f.file_field :video, :accept => 'video/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"开始录像", "data-icon"=>"false"%>
+        <%=f.file_field :video, :accept => 'video/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"录制挑战视频", "data-icon"=>"false"%>
 
     </div>
     <div class="group">
-          <%= f.file_field :image, :accept => 'image/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"自拍一下", "data-icon"=>"false" %>
+          <%= f.file_field :image, :accept => 'image/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"添加封面照片", "data-icon"=>"false" %>
     </div>
     <br>
     <div class="form-actions">

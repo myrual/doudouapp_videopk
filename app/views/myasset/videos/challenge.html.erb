@@ -10,11 +10,11 @@
     :method => 'post' do |f| %>    
     
     <div class="group">
-        <%=f.file_field :video, :accept => 'video/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"开始录像", "data-icon"=>"false"%>
+        <%=f.file_field :video, :accept => 'video/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"录制挑战视频", "data-icon"=>"false"%>
 
     </div>
     <div class="group">
-          <%= f.file_field :image, :accept => 'image/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"自拍一下", "data-icon"=>"false" %>
+          <%= f.file_field :image, :accept => 'image/*', :capture => "camera", :class => "filestyle", "data-buttonText" =>"添加封面照片", "data-icon"=>"false" %>
     </div>
     <div class="group">
         <%= f.input :title, :label => "我的视频名称", :input_html => { :value => @targevideo.title} %>
