@@ -1,5 +1,11 @@
 class Api::V1::StreamsController < ApplicationController
+  skip_before_action :verify_authenticity_token, if: :json_request?
   before_action :set_stream, only: [:show, :vote_for_left, :vote_for_right, :invitechallenge]
+
+  def json_request?
+    request.format.json?
+  end
+
   def index
     @streams = Stream.all
   end
@@ -160,5 +166,8 @@ class Api::V1::StreamsController < ApplicationController
         "#{battle_order.battle_id}" != params["battle"] and !is_voted(Battle.find(battle_order.battle_id))
       end
       remainbattles_in_stream_inorder.map {|v| Battle.find(v.battle_id)}
+  end
+  def verify_api_only
+     params[:appid].present? and params[:appsecret].present?
   end
 end

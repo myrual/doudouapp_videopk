@@ -26,4 +26,7 @@ module ApplicationHelper
   def is_voted(battle)
     left_is_voted(battle) or right_is_voted(battle)
   end
+  def verify_api_only(req_params)
+     req_params[:appid].present? and req_params[:appsecret].present?
+  end
 end
