@@ -87,7 +87,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :streams
-      resources :videos
+      resources :videos do
+        member do
+          post :new_ext_video
+        end
+      end
       resources :battles do
         member do
           post :follow_left_video

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  provider: MyString
+  videourl: MyString
+  posturl: MyString
+  video: one
+
+two:
+  provider: MyString
+  videourl: MyString
+  posturl: MyString
+  video: two

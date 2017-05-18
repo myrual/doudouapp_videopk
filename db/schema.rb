@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513040007) do
+ActiveRecord::Schema.define(version: 20170518073013) do
 
   create_table "battle_comments", force: :cascade do |t|
     t.integer  "battle_id"
@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(version: 20170513040007) do
     t.index ["stream_id"], name: "index_challengevideos_on_stream_id"
     t.index ["user_id"], name: "index_challengevideos_on_user_id"
     t.index ["video_id"], name: "index_challengevideos_on_video_id"
+  end
+
+  create_table "ext_videos", force: :cascade do |t|
+    t.string   "provider"
+    t.string   "videourl"
+    t.string   "posturl"
+    t.integer  "video_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["video_id"], name: "index_ext_videos_on_video_id"
   end
 
   create_table "favor_left_video_relationships", force: :cascade do |t|
@@ -108,6 +118,8 @@ ActiveRecord::Schema.define(version: 20170513040007) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "authentication_token",   limit: 30
+    t.string   "provider"
+    t.string   "uid"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

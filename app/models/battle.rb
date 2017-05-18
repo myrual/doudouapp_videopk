@@ -27,6 +27,40 @@ class Battle < ApplicationRecord
     self.is_hidden = true
     self.save
   end
+  
+  def left_video_url
+    ext_left = self.left_video.ext_video 
+    if ext_left
+      ext_left.videourl
+    else
+      self.left_video.video_url.to_s
+    end
+  end
+
+  def right_video_url
+    ext_right = self.right_video.ext_video
+    if ext_right
+      ext_right.videourl
+    else
+      self.right_video.video_url.to_s
+    end
+  end
+  def left_video_poster_url
+    ext_left = self.left_video.ext_video
+    if ext_left
+      ext_left.posturl
+    else
+      self.left_video.image.thumb.to_s
+    end
+  end
+  def right_video_poster_url
+    ext_right = self.right_video.ext_video
+    if ext_right
+      ext_right.posturl
+    else
+      self.right_video.image.thumb.to_s
+    end
+  end
 
   scope :published, -> { where(is_hidden: false) }
 end

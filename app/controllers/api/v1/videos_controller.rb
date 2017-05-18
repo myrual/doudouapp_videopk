@@ -49,6 +49,21 @@ class Api::V1::VideosController < ApplicationController
       end
     end
     
+    def new_ext_video
+      @video = Video.find(params[:id])
+      @extvideo = @video.ext_videos.new
+      @extvideo.provider = params[:provider]
+      @extvideo.videourl = params[:videourl]
+      @extvideo.posturl = params[:posturl]
+      if @extvideo.save
+        @extvideo
+      else
+        render status :no_content
+      end
+    end
+    def update_ext_video
+      @video = Video.find(params[:id])
+    end
     private
     def video_params
       params.require(:video).permit(:title, :description, :video, :image)
