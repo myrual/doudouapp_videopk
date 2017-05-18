@@ -4,6 +4,8 @@
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :content %>
+    <%= f.input :approved, as: :boolean, checked_value: true, unchecked_value: false, :input_html => { :value => @stream.approved } %>
+    <%= f.input :running,  as: :boolean, checked_value: true, unchecked_value: false, :input_html => { :value => @stream.running }   %>
   </div>
 
   <div class="form-actions">

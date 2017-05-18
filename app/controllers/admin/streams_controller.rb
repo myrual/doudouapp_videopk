@@ -132,7 +132,7 @@ class Admin::StreamsController < ApplicationController
   def update
     respond_to do |format|
       if @stream.update(stream_params)
-        format.html { redirect_to myasset_stream_url(@stream), notice: 'Stream was successfully updated.' }
+        format.html { redirect_to admin_streams_url, notice: 'Stream was successfully updated.' }
         format.json { render :show, status: :ok, location: @stream }
       else
         format.html { render :edit }
@@ -185,6 +185,6 @@ class Admin::StreamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stream_params
-      params.require(:stream).permit(:title, :content)
+      params.require(:stream).permit(:title, :content, :approved, :running)
     end
 end

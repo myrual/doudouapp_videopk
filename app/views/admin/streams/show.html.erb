@@ -17,6 +17,24 @@
 <%= link_to '添加最后挑战video', addvideo_admin_stream_path(@stream) %> |
 <%= link_to '编辑最后挑战video', editvideo_admin_stream_path(@stream) %>
 </div>
+<% approved_status = @stream.approved %>
+<% running_status = @stream.running %>
+
+<div class="row">
+<% if approved_status %>
+    已经审批
+<% else %>
+    等待审批
+<% end %>
+</div>
+<div class="row">
+<% if running_status %>
+    正在运行
+<% else %>
+    已经暂停
+<% end %>
+
+</div>
       <% @stream.multivotes.each do |relation| %>
         <div class="container" id="<%= "singlebattle_#{relation.battle.id}"%>">
           <div id="<%= "votebar_battle_#{relation.battle.id}"%>">
