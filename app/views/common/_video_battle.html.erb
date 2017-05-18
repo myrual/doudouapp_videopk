@@ -3,21 +3,21 @@
     <div class="col-sm-6 col-xs-6">
       <% posturl = battle.left_video_poster_url %>
       <% if posturl == "" %>
-		    <video src= <%= battle.left_video_url %> style = "width:100%" %>  controls>
+		    <video src= <%= battle.left_video_url %> style = "width:100%"  controls>
 		    </video>
-      <% else %>
-		    <video src= <%= battle.left_video_url %> style = "width:100%" poster=<%= posturl %>  controls>
+		  <% else %>
+		    <video src= <%= battle.left_video_url %> style = "width:100%" poster= <%= posturl %>  controls>
 		    </video>
-      <% end %>
+		  <% end %>
 
     </div>
     <div class="col-sm-6 col-xs-6">
       <% posturl = battle.right_video_poster_url %>
       <% if posturl == "" %>
-		    <video src= <%= battle.right_video_url %> style = "width:100%"%>  controls>
+		    <video src= <%= battle.right_video_url %> style = "width:100%"  controls>
 		    </video>
 		  <% else %>
-		    <video src= <%= battle.right_video_url %> style = "width:100%" poster=<%= posturl %>  controls>
+		    <video src= <%= battle.right_video_url %> style = "width:100%" poster= <%= posturl %>  controls>
 		    </video>
 		  <% end %>
     </div>
