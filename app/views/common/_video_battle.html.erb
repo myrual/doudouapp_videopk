@@ -1,25 +1,24 @@
 <% battle = local_assigns[:battle] %>
-<% left_video = Video.find(battle.left_video_id) %>
-<% right_video = Video.find(battle.right_video_id) %>
   <div class="row ">
-
-
     <div class="col-sm-6 col-xs-6">
-		<% if left_video.image.thumb.to_s != "" %>
-		  <video src= <%= left_video.video_url.to_s %> style = "width:100%" poster=<%= left_video.image.thumb.to_s %>  controls>
-		  </video>
-	  	<% else %>
-		  <video src= <%= left_video.video_url.to_s %> style = "width:100%" controls>
-		  </video>
-	    <% end %>
+      <% posturl = battle.left_video_poster_url %>
+      <% if posturl == "" %>
+		    <video src= <%= battle.left_video_url %> style = "width:100%" %>  controls>
+		    </video>
+      <% else %>
+		    <video src= <%= battle.left_video_url %> style = "width:100%" poster=<%= posturl %>  controls>
+		    </video>
+      <% end %>
+
     </div>
     <div class="col-sm-6 col-xs-6">
-		<% if right_video.image.thumb.to_s %>
-		  <video src= <%= right_video.video_url.to_s %> style = "width:100%" poster=<%= right_video.image.thumb.to_s %>  controls>
-		  </video>
-	  	<% else %>
-		  <video src= <%= right_video.video_url.to_s %> style = "width:100%" controls>
-		  </video>
-	    <% end %>
+      <% posturl = battle.right_video_poster_url %>
+      <% if posturl == "" %>
+		    <video src= <%= battle.right_video_url %> style = "width:100%"%>  controls>
+		    </video>
+		  <% else %>
+		    <video src= <%= battle.right_video_url %> style = "width:100%" poster=<%= posturl %>  controls>
+		    </video>
+		  <% end %>
     </div>
   </div>
