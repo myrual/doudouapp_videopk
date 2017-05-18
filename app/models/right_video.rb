@@ -1,4 +1,4 @@
-class Right_Video < Video
+class RightVideo < Video
   has_many :battles
 
   #has_many :favor_videos_relationships

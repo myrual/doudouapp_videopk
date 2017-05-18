@@ -16,6 +16,8 @@ class Battle < ApplicationRecord
   has_many :comments_from_user, through: :battle_comments, source: :user
   has_many :visitor_votes
   has_many :multivotes
+  belongs_to :left_video
+  belongs_to :right_video
   def publish!
     self.is_hidden = false
     self.save
