@@ -90,6 +90,7 @@ Rails.application.routes.draw do
       resources :videos do
         member do
           post :new_ext_video
+          post :video_convert_done
         end
       end
       resources :battles do

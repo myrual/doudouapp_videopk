@@ -49,6 +49,30 @@ class Api::V1::VideosController < ApplicationController
       end
     end
     
+    def video_convert_done
+      @video = Video.find(params[:id])
+
+      bucket_name = params["bucket_name"]
+      path = params["path"]
+      taskid = params["task_id"]
+      description = params["description"]
+      if description == "OK"
+        @extvideo = ExtVideo.new
+        if @video.ext_video
+          @extvideo = @video.ext_video
+        else
+          @extvideo = ExtVideo.new
+        end
+        @extvideo.video = @video
+        @extvideo.provider = "upyun"
+        @extvideo.videourl = "http://"+bucket_name + ".b0.upaiyun.com" + path[0]
+        @extvideo.posturl = params[:posturl]
+        @extvideo.save
+      end
+
+
+    end
+
     def new_ext_video
       @video = Video.find(params[:id])
       @extvideo = @video.ext_videos.new
