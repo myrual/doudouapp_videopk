@@ -73,6 +73,23 @@ class Api::V1::VideosController < ApplicationController
 
     end
 
+
+    def thumb_done
+      @video = Video.find(params[:id])
+
+      bucket_name = params["bucket_name"]
+      path = params["path"]
+      taskid = params["task_id"]
+      description = params["description"]
+      if description == "OK"
+        if @video.ext_video
+          @extvideo = @video.ext_video
+          @extvideo.posturl = "http://"+bucket_name + ".b0.upaiyun.com" + path[0]
+          @extvideo.save
+        end
+      end
+    end
+
     def new_ext_video
       @video = Video.find(params[:id])
       @extvideo = @video.ext_videos.new
