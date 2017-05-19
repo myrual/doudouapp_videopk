@@ -46,17 +46,17 @@ class Battle < ApplicationRecord
     end
   end
   def left_video_poster_url
-    ext_left = self.left_video.ext_video
+    ext_left = self.left_video.ext_video.posturl
     if ext_left
-      ext_left.posturl
+      ext_left
     else
       self.left_video.becomes(Video).image.thumb.to_s
     end
   end
   def right_video_poster_url
-    ext_right = self.right_video.ext_video
+    ext_right = self.right_video.ext_video.posturl
     if ext_right
-      ext_right.posturl
+      ext_right
     else
       self.right_video.becomes(Video).image.thumb.to_s
     end
