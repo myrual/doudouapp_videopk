@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       post :unfollow_right_video
       post :vote_for_left
       post :vote_for_right
+      get :congratulation
       
       
     end

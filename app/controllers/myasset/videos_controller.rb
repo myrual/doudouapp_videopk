@@ -42,7 +42,7 @@ class Myasset::VideosController < ApplicationController
           newBattle.is_hidden = false
           newBattle.user = current_user
           newBattle.save
-          redirect_to battle_path(newBattle), notice: '比赛已创建!'
+          redirect_to congratulation_battle_path(newBattle), notice: '比赛已创建!'
       else
         render :new
       end

@@ -26,6 +26,12 @@ class BattlesController < ApplicationController
     @battle = Battle.find(params[:id])
     @title = @battle.title
   end
+
+  def congratulation
+    @battle = Battle.find(params[:id])
+    @title = "我刚刚怼了右边，快来助威"
+  end
+
   def follow_left_video
     if current_user.has_follow_right?(@battle)
       flash[:warning] = "已经给右边视频投票！不能同时投两边！" if request.format.html?
