@@ -29,7 +29,7 @@ class BattlesController < ApplicationController
 
   def congratulation
     @battle = Battle.find(params[:id])
-    @title = "我刚刚怼了右边，快来助威"
+    @title = @battle.right_video.title
   end
 
   def follow_left_video
