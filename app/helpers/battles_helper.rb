@@ -24,7 +24,14 @@ module BattlesHelper
       visitorID = find_visitor_id
       battle.visitor_votes.find_by(visitorID:visitorID, voteLeft:false) != nil
     end
-  end  
+  end
+  def is_my_battle(battle)
+    if current_user
+      current_user.battles.include?(battle)
+    else
+      false
+    end
+  end
   def left_is_voted(battle)
     if current_user
       current_user.has_follow_left?(battle)
