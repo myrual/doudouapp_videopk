@@ -8,6 +8,8 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+
+  <% if Rails.env.production? %>
     <!-- start Mixpanel -->
         <script type="text/javascript">
             (function (e, a) {
@@ -73,7 +75,7 @@
             })(document, window.mixpanel || []);
             mixpanel.init("1667d355787be65194150c4ba9f38ca4");
         </script>
-        
+  <% end %>
         <!-- end Mixpanel -->
   </head>
 
