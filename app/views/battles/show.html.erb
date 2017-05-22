@@ -49,12 +49,12 @@
     <div class="row comment-list">
       <div class="col-xs-2">
         <div class="thumbnail1" style="margin-top:5px;">
-            <% if comment.user.avatar_file_name.present? %>
+            <% if comment.user.avatar_file_name.url(:thumb) %>
             <%#= image_tag(comment.user.avatar.url(:thumb), :size => "30x30", class: "img-circle") %>
-            <%= image_tag(comment.user.avatar_file_name.url(:thumb), :size => "30x30", class: "img-circle") %>
-        <% else %>
+              <%= image_tag(comment.user.avatar_file_name.url(:thumb), :size => "30x30", class: "img-circle") %>
+            <% else %>
             <%#= image_tag("http://placehold.it/100x100&text=No Pic", :size => "30x30", class: "img-circle") %>
-            <%= image_tag "logo.jpeg", :size => "30x30", class: "img-circle" %>
+              <%= image_tag "logo.jpeg", :size => "30x30", class: "img-circle" %>
             <% end %>
         </div>
       </div>
