@@ -37,14 +37,34 @@ body {
   //margin-right: -15px;
 }
 .navbar .navbar-brand{
-  color: #ffffff;  
+  color: #ffffff;
 }
-.nav.navbar-nav.navbar-right li a {
+.nav.navbar-nav.navbar-right > li > a {
     color: #ffffff;
 }
-.navbar-inverse {
-  border-color: #fff;
+.nav.navbar-nav.navbar-right > li > a:hover,
+.nav.navbar-nav.navbar-right > li > a:focus {
+  color: #ffffff;
+  background-color: transparent;
 }
+
+.nav.navbar-nav.navbar-right > .active > a,
+.nav.navbar-nav.navbar-right > .active > a:hover,
+.nav.navbar-nav.navbar-right > .active > a:focus {
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.nav.navbar-nav.navbar-right > .open > a,
+.nav.navbar-nav.navbar-right > .open > a:focus,
+.nav.navbar-nav.navbar-right > .open > a:hover {
+  color: #212121;
+  background-color: transparent;
+}
+
+// .navbar-inverse {
+//   border-color: #fff;
+// }
 
 .round-image-50 {
     background-color: white;
@@ -193,7 +213,7 @@ hr {
 .challenge:hover {
     background: #c5ecf9;
     color: #fff; }
-    
+
 .challenge_left {
   //background: blue;
   //background: #bfdbb8;
