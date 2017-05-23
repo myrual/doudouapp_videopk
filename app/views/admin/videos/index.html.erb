@@ -9,10 +9,9 @@
       <p><%= link_to(v.title, admin_video_path(v)) %></td></p>
       <p>
         <%= link_to admin_video_path(v) do %>
-          <% if v.image.present? %>
-            <%= image_tag(v.image.thumb.url, class: "thumbnail") %>
-          <% else %>
-            <%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail") %>
+          <% posturl = v.poster_url %>
+          <% if posturl %>
+            <%= image_tag(posturl, class: "thumbnail") %>
           <% end %>
         <% end %>
       </p>

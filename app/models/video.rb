@@ -11,4 +11,15 @@ class Video < ApplicationRecord
 
   #has_many :favor_videos_relationships
   #has_many :followers, through: :favor_videos_relationships, source: :user
+  def poster_url
+    ext_right = self.ext_video
+    if ext_right and ext_right.posturl
+      ext_right.posturl
+    else
+      if self.image.thumb.to_s == ""
+        return nil
+      end
+      self.image.thumb.to_s
+    end
+  end
 end
