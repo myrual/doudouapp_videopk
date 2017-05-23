@@ -29,7 +29,11 @@ class BattlesController < ApplicationController
 
   def congratulation
     @battle = Battle.find(params[:id])
-    @title = @battle.right_video.title
+    username = "我"
+    if @battle.user.name
+      username =  @battle.user.name
+    end
+    @title = username + "刚刚怼了" + @battle.right_video.title
   end
 
   def follow_left_video
