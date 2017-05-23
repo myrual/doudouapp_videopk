@@ -6,11 +6,11 @@
           <% else %>
                <% if left_is_voted(battle) %>
                   <div class="col-sm-12 col-xs-12 text-center">
-                    <%= link_to("挑战右边", myasset_video_challenge_url(battle.right_video), :class => "btn btn-default challenge_right") %>
+                    <%= link_to("怼右边", myasset_video_challenge_url(battle.right_video), :class => "btn btn-default challenge_right") %>
                   </div>
                <% elsif right_is_voted(battle) %>
                   <div class="col-sm-12 col-xs-12 text-center">
-                    <%= link_to("挑战左边", myasset_video_challenge_url(battle.left_video), :class => "btn btn-default challenge_left") %>
+                    <%= link_to("怼左边", myasset_video_challenge_url(battle.left_video), :class => "btn btn-default challenge_left") %>
                   </div>  
                <% end %>
            <% end %>
