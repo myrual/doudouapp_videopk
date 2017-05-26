@@ -73,7 +73,7 @@ class User < ApplicationRecord
         user.email = auth.info.email || "#{auth.uid}@herego.com"
         user.name = auth.info.nickname
         user.password = Devise.friendly_token[0,20]
-        user.save
+        user.save!
       end
   end
   private
