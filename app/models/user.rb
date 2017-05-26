@@ -77,7 +77,6 @@ class User < ApplicationRecord
         user.save
       end
   end
-end
   private
   def generate_authentication_token(token_generator)
     loop do
