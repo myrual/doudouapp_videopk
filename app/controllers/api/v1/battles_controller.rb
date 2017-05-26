@@ -159,6 +159,8 @@ class Api::V1::BattlesController < ApplicationController
      params[:user_id].present? and params[:user_token].present? and User.find(params[:user_id]).authentication_token == params[:user_token]
   end
   def video_present
-     params[:battle_left_video_id].present? and Video.find(params[:battle_left_video_id].present? and params[:battle_right_video_id].present? and Video.find(params[:battle_right_video_id].present?
+    lv = params[:battle_left_video_id]
+    rv = params[:battle_right_video_id]
+    lv.present? and Video.find(lv).present? and rv.present? and Video.find(rv).present?
   end
 end
