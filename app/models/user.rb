@@ -74,7 +74,7 @@ class User < ApplicationRecord
         user.name = auth.info.nickname
         user.password = Devise.friendly_token[0,20]
         user.is_admin = false
-        user.save!
+        user.save
       end
   end
   private
