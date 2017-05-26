@@ -19,10 +19,12 @@
     <%= render :partial => "common/video_battle", locals: {battle: @battle}%>
   <div id="<%= "votebar_battle_#{@battle.id}"%>">
 
-    <%= render :partial => "common/votebar_battle_challenge", locals: {battle: @battle}%>
+    <%= render :partial => "common/votebar_battle", locals: {battle: @battle}%>
   </div>
 
-
+    <div id="<%= "challenge_battle_#{@battle.id}"%>">
+    <%= render :partial => "common/challenge_battle", locals: {battle: battle}%>
+    </div>
 
 
 
