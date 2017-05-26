@@ -38,15 +38,22 @@ class Api::V1::BattlesController < ApplicationController
   def create
     if verify_api_only == true and verify_user_only == true
       respond_to :json
-      @battle = Battle.create(battle_params)
-      @battle.user = current_user
+      currentuser  = User.find(params["user_id"])
+        
+      @battle = currentuser.battles.new
+      @battle.title = params["battle_title"]
+      @battle.description = params["battle_description"]
+      @battle.left_video_id = params["battle_left_video_id"]
+      @battle.right_video_id = params["battle_right_video_id"]
+      @battle.is_hidden = false
 
-      if @battle.save
-        redirect_to myasset_battles_path, notice: '比赛已创建!'
+      if @battle.save!
+        @battle
       else
-        render :new
+        render status: :unauthorized
       end
     else
+      render status: :unauthorized
     end
   end
   
