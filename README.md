@@ -73,3 +73,19 @@ jsonResult = successRes.json()
 print(jsonResult)
 raw_input("create battle by post battles.json with correct user token should work")
 ```
+### get single battle
+url: host/api/v1/battles/1.json
+
+method: get
+
+json paramter
+
+{'appid':'app123', 'appsecret':'333'}
+
+```
+battleID = jsonResult[0]['id']
+successRes = requests.get(rooturl+ "/api/v1/battles/" + str(battleID) + ".json", params={'appid':'app123', 'appsecret':'333', 'user_email':userEmail, 'user_token':auth_token})
+print(successRes.json())
+raw_input("get single battles json with correct user token should work")
+
+```
