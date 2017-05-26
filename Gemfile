@@ -32,6 +32,7 @@ gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'will_paginate'
 gem 'awesome_rails_console'
+gem 'omniauth'
 gem 'devise'
 gem 'font-awesome-rails'
 gem 'rmagick'
@@ -42,7 +43,8 @@ gem 'figaro'
 gem 'fog'
 gem 'paperclip', '~> 4.1'
 gem 'simple_token_authentication', '~> 1.0' # see semver.org
-gem "omniauth-wechat-oauth2", git: 'git@github.com:myrual/omniauth-wechat-oauth2.git'
+gem 'omniauth-oauth2'
+gem "omniauth-wechat-oauth2"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

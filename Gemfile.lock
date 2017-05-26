@@ -1,11 +1,3 @@
-GIT
-  remote: git@github.com:myrual/omniauth-wechat-oauth2.git
-  revision: 92cc3a6381a4f7413b179efe5bfb815fc124ca8e
-  specs:
-    omniauth-wechat-oauth2 (0.1.0)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -302,6 +294,9 @@ GEM
     omniauth-oauth2 (1.0.2)
       oauth2 (~> 0.6.0)
       omniauth (~> 1.0)
+    omniauth-wechat-oauth2 (0.1.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
     orm_adapter (0.5.0)
     paperclip (4.3.7)
       activemodel (>= 3.2.0)
@@ -432,7 +427,9 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   mini_magick
-  omniauth-wechat-oauth2!
+  omniauth
+  omniauth-oauth2
+  omniauth-wechat-oauth2
   paperclip (~> 4.1)
   pg
   puma (~> 3.0)
