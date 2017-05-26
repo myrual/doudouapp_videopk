@@ -34,6 +34,21 @@ class Api::V1::BattlesController < ApplicationController
       render status: :unauthorized
     end
   end
+
+  def create
+    if verify_api_only == true and verify_user_only == true
+      respond_to :json
+      @battle = Battle.create(battle_params)
+      @battle.user = current_user
+
+      if @battle.save
+        redirect_to myasset_battles_path, notice: '比赛已创建!'
+      else
+        render :new
+      end
+    else
+    end
+  end
   
   def follow_left_video
     respond_to :json
