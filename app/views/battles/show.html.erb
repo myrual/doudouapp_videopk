@@ -19,10 +19,22 @@
     <%= render :partial => "common/video_battle", locals: {battle: @battle}%>
   <div id="<%= "votebar_battle_#{@battle.id}"%>">
 
-    <%= render :partial => "common/votebar_battle", locals: {battle: @battle}%>
+        <div class="row">
+          <div class="col-sm-2 col-xs-2">
+            <%= render :partial => "common/leftvotebutton", locals: {battle: @battle, remote: false}%>     
+          </div>
+          <div class = "col-sm-8 col-xs-8">
+            <%= render :partial => "common/votebar", locals: {battle: @battle}%>
+          </div>
+          <div class="col-sm-2 col-xs-2" style="text-align:right">
+            <%= render :partial => "common/rightvotebutton", locals: {battle: @battle, remote: false}%>     
+          </div>
+        </div>
   </div>
     <div id="<%= "challenge_battle_#{@battle.id}"%>">
+      
     <%= render :partial => "common/challenge_battle", locals: {battle: @battle}%>
+    
     </div>
 
 

@@ -1,4 +1,9 @@
   <% battle = local_assigns[:battle] %>
+  <% remote = local_assigns[:remote]%>
+  <% needRemote = true %>
+  <% if remote != nil and remote == false%>
+    <% needRemote = false %>
+  <% end %>
      <% if left_is_voted(battle) %>
          <%  left_vote_link_text = "fa fa-thumbs-up fa-2x"%>
      <% else %>
@@ -10,7 +15,7 @@
 
     <% elsif !right_is_voted(battle)%>
                 <%= link_to vote_for_left_battle_path(battle), :method => :post,
-                                               :remote => true do %>
+                                               :remote => needRemote do %>
                         <i class= "<%= "#{left_vote_link_text}"%>" aria-hidden="true" style="color:#135392;"></i>
-                <% end %>    
+                <% end %>
     <% end %>
