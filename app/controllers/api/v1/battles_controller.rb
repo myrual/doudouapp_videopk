@@ -133,4 +133,7 @@ class Api::V1::BattlesController < ApplicationController
   def verify_api_only
      params[:appid].present? and params[:appsecret].present?
   end
+  def verify_user_only
+     params[:user_id].present? and params[:user_token].present? and User.find(params[:user_id]).authentication_token == params[:user_token]
+  end
 end

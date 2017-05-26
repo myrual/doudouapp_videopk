@@ -29,14 +29,21 @@ class Api::V1::VideosController < ApplicationController
     end
 
     def create
-      @video = Video.create(video_params)
-      @video.user = current_user
-
-      if @video.save!
-        redirect_to admin_videos_path, notice: '视频已创建!'
+      respond_to :json
+      if verify_api_only == true and verify_user_only == true
+        currentuser  = User.find(params["user_id"])
+        
+        @video = currentuser.videos.new
+        @video.title = params["video_title"]
+        @video.description = params["video_description"]
+        if @video.save!
+        else
+          render :new
+        end
       else
-        render :new
+        render status: :unauthorized
       end
+
     end
 
     def update
@@ -91,25 +98,34 @@ class Api::V1::VideosController < ApplicationController
     end
 
     def new_ext_video
-      @video = Video.find(params[:id])
-      @extvideo = @video.ext_videos.new
-      @extvideo.provider = params[:provider]
-      @extvideo.videourl = params[:videourl]
-      @extvideo.posturl = params[:posturl]
-      if @extvideo.save
-        @extvideo
+      respond_to :json
+      if verify_api_only == true and verify_user_only == true
+        @video = Video.find(params[:id])
+        @extvideo = @video.build_ext_video
+        @extvideo.provider = params[:provider]
+        @extvideo.videourl = params[:videourl]
+        @extvideo.posturl = params[:posturl]
+        if @extvideo.save
+          @extvideo
+        else
+          render status :no_content
+        end
       else
-        render status :no_content
       end
     end
+    
+    
     def update_ext_video
       @video = Video.find(params[:id])
     end
     private
     def video_params
-      params.require(:video).permit(:title, :description, :video, :image)
+      params.require(:video).permits(:title, :description)
     end
   def verify_api_only
      params[:appid].present? and params[:appsecret].present?
+  end
+  def verify_user_only
+     params[:user_id].present? and params[:user_token].present? and User.find(params[:user_id]).authentication_token == params[:user_token]
   end
 end
