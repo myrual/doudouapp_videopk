@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:wechat]
 
   def admin?
     is_admin
@@ -66,7 +66,18 @@ class User < ApplicationRecord
      self.authentication_token = generate_authentication_token("")
      self.save
    end
-
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.email = auth.info.email || "#{auth.uid}@herego.com"
+        user.name = auth.info.nickname
+        user.portrait_url = auth.info.headimgurl
+        user.password = Devise.friendly_token[0,20]
+        user.save
+      end
+  end
+end
   private
   def generate_authentication_token(token_generator)
     loop do
