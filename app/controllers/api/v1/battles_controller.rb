@@ -34,6 +34,28 @@ class Api::V1::BattlesController < ApplicationController
       render status: :unauthorized
     end
   end
+
+  def create
+    if verify_api_only == true and verify_user_only == true and video_present == true
+      respond_to :json
+      currentuser  = User.find(params["user_id"])
+        
+      @battle = currentuser.battles.new
+      @battle.title = params["battle_title"]
+      @battle.description = params["battle_description"]
+      @battle.left_video_id = params["battle_left_video_id"]
+      @battle.right_video_id = params["battle_right_video_id"]
+      @battle.is_hidden = false
+
+      if @battle.save!
+        @battle
+      else
+        render status: :unauthorized
+      end
+    else
+      render status: :unauthorized
+    end
+  end
   
   def follow_left_video
     respond_to :json
@@ -135,5 +157,10 @@ class Api::V1::BattlesController < ApplicationController
   end
   def verify_user_only
      params[:user_id].present? and params[:user_token].present? and User.find(params[:user_id]).authentication_token == params[:user_token]
+  end
+  def video_present
+    lv = params[:battle_left_video_id]
+    rv = params[:battle_right_video_id]
+    lv.present? and Video.find(lv).present? and rv.present? and Video.find(rv).present?
   end
 end
