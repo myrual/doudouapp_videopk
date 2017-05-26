@@ -3,7 +3,7 @@ lock "3.8.0"
 
 set :application, "videopk"
 set :repo_url, "git@github.com:myrual/doudouapp_videopk.git"
-set :branch, "upyun_challenge"
+set :branch, "refract_challenge"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
