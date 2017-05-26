@@ -72,7 +72,6 @@ class User < ApplicationRecord
         user.uid = auth.uid
         user.email = auth.info.email || "#{auth.uid}@herego.com"
         user.name = auth.info.nickname
-        user.portrait_url = auth.info.headimgurl
         user.password = Devise.friendly_token[0,20]
         user.save
       end
