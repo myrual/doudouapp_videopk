@@ -29,7 +29,13 @@ class Api::V1::BattlesController < ApplicationController
     if verify_api_only == true
       respond_to :json
       each = Battle.find(params[:id])
-      @battle = {:id => each.id, :title => each.title, :left_video_url => Video.find(each.left_video_id).video_url.to_s, :left_video_poster => Video.find(each.left_video_id).image.thumb.to_s,:right_video_url => Video.find(each.right_video_id).video_url.to_s, :right_video_poster => Video.find(each.right_video_id).image.thumb.to_s}
+      @battle = {:id => each.id, :title => each.title, :description => each.description,
+      :left_video_id => each.left_video_id, 
+      :right_video_id => each.right_video_id, 
+      :left_video_url => Video.find(each.left_video_id).video_url.to_s, 
+      :left_video_poster => Video.find(each.left_video_id).image.thumb.to_s,
+      :right_video_url => Video.find(each.right_video_id).video_url.to_s, 
+      :right_video_poster => Video.find(each.right_video_id).image.thumb.to_s}
     else
       render status: :unauthorized
     end
