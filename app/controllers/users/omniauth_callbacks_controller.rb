@@ -26,7 +26,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   #   super(scope)
   # end
   def wechat
-    logger.debug "wechat omni: #{request.env["omniauth.auth"]}"
     @user = User.from_omniauth(request.env["omniauth.auth"])
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication
