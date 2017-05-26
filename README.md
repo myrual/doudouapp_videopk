@@ -57,4 +57,19 @@ print(jsonResult)
 video_id = jsonResult["id"]
 raw_input("create videos.json with correct user token should work")
 ```
+### create battle
+url: host/api/v1/battles.json
 
+method: post
+
+json paramter
+
+{'appid':'app123', 'appsecret':'333', 'user_id':123, 'user_token':auth_token, 'battle_title':'upyun', 'battle_description':'video xxx url on upyun', 'battle_left_video_id':'post urlxxx','battle_right_video_id':'post urlxxx'}
+
+```
+successRes = requests.post(rooturl+ "/api/v1/battles.json", params={'appid':'app123', 'appsecret':'333', 'user_id':user_id, 'user_token':auth_token, 'battle_title':'api create battle', 'battle_description':'create battle by api', 'battle_left_video_id':1, 'battle_right_video_id':2})
+print(successRes)
+jsonResult = successRes.json()
+print(jsonResult)
+raw_input("create battle by post battles.json with correct user token should work")
+```
