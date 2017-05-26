@@ -36,7 +36,7 @@ class Api::V1::BattlesController < ApplicationController
   end
 
   def create
-    if verify_api_only == true and verify_user_only == true
+    if verify_api_only == true and verify_user_only == true and video_present == true
       respond_to :json
       currentuser  = User.find(params["user_id"])
         
@@ -157,5 +157,8 @@ class Api::V1::BattlesController < ApplicationController
   end
   def verify_user_only
      params[:user_id].present? and params[:user_token].present? and User.find(params[:user_id]).authentication_token == params[:user_token]
+  end
+  def video_present
+     params[:battle_left_video_id].present? and Video.find(params[:battle_left_video_id].present? and params[:battle_right_video_id].present? and Video.find(params[:battle_right_video_id].present?
   end
 end
