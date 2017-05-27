@@ -22,8 +22,10 @@ class Api::V1::BattlesController < ApplicationController
           :right_video_id => each.right_video_id, 
           :left_video_url => each.left_video_url,
           :left_video_poster => each.left_video_poster_url,
+          :left_votes => left_votes(each),
           :right_video_url => each.right_video_url,
-          :right_video_poster => each.right_video_poster_url
+          :right_video_poster => each.right_video_poster_url,
+          :right_votes => right_votes(each)
           }
       }
     else
@@ -41,8 +43,10 @@ class Api::V1::BattlesController < ApplicationController
           :right_video_id => each.right_video_id, 
           :left_video_url => each.left_video_url,
           :left_video_poster => each.left_video_poster_url,
+          :left_votes => left_votes(each),
           :right_video_url => each.right_video_url,
-          :right_video_poster => each.right_video_poster_url
+          :right_video_poster => each.right_video_poster_url,
+          :right_votes => right_votes(each)
       }
     else
       render status: :unauthorized

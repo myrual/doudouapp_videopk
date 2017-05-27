@@ -6,7 +6,6 @@ class Api::V1::UpyunauthsController < ApplicationController
       request.format.json?
     end
     def index
-      
         respond_to :json
         md5 = Digest::MD5.new
         md5.update ENV["UPYUN_OPERATOR_PASSWORD"] #update 又拍云的密码
