@@ -1,6 +1,6 @@
   <% battle = local_assigns[:battle] %>
 
-        <% if total_votes(battle) >0 %>
+        <% if left_is_voted(battle) or right_is_voted(battle) %>
             <div class="progress" style="margin-top: 20px;">
                 <div id="leftBar" class="progress-bar" role="progressbar" style="width:<%= render_left_width(battle)%>%;
                         background-color:#135392; color:white;">
