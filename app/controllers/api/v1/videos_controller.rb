@@ -5,9 +5,10 @@ class Api::V1::VideosController < ApplicationController
       request.format.json?
     end
     def index
-      if verify_api_only == true
+      if verify_api_only == true and verify_user_only == true
         respond_to :json
-        videos = Video.all
+        currentuser  = User.find(params["user_id"])
+        videos = currentuser.videos.all
         @videos = videos.map {|each|
           {:id => each.id, :title => each.title, :user_id => each.user_id, :origin_video_poster => each.image.thumb.to_s,:origin_video_url => each.video_url.to_s}
         }

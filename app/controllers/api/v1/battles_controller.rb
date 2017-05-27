@@ -17,7 +17,14 @@ class Api::V1::BattlesController < ApplicationController
       respond_to :json
       battles = Battle.published.recent
       @battles = battles.map {|each|
-        {:id => each.id, :title => each.title, :left_video_url => Video.find(each.left_video_id).video_url.to_s, :left_video_poster => Video.find(each.left_video_id).image.thumb.to_s,:right_video_url => Video.find(each.right_video_id).video_url.to_s, :right_video_poster => Video.find(each.right_video_id).image.thumb.to_s}
+          {:id => each.id, :user_id => each.user_id, :title => each.title, :description => each.description,
+          :left_video_id => each.left_video_id, 
+          :right_video_id => each.right_video_id, 
+          :left_video_url => each.left_video_url,
+          :left_video_poster => each.left_video_poster,
+          :right_video_url => each.right_video_url,
+          :right_video_poster => each.right_video_poster
+          }
       }
     else
       render status: :unauthorized
@@ -29,13 +36,13 @@ class Api::V1::BattlesController < ApplicationController
     if verify_api_only == true
       respond_to :json
       each = Battle.find(params[:id])
-      @battle = {:id => each.id, :title => each.title, :description => each.description,
+      @battle = {:id => each.id, :user_id => each.user_id, :title => each.title, :description => each.description,
       :left_video_id => each.left_video_id, 
       :right_video_id => each.right_video_id, 
-      :left_video_url => Video.find(each.left_video_id).video_url.to_s, 
-      :left_video_poster => Video.find(each.left_video_id).image.thumb.to_s,
-      :right_video_url => Video.find(each.right_video_id).video_url.to_s, 
-      :right_video_poster => Video.find(each.right_video_id).image.thumb.to_s}
+      :left_video_url => each.left_video_url,
+      :left_video_poster => each.left_video_poster,
+      :right_video_url => each.right_video_url,
+      :right_video_poster => each.right_video_poster}
     else
       render status: :unauthorized
     end
