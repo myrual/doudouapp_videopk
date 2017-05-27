@@ -1,1 +1,1 @@
-json.extract! @battle, :id, :description, :left_video_id, :right_video_id, :title, :left_video_url, :left_video_poster, :right_video_url, :right_video_poster
+json.extract! @battle, :id, :title, :user_id, :description, :left_video_id, :right_video_id, :title, :left_video_url, :left_video_poster, :right_video_url, :right_video_poster

@@ -21,9 +21,9 @@ class Api::V1::BattlesController < ApplicationController
           :left_video_id => each.left_video_id, 
           :right_video_id => each.right_video_id, 
           :left_video_url => each.left_video_url,
-          :left_video_poster => each.left_video_poster,
+          :left_video_poster => each.left_video_poster_url,
           :right_video_url => each.right_video_url,
-          :right_video_poster => each.right_video_poster
+          :right_video_poster => each.right_video_poster_url
           }
       }
     else
@@ -37,12 +37,13 @@ class Api::V1::BattlesController < ApplicationController
       respond_to :json
       each = Battle.find(params[:id])
       @battle = {:id => each.id, :user_id => each.user_id, :title => each.title, :description => each.description,
-      :left_video_id => each.left_video_id, 
-      :right_video_id => each.right_video_id, 
-      :left_video_url => each.left_video_url,
-      :left_video_poster => each.left_video_poster,
-      :right_video_url => each.right_video_url,
-      :right_video_poster => each.right_video_poster}
+          :left_video_id => each.left_video_id, 
+          :right_video_id => each.right_video_id, 
+          :left_video_url => each.left_video_url,
+          :left_video_poster => each.left_video_poster_url,
+          :right_video_url => each.right_video_url,
+          :right_video_poster => each.right_video_poster_url
+      }
     else
       render status: :unauthorized
     end
