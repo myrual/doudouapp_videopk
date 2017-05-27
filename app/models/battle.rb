@@ -62,5 +62,12 @@ class Battle < ApplicationRecord
     end
   end
 
+   def left_votes
+      self.left_followers.count + self.visitor_votes.where(voteLeft: true).count
+   end
+   def right_votes
+      self.right_followers.count + self.visitor_votes.where(voteLeft: false).count
+   end
+
   scope :published, -> { where(is_hidden: false) }
 end
