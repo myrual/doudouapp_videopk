@@ -1,7 +1,10 @@
+  <% video = local_assigns[:video] %>
 <h4 class="text-center">即将挑战</h4>
-  <video src=<%= @targevideo.video_url.to_s %> style = "width:100%"  poster=<%= @targevideo.image.thumb.to_s %> controls>
-    <p>Your browser doesn't support HTML5 video. Here is a <a href="rabbit320.webm">link to the video</a> instead.</p>
-  </video>
+<div>
+    <div class="col-xs-12 col-sm-12">
+     		<%= render :partial => "common/video_player", locals: {video: @targevideo}%>
+    </div>
+</div>
   
 <div class="form-group">
 <%= simple_form_for [:myasset, @video], 

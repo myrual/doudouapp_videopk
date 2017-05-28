@@ -12,22 +12,22 @@ class Video < ApplicationRecord
   #has_many :favor_videos_relationships
   #has_many :followers, through: :favor_videos_relationships, source: :user
   def poster_url
-    ext_right = self.ext_video
+    ext_right = self.becomes(Video).ext_video
     if ext_right and ext_right.posturl
       ext_right.posturl
     else
-      if self.image.thumb.to_s == ""
+      if self.becomes(Video).image.thumb.to_s == ""
         return nil
       end
-      self.image.thumb.to_s
+      self.becomes(Video).image.thumb.to_s
     end
   end
   def unique_url
-    ext_v = self.ext_video
+    ext_v = self.becomes(Video).ext_video
     if ext_v
       ext_v.videourl
     else
-      self.video_url.to_s
+      self.becomes(Video).video_url.to_s
     end
   end
 end

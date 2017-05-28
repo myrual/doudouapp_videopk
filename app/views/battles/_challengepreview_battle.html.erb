@@ -8,8 +8,7 @@
 
 <div>
     <div class="col-xs-12 col-sm-12">
-      <video src=<%= @video.video_url.to_s %> style = "width:100%"  poster=<%= @video.image.thumb.to_s %> controls>
-      </video>
+     		<%= render :partial => "common/video_player", locals: {video: video}%>
     </div>
 </div>
 
