@@ -16,7 +16,7 @@
 <br>
 
 <div class="container">
-    <%= render :partial => "common/video_battle", locals: {battle: @battle}%>
+    <%= render :partial => "common/video_battle", locals: {battle: @battle, leftvideoautoplay: true}%>
   <div id="<%= "votebar_battle_#{@battle.id}"%>">
 
         <div class="row">
