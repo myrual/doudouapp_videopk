@@ -1,6 +1,7 @@
 <% video = local_assigns[:video] %>
 <% videoautoplay = local_assigns[:autoplay]%>
 <% needautoplayvideo = (videoautoplay == true) %>
+<% needautoplayvideo = false %>
 <% posturl = video.poster_url %>
       <% if posturl  and posturl != "" %>
         <% if needautoplayvideo %>
