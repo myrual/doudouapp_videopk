@@ -5,9 +5,9 @@
     <% needRemote = false %>
   <% end %>
      <% if right_is_voted(battle) %>
-         <%  right_vote_link_text = "fa fa-thumbs-up fa-2x flip"%>
+         <%  right_vote_link_text = "fa fa-heart fa-2x"%>
      <% else %>
-         <%  right_vote_link_text = "fa fa-thumbs-o-up fa-2x flip"%>
+         <%  right_vote_link_text = "fa fa-heart-o fa-2x"%>
      <% end %>
     <%if right_is_voted(battle)%>
             <i class= "<%= "#{right_vote_link_text}"%>" aria-hidden="true" style="color:#e02622;"></i>
