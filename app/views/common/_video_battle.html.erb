@@ -1,14 +1,22 @@
 <% battle = local_assigns[:battle] %>
 <% leftvideoautoplay = local_assigns[:leftvideoautoplay]%>
-  <% needautoplayleftvideo = leftvideoautoplay  == true %>
+  <% needautoplayleftvideo = (leftvideoautoplay == true) %>
   <div class="row ">
     <div class="col-sm-6 col-xs-6">
       <% posturl = battle.left_video_poster_url %>
       <% if posturl  and posturl != "" %>
-		    <video src="<%= battle.left_video_url %>" style="width:100%" poster= <%= posturl %> autoplay = needautoplayleftvideo controls>
+        <% if needautoplayleftvideo %>
+		    	<video src="<%= battle.left_video_url %>" style="width:100%" poster= <%= posturl %> autoplay= true controls>
+		    <% else %>
+		    	<video src="<%= battle.left_video_url %>" style="width:100%" poster= <%= posturl %> controls>
+		    <% end %>
 		    </video>
 		  <% else %>
-		    <video src="<%= battle.left_video_url %>" style="width:100%" autoplay = needautoplayleftvideo controls>
+        <% if needautoplayleftvideo %>
+		    	<video src="<%= battle.left_video_url %>" style="width:100%" autoplay= true controls>
+		    <% else %>
+		    	<video src="<%= battle.left_video_url %>" style="width:100%" controls>
+		    <% end %>
 		    </video>
 		  <% end %>
 

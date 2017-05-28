@@ -36,6 +36,22 @@ class BattlesController < ApplicationController
     @title = username + "刚刚怼了" + @battle.right_video.title
   end
 
+  def challengepreviewleft
+    @battle = Battle.find(params[:id])
+    username = "我"
+    if @battle.user.name
+      username =  @battle.user.name
+    end
+    @title = username + "刚刚怼了" + @battle.right_video.title
+  end
+  def challengepreviewright
+    @battle = Battle.find(params[:id])
+    username = "我"
+    if @battle.user.name
+      username =  @battle.user.name
+    end
+    @title = username + "刚刚怼了" + @battle.right_video.title
+  end
   def follow_left_video
     if current_user.has_follow_right?(@battle)
       flash[:warning] = "已经给右边视频投票！不能同时投两边！" if request.format.html?

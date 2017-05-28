@@ -3,7 +3,7 @@ lock "3.8.1"
 
 set :application, "videopk"
 set :repo_url, "git@github.com:myrual/doudouapp_videopk.git"
-set :branch, "likebuttonrefract"
+set :branch, "left_right_bottombar"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

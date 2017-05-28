@@ -22,4 +22,12 @@ class Video < ApplicationRecord
       self.image.thumb.to_s
     end
   end
+  def unique_url
+    ext_v = self.ext_video
+    if ext_v
+      ext_v.videourl
+    else
+      self.video_url.to_s
+    end
+  end
 end

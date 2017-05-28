@@ -1,0 +1,56 @@
+  <% battle = local_assigns[:battle] %>
+
+<div class="row button-footer">
+    <% if left_is_voted(battle) or right_is_voted(battle) %>
+       	<div class="col-xs-4 text-center">
+       	  <% if battle.newerpublishedbattle %>
+                <%= link_to battle_path(battle.newerpublishedbattle) do %>
+                        <i class= "fa fa-arrow-left" aria-hidden="true"></i>
+                <% end %>
+        	<% else %>
+        	  <%= link_to("", "#") %>
+        	<% end %>
+
+		    </div>
+       	<div class="col-xs-4 text-center">
+            <% if left_is_voted(battle) %>
+                <%= link_to myasset_video_challenge_url(battle.left_video) do %>
+                            <i class= "fa fa-video-camera" aria-hidden="true"></i>我也怼右边
+                <% end %>
+            <% else %>
+                <%= link_to myasset_video_challenge_url(battle.left_video) do %>
+                            <i class= "fa fa-video-camera" aria-hidden="true"></i>我也怼左边
+                <% end %>
+            <% end %>
+		    </div>
+       	<div class="col-xs-4 text-center">
+       	  <% if battle.olderpublishedbattle %>
+                <%= link_to battle_path(battle.olderpublishedbattle) do %>
+                        <i class= "fa fa-arrow-right" aria-hidden="true"></i>
+                <% end %>
+        	<% else %>
+        	  <%= link_to("主人可以休息了", "#") %>
+        	<% end %>
+       	</div>
+    <% else %>
+       	<div class="col-xs-6 text-center">
+       	  <% if battle.newerpublishedbattle %>
+                <%= link_to battle_path(battle.newerpublishedbattle) do %>
+                        <i class= "fa fa-arrow-left" aria-hidden="true"></i>
+                <% end %>
+        	<% else %>
+        	  <%= link_to("", "#") %>
+        	<% end %>
+
+		    </div>
+       	<div class="col-xs-6 text-center">
+       	  <% if battle.olderpublishedbattle %>
+                <%= link_to battle_path(battle.olderpublishedbattle) do %>
+                        <i class= "fa fa-arrow-right" aria-hidden="true"></i>
+                <% end %>
+        	<% else %>
+        	  <%= link_to("主人可以休息了", "#") %>
+        	<% end %>
+       	</div>
+       	<% end %>
+</div>

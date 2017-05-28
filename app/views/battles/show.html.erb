@@ -31,9 +31,6 @@
           </div>
         </div>
   </div>
-    <div id="<%= "challenge_battle_#{@battle.id}"%>">
-    <%= render :partial => "common/challenge_battle", locals: {battle: @battle}%>
-    </div>
 </div>
 
 
@@ -44,24 +41,4 @@
   <%= render :partial => "common/comments_for_battle", locals: {battle: @battle}%>
 </div>
 
-    <div class="row button-footer">
-       	<div class="col-xs-6 text-center">
-       	  <% if @battle.newerpublishedbattle %>
-                <%= link_to battle_path(@battle.newerpublishedbattle) do %>
-                        <i class= "fa fa-arrow-left" aria-hidden="true"></i>
-                <% end %>
-        	<% else %>
-        	  <%= link_to("", "#") %>
-        	<% end %>
-
-		</div>
-       	<div class="col-xs-6 text-center">
-       	  <% if @battle.olderpublishedbattle %>
-                <%= link_to battle_path(@battle.olderpublishedbattle) do %>
-                        <i class= "fa fa-arrow-right" aria-hidden="true"></i>
-                <% end %>
-        	<% else %>
-        	  <%= link_to("主人可以休息了", "#") %>
-        	<% end %>
-       	</div>
-    </div>
+  <%= render :partial => "common/footer_battle", locals: {battle: @battle}%>
