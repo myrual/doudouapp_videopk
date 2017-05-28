@@ -1,8 +1,8 @@
   <% battle = local_assigns[:battle] %>
      <% if left_is_voted(battle) %>
-         <%  left_vote_link_text = "fa fa-thumbs-up fa-2x"%>
+         <%  left_vote_link_text = "fa fa-heart fa-2x"%>
      <% else %>
-         <%  left_vote_link_text = "fa fa-thumbs-o-up fa-2x"%>
+         <%  left_vote_link_text = "fa fa-heart-o fa-2x"%>
      <% end %>
      <% if left_is_voted(battle)%>
         <i class= "<%= "#{left_vote_link_text}"%>" aria-hidden="true" style="color:#00314f;"></i>
