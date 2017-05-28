@@ -46,9 +46,18 @@
 
     <div class="row button-footer">
        	<div class="col-xs-6 text-center">
-        	<%= link_to("上传视频", new_myasset_video_path) %>
+       	  <% if @battle.newerpublishedbattle %>
+        	  <%= link_to("<-", battle_path(@battle.newerpublishedbattle)) %>
+        	<% else %>
+        	  <%= link_to("开始批奏章", "#") %>
+        	<% end %>
+
 		</div>
        	<div class="col-xs-6 text-center">
-        	<%= link_to("发起PK", new_myasset_battle_path) %>
+       	  <% if @battle.olderpublishedbattle %>
+        	  <%= link_to("->", battle_path(@battle.olderpublishedbattle)) %>
+        	<% else %>
+        	  <%= link_to("主人可以休息了", "#") %>
+        	<% end %>
        	</div>
     </div>

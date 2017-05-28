@@ -68,6 +68,12 @@ class Battle < ApplicationRecord
    def right_votes
       self.right_followers.count + self.visitor_votes.where(voteLeft: false).count
    end
-
+   
+   def olderpublishedbattle
+     Battle.published.where("created_at < ?", self.created_at).last
+   end
+   def newerpublishedbattle
+     Battle.published.where("created_at > ?", self.created_at).first
+   end
   scope :published, -> { where(is_hidden: false) }
 end
