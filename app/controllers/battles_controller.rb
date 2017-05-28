@@ -37,20 +37,10 @@ class BattlesController < ApplicationController
   end
 
   def challengepreviewleft
-    @battle = Battle.find(params[:id])
-    username = "我"
-    if @battle.user.name
-      username =  @battle.user.name
-    end
-    @title = username + "刚刚怼了" + @battle.right_video.title
+    @video = Battle.find(params[:id]).left_video
   end
   def challengepreviewright
-    @battle = Battle.find(params[:id])
-    username = "我"
-    if @battle.user.name
-      username =  @battle.user.name
-    end
-    @title = username + "刚刚怼了" + @battle.right_video.title
+    @video = Battle.find(params[:id]).right_video
   end
   def follow_left_video
     if current_user.has_follow_right?(@battle)

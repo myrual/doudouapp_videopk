@@ -8,8 +8,7 @@ Rails.application.routes.draw do
     end
   end
   devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    :omniauth_callbacks => "users/omniauth_callbacks"
+    sessions: 'users/sessions'
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'battles#index'
@@ -27,7 +26,8 @@ Rails.application.routes.draw do
       post :vote_for_left
       post :vote_for_right
       get :congratulation
-      
+      get :challengepreviewleft
+      get :challengepreviewright
       
     end
 

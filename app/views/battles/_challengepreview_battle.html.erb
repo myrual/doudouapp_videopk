@@ -1,0 +1,18 @@
+<% video = local_assigns[:video] %>
+<div class="row col-xs-12 col-sm-12">
+        <div class="panel1">
+            <h4 align="center"> 即将挑战</h4>
+            <!-- <p class="pull-left" style="margin-left: 10px; height: 30px;"><%#= simple_format(battle.description) %></p> -->
+        </div>
+</div>
+
+<div>
+    <div class="col-xs-12 col-sm-12">
+      <video src=<%= @video.video_url.to_s %> style = "width:100%"  poster=<%= @video.image.thumb.to_s %> controls>
+      </video>
+    </div>
+</div>
+
+<div class="col-sm-12 col-xs-12 text-center">
+              <%= link_to("怼TA", myasset_video_challenge_url(@video), :class => "btn btn-default challenge_left") %>
+</div>

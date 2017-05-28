@@ -14,11 +14,11 @@
 		    </div>
        	<div class="col-xs-4 text-center">
             <% if left_is_voted(battle) %>
-                <%= link_to myasset_video_challenge_url(battle.left_video) do %>
+                <%= link_to challengepreviewright_battle_path(battle) do %>
                             <i class= "fa fa-video-camera" aria-hidden="true"></i>我也怼右边
                 <% end %>
             <% else %>
-                <%= link_to myasset_video_challenge_url(battle.left_video) do %>
+                <%= link_to challengepreviewleft_battle_path(battle) do %>
                             <i class= "fa fa-video-camera" aria-hidden="true"></i>我也怼左边
                 <% end %>
             <% end %>
