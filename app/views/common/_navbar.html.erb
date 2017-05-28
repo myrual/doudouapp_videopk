@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-       <a class="navbar-brand" href="/">
+       <a class="navbar-brand" href="/" data-trackevent="back_home_from_nav">
             <i class="fa fa-video-camera" aria-hidden="true"></i> 斗斗
             <%#= link_to("斗斗", root_path) %>
        </a>
@@ -17,13 +17,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to("联系我们", contact_path) %></li>
-            <li><%= link_to("关于我们", about_path) %></li>
+            <li><%= link_to("联系我们", contact_path, data:{trackevent: "contact_us_from_nav"}) %></li>
+            <li><%= link_to("关于我们", about_path, data:{trackevent: "about_us_from_nav"}) %></li>
 
             <% if !current_user %>
-                <li><%= link_to("注册", new_user_registration_path) %>
+                <li><%= link_to("注册", new_user_registration_path, data:{trackevent: "register_from_nav"}) %>
                 </li>
-                <li><%= link_to("登录", new_user_session_path) %></li>
+                <li><%= link_to("登录", new_user_session_path, data:{trackevent: "login_from_nav"}) %></li>
             <% else %>
                 <!-- <li class="round-image-50"><%#= image_tag(current_user.avatar.url(:thumb)) %></li>
                 <li class="dropdown">

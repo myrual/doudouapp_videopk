@@ -4,7 +4,7 @@
     <% if left_is_voted(battle) or right_is_voted(battle) %>
        	<div class="col-xs-4 text-center">
        	  <% if battle.newerpublishedbattle %>
-                <%= link_to battle_path(battle.newerpublishedbattle) do %>
+                <%= link_to battle_path(battle.newerpublishedbattle), :data => {:trackevent => "prev_show"} do %>
                         <i class= "fa fa-arrow-left" aria-hidden="true"></i>
                 <% end %>
         	<% else %>
@@ -14,18 +14,18 @@
 		    </div>
        	<div class="col-xs-4 text-center">
             <% if left_is_voted(battle) %>
-                <%= link_to challengepreviewright_battle_path(battle) do %>
+                <%= link_to challengepreviewright_battle_path(battle), :data => {:trackevent => "challenge_show"} do %>
                             <i class= "fa fa-video-camera" aria-hidden="true"></i>我也怼右边
                 <% end %>
             <% else %>
-                <%= link_to challengepreviewleft_battle_path(battle) do %>
+                <%= link_to challengepreviewleft_battle_path(battle), :data => {:trackevent => "challenge_show"}  do %>
                             <i class= "fa fa-video-camera" aria-hidden="true"></i>我也怼左边
                 <% end %>
             <% end %>
 		    </div>
        	<div class="col-xs-4 text-center">
        	  <% if battle.olderpublishedbattle %>
-                <%= link_to battle_path(battle.olderpublishedbattle) do %>
+                <%= link_to battle_path(battle.olderpublishedbattle), :data => {:trackevent => "next_show"} do %>
                         <i class= "fa fa-arrow-right" aria-hidden="true"></i>
                 <% end %>
         	<% else %>
@@ -35,7 +35,7 @@
     <% else %>
        	<div class="col-xs-6 text-center">
        	  <% if battle.newerpublishedbattle %>
-                <%= link_to battle_path(battle.newerpublishedbattle) do %>
+                <%= link_to battle_path(battle.newerpublishedbattle), :data => {:trackevent => "prev_show"} do %>
                         <i class= "fa fa-arrow-left" aria-hidden="true"></i>
                 <% end %>
         	<% else %>
@@ -45,7 +45,7 @@
 		    </div>
        	<div class="col-xs-6 text-center">
        	  <% if battle.olderpublishedbattle %>
-                <%= link_to battle_path(battle.olderpublishedbattle) do %>
+                <%= link_to battle_path(battle.olderpublishedbattle), :data => {:trackevent => "next_show"} do %>
                         <i class= "fa fa-arrow-right" aria-hidden="true"></i>
                 <% end %>
         	<% else %>

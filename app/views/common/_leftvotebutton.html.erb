@@ -15,7 +15,7 @@
 
     <% elsif !right_is_voted(battle)%>
                 <%= link_to vote_for_left_battle_path(battle), :method => :post,
-                                               :remote => needRemote do %>
+                                               :remote => needRemote, :track => true, :data => {:trackevent => "vote"} do %>
                         <i class= "<%= "#{left_vote_link_text}"%>" aria-hidden="true" style="color:#135392;"></i>
                 <% end %>
     <% end %>
