@@ -1,5 +1,8 @@
 class Admin::TopicsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :admin_required
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
+  layout "admin"
 
   # GET /topics
   # GET /topics.json
