@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Category</th>
       <th>Title</th>
       <th>Running</th>
       <th>Order</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @topics.each do |topic| %>
       <tr>
+        <td><%= topic.t1topic.title %></td>
         <td><%= topic.title %></td>
         <td><%= topic.running %></td>
         <td><%= topic.order %></td>
