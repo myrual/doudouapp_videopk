@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530132559) do
+ActiveRecord::Schema.define(version: 20170530141822) do
 
   create_table "battle_comments", force: :cascade do |t|
     t.integer  "battle_id"
@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(version: 20170530132559) do
     t.integer  "order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "t1topic_id"
+    t.index ["t1topic_id"], name: "index_topics_on_t1topic_id"
   end
 
   create_table "users", force: :cascade do |t|
