@@ -263,11 +263,19 @@ hr {
 
   /* Set the fixed height of the footer here */
 }
-
+.video_container{
+  padding-left: 1px;
+  padding-right: 1px;
+}
+.battle_video_vote_comment{
+  padding-left: 1px;
+  padding-right: 1px;
+}
+/*
 video {
   height: 240px !important;
 }
-
+*/
 .form-inputs, .form-actions {
   margin-left: 10px;
   margin-right: 10px;

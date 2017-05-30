@@ -2,14 +2,10 @@
 <% leftvideoautoplay = local_assigns[:leftvideoautoplay]%>
   <% needautoplayleftvideo = (leftvideoautoplay == true) %>
   <div class="row ">
-    <div class="col-sm-6 col-xs-6">
-     <% if needautoplayleftvideo %>
-     		<%= render :partial => "common/video_player", locals: {video: battle.left_video, autoplay: true}%>
-     <% else %>
+    <div class="col-sm-6 col-xs-6 video_container">
      		<%= render :partial => "common/video_player", locals: {video: battle.left_video}%>
-     <% end %>
     </div>
-    <div class="col-sm-6 col-xs-6">
+    <div class="col-sm-6 col-xs-6 video_container">
      		<%= render :partial => "common/video_player", locals: {video: battle.right_video}%>
     </div>
   </div>

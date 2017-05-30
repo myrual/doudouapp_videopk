@@ -1,5 +1,5 @@
 <% battle = local_assigns[:battle] %>
-<div class="container" id="<%= "singlebattle_#{battle.id}"%>">
+<div class="container battle_video_vote_comment" id="<%= "singlebattle_#{battle.id}"%>">
 
     <div class="row">
       
@@ -10,7 +10,7 @@
           </div>
       </div>
     </div>
-    <%= render :partial => "common/video_battle", locals: {battle: battle}%>
+      <%= render :partial => "common/video_battle", locals: {battle: battle}%>
     <div id="<%= "votebar_battle_#{battle.id}"%>">
       <% if battle %>
         <div class="row">
