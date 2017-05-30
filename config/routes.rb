@@ -41,7 +41,8 @@ Rails.application.routes.draw do
     resources :videos do
       #resources :video_comments
     end
-
+    resources :t1topics do
+    end
     resources :battles do
       member do
         post :publish

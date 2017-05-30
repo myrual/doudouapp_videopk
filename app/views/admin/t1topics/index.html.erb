@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>T1topics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Running</th>
+      <th>Order</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @t1topics.each do |t1topic| %>
+      <tr>
+        <td><%= t1topic.title %></td>
+        <td><%= t1topic.running %></td>
+        <td><%= t1topic.order %></td>
+        <td><%= link_to 'Show', admin_t1topic_path(t1topic) %></td>
+        <td><%= link_to 'Edit', edit_admin_t1topic_path(t1topic) %></td>
+        <td><%= link_to 'Destroy', admin_t1topic_path(t1topic), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New T1topic', new_admin_t1topic_path %>
