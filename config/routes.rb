@@ -43,6 +43,9 @@ Rails.application.routes.draw do
     end
     resources :t1topics do
     end
+    resources :topics do 
+    end
+
     resources :battles do
       member do
         post :publish
