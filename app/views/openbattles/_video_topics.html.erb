@@ -1,5 +1,4 @@
 <% @t1topic.topics.all.each do |topic| %>
-    <% if topic.videos.all.count > 0 %>
         <div class="video-in-topic">
             
             <h4><%= link_to topic.title, topic %></h4>
@@ -10,5 +9,4 @@
                 </div>
             <% end %>
         </div>
-    <% end %>
 <% end %>
