@@ -1,6 +1,6 @@
 
     <div class="row">
 <% @topicsundert1.each do |topic| %>
-                <%= link_to topic.title, myasset_topic_newvideo_path(topic), :class => "btn btn-primary text-center  t2-topic", :data => {:trackevent => "select topic"} %>
+                <%= link_to topic.title, openbattle_path(topic), :class => "btn btn-primary text-center  t2-topic", :data => {:trackevent => "select topic"} %>
 <% end %>
     </div>
