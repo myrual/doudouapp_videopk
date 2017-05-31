@@ -1,7 +1,8 @@
   <% battle = local_assigns[:battle] %>
-
+  <% alreadyVoted =  left_is_voted(battle) or right_is_voted(battle) %>
+  <% alreadyVoted = false %>
 <div class="row button-footer">
-    <% if left_is_voted(battle) or right_is_voted(battle) %>
+    <% if alreadyVoted %>
        	<div class="col-xs-4 text-center">
        	  <% if battle.newerpublishedbattle %>
                 <%= link_to battle_path(battle.newerpublishedbattle), :data => {:trackevent => "prev_show"} do %>
@@ -15,11 +16,11 @@
        	<div class="col-xs-4 text-center">
             <% if left_is_voted(battle) %>
                 <%= link_to challengepreviewright_battle_path(battle), :data => {:trackevent => "challenge_show"} do %>
-                            <i class= "fa fa-video-camera" aria-hidden="true"></i>我也怼右边
+                            <i class= "fa fa-video-camera fa-2x" aria-hidden="true"></i>
                 <% end %>
             <% else %>
                 <%= link_to challengepreviewleft_battle_path(battle), :data => {:trackevent => "challenge_show"}  do %>
-                            <i class= "fa fa-video-camera" aria-hidden="true"></i>我也怼左边
+                            <i class= "fa fa-video-camera fa-2x" aria-hidden="true"></i>
                 <% end %>
             <% end %>
 		    </div>

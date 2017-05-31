@@ -14,13 +14,13 @@
     <div id="<%= "votebar_battle_#{battle.id}"%>">
       <% if battle %>
         <div class="row">
-          <div class="col-sm-2 col-xs-2">
+          <div class="col-sm-2 col-xs-2  vote_star_button">
             <%= render :partial => "common/leftvotebutton", locals: {battle: battle}%>     
           </div>
           <div class = "col-sm-8 col-xs-8">
             <%= render :partial => "common/votebar", locals: {battle: battle}%>
           </div>
-          <div class="col-sm-2 col-xs-2" style="text-align:right">
+          <div class="col-sm-2 col-xs-2  vote_star_button vote_star_right">
             <%= render :partial => "common/rightvotebutton", locals: {battle: battle}%>     
           </div>
         </div>

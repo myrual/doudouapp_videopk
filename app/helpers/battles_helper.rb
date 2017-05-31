@@ -1,10 +1,10 @@
 module BattlesHelper
   def render_left_width(battle)
-    (battle.left_followers.count + battle.visitor_votes.where(voteLeft: true).count).to_f/total_votes(battle).to_f*100
+    (battle.left_followers.count + battle.visitor_votes.where(voteLeft: true).count).to_f/total_votes(battle).to_f*99
   end
 
   def render_right_width(battle)
-    (battle.right_followers.count + battle.visitor_votes.where(voteLeft: false).count).to_f/total_votes(battle).to_f*100
+    (battle.right_followers.count + battle.visitor_votes.where(voteLeft: false).count).to_f/total_votes(battle).to_f*99
   end
 
    def total_votes(battle)

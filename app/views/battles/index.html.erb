@@ -3,59 +3,8 @@
 
 
 <% if @battles.present? %>
-<% @battles.each do |battle| %>
-<%= render :partial => "common/singlebattle", locals: {battle: battle}%>
-
-<div class="row comments">
-  <div class="col-xs-12 col-sm-12">
-    <div class="comments-title">
-      <% if battle.battle_comments.blank? %>
-          <%= link_to new_battle_battle_comment_path(battle) do %>
-            我来写第一条评论 <i class="fa fa-pencil" aria-hidden="true"></i>
-          <% end %>
-      <% else %>
-        精选留言
-        <span class="pull-right">
-            <%= link_to new_battle_battle_comment_path(battle) do %>
-              写评论 <i class="fa fa-pencil" aria-hidden="true"></i>
-            <% end %>
-        </span>
-      <% end %>
-
-    </div>
-    <% if battle.battle_comments.blank? %>
-    <% else %>
-      <% battle.battle_comments.order("created_at DESC").limit(3).each do |comment| %>
-      <div class="row comment-list">
-        <div class="col-xs-2 col-sm-2">
-          <div class="thumbnail1" style="margin-top:5px;">
-              <% if comment.user.avatar_file_name.url(:thumb) %>
-                <%#= image_tag(comment.user.avatar.url(:thumb), :size => "30x30", class: "img-circle") %>
-                <%= image_tag(comment.user.avatar_file_name.url(:thumb), :size => "30x30", class: "img-circle") %>
-              <% else %>
-                <%#= image_tag("http://placehold.it/100x100&text=No Pic", :size => "30x30", class: "img-circle") %>
-                <%= image_tag "logo.jpeg", :size => "30x30", class: "img-circle" %>
-              <% end %>
-            </div>
-        </div>
-        <div class="col-xs-10 col-sm-10">
-          <p>
-            <% if comment.user.name.present? %>
-              <%= comment.user.name %>
-            <% else %>
-              <%= comment.user.display_name %>
-            <% end %>
-             发表于 <%= comment.created_at.strftime("%Y年%-m月%d日") %>
-          </p>
-          <p>
-            <%= simple_format(comment.comment) %>
-          </p>
-        </div>
-      </div>
-    <% end %>
-    <% end %>
-  </div>
-</div>
+  <% @battles.each do |battle| %>
+  <%= render :partial => "common/singlebattle", locals: {battle: battle}%>
 <% end %>
 
 <div class="text-center">
