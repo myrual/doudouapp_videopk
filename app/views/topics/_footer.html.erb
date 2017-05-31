@@ -1,0 +1,26 @@
+<div class="row button-footer">
+       	<div class="col-xs-4 text-center">
+       	  <% if @prevideo %>
+                <%= link_to topic_path(@topic, cur_videoid:(@videoindex - 1)), :data => {:trackevent => "prev_show"}  do %>
+                        <i class= "fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+                <% end %>
+          <% else %>
+        	  <%= link_to("", "#") %>
+          <% end %>
+
+		</div>
+       	<div class="col-xs-4 text-center">
+                <%= link_to myasset_topic_newvideo_path(@topic), :data => {:trackevent => "create_video_topic"} do %>
+                            <i class= "fa fa-video-camera fa-2x" aria-hidden="true"></i>
+                <% end %>
+		    </div>
+       	<div class="col-xs-4 text-center">
+       	    <% if @nextvideo %>
+                <%= link_to topic_path(@topic, cur_videoid:(@videoindex + 1)), :data => {:trackevent => "next_video_topic"}  do %>
+                        <i class= "fa fa-arrow-right fa-2x" aria-hidden="true"></i>
+                <% end %>
+            <% else %>
+        	    <%= link_to("", "#") %>
+        	<% end %>
+       	</div>
+</div>

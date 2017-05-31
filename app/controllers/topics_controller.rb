@@ -4,7 +4,20 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
-      @videos = @topic.videos
+      @videoindex = params[:cur_videoid].to_i
+      allvideo = @topic.videos.all
+      if @videoindex
+        @currentvideo = allvideo[@videoindex]
+        @nextvideo = allvideo[@videoindex + 1]
+        if @videoindex != 0
+          @prevideo = allvideo[@videoindex - 1]
+        end
+      else
+        @videoindex = 0
+        @currentvideo = allvideo[@videoindex]
+        @nextvideo = allvideo[@videoindex + 1]
+      end
+
   end
 
 
