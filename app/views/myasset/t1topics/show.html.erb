@@ -1,0 +1,7 @@
+<% @topicsundert1.each do |topic| %>
+    <div class="row">
+
+                <%= link_to topic.title, myasset_topic_path(topic), :class => "btn btn-default text-center", :data => {:trackevent => "select topic"} %>
+
+    </div>
+<% end %>

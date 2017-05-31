@@ -1,0 +1,33 @@
+<div>
+  <h4><%= @topic.title %> </h4>
+  
+</div>
+<div class="form-group">
+<%= simple_form_for [:myasset, @video], 
+    
+    :url => myasset_topic_createvideo_path(@topic),
+    :method => 'post' do |f| %>    
+    
+    <div class="group">
+        <%=f.file_field :video, :accept => 'video/*', :capture => "user", :class => "filestyle", "data-buttonText" =>"录制视频", "data-icon"=>"false"%>
+
+    </div>
+    <div class="group">
+          <%= f.file_field :image, :accept => 'image/*', :capture => "user", :class => "filestyle", "data-buttonText" =>"封面照片", "data-icon"=>"false" %>
+    </div>
+    <div class="group">
+        <%= f.input :title, :label => "我的视频名称" %>
+    </div>
+    <% if @video.image.present? %>
+    <span>视频封面</span>
+    <br>
+    <%= image_tag(@video.image.thumb.url) %>
+    <% end %>
+    
+    <br>
+    <div class="form-actions">
+      <%= f.submit "提交" , disable_with: "Submiting...", class: "btn btn-success", :style => "border: none;color:white;width:49%;background-color:#e02622;" %>
+      <%= link_to "取消", myasset_videos_path, class: "btn btn-default", :style => "border: none;color:white;width:49%;background-color:#e02622;"%>
+    </div>
+<% end %>
+</div>

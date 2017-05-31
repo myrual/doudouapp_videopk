@@ -78,7 +78,14 @@ Rails.application.routes.draw do
       post :createchallenge
       #resources :video_comments
     end
-
+    
+    resources :t1topics do
+    end
+    
+    resources :topics do
+      post :createvideo
+    end
+    
     resources :battles do
       resources :battle_comments
       get :challenge_left
