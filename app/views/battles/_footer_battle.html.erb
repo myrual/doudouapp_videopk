@@ -36,7 +36,7 @@
     <% else %>
        	<div class="col-xs-6 text-center">
        	  <% if battle.newerpublishedbattle %>
-                <%= link_to battle_path(battle.newerpublishedbattle), :data => {:trackevent => "prev_show"} do %>
+                <%= link_to battle_path(battle.newerpublishedbattle),:class => "btn", :data => {:trackevent => "prev_show"} do %>
                         <i class= "fa fa-arrow-left fa-2x" aria-hidden="true"></i>
                 <% end %>
         	<% else %>
@@ -46,7 +46,7 @@
 		    </div>
        	<div class="col-xs-6 text-center">
        	  <% if battle.olderpublishedbattle %>
-                <%= link_to battle_path(battle.olderpublishedbattle), :data => {:trackevent => "next_show"} do %>
+                <%= link_to battle_path(battle.olderpublishedbattle), :class => "btn", :data => {:trackevent => "next_show"} do %>
                         <i class= "fa fa-arrow-right fa-2x" aria-hidden="true"></i>
                 <% end %>
         	<% else %>
