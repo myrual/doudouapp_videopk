@@ -1,0 +1,9 @@
+<div>
+  <h4><%= @topic.title %> </h4>
+  
+</div>
+<% @videos.each do |video| %>
+    <div class="col-sm-12 col-xs-12 video_container">
+     		<%= render :partial => "common/video_player", locals: {video: video}%>
+    </div>
+<% end %>

@@ -1,7 +1,8 @@
 <% @t1topic.topics.all.each do |topic| %>
     <% if topic.videos.all.count > 0 %>
         <div class="video-in-topic">
-            <h4><%= topic.title %></h4>
+            
+            <h4><%= link_to topic.title, topic %></h4>
             <% topic.videos.all.each do |video| %>
                 <div class="col-sm-6 col-xs-6 video_container">
                     <p><%= video.title %></p>

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :openbattles
   resources :multivotes
+  resources :topics
   resources :streams do
     member do
       post :vote_for_left
