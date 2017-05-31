@@ -5,25 +5,25 @@ class Myasset::TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
-      @video = Video.new
+      @videos = @topic.videos.where(:user => current_user)
   end
 
 
+  def newvideo
+    @topic = Topic.find(params[:topic_id])
+      @video = Video.new
+  end
   # POST /topics/1/createvideo
   
   def createvideo
       video_topic = Topic.find(params[:topic_id])
-      @video = Video.create(video_params)
-      @video.user = current_user
-      if @video.save!
-          newBattle = Battle.new
-          newBattle.title = toChallenge_video.title
-          newBattle.left_video_id = @video.id
-          newBattle.right_video_id = toChallenge_video.id
-          newBattle.is_hidden = false
-          newBattle.user = current_user
-          newBattle.save
-          redirect_to congratulation_battle_path(newBattle), notice: '比赛已创建!'
+      @video = current_user.videos.new(video_params)
+      if @video.save
+          @topic_video = current_user.topic_videos.new(video: @video, topic: video_topic)
+          if @topic_video.save
+          else
+          end
+          redirect_to myasset_topic_path(video_topic), notice: '视频上传成功!'
       else
         render :new
       end

@@ -84,6 +84,7 @@ Rails.application.routes.draw do
     
     resources :topics do
       post :createvideo
+      get :newvideo
     end
     
     resources :battles do

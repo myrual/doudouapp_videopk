@@ -7,6 +7,8 @@ class Video < ApplicationRecord
   has_many :video_comments
   has_many :comments_from_user, through: :video_comments, source: :user
   has_many :challengevideos
+  has_many :topic_videos
+  has_many :topics ,through: :topic_videos
   has_one :ext_video
 
   #has_many :favor_videos_relationships

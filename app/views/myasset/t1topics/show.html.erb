@@ -1,7 +1,6 @@
-<% @topicsundert1.each do |topic| %>
+
     <div class="row">
-
-                <%= link_to topic.title, myasset_topic_path(topic), :class => "btn btn-default text-center", :data => {:trackevent => "select topic"} %>
-
-    </div>
+<% @topicsundert1.each do |topic| %>
+                <%= link_to topic.title, myasset_topic_newvideo_path(topic), :class => "btn btn-primary text-center  t2-topic", :data => {:trackevent => "select topic"} %>
 <% end %>
+    </div>

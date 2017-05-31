@@ -1,7 +1,11 @@
 
 
-    <div class="row">
+
     <% @t1topics.each do |t1topic| %>
-                <%= link_to t1topic.title, myasset_t1topic_path(t1topic), :class => "btn btn-default text-center", :data => {:trackevent => "select t1 topic"} %>
-    <% end %>
+    <div class="row">
+                <%= link_to t1topic.title, myasset_t1topic_path(t1topic), :class => "btn btn-primary text-center t1-topic", :data => {:trackevent => "select t1 topic"} %>
     </div>
+    <br>
+    
+    <% end %>
+

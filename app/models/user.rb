@@ -33,6 +33,8 @@ class User < ApplicationRecord
   has_many :streams
   has_many :challenge_videos
   
+  has_many :topic_videos
+
   def has_follow_left?(battle)
     favor_left_videos.include?(battle)
   end
