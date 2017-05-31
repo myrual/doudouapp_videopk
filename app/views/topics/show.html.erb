@@ -8,7 +8,9 @@
 </div>
 
 <div class="col-sm-12 col-xs-12 video_container">
-  <%= render :partial => "common/video_player", locals: {video: @currentvideo}%>
+  <% if @currentvideo %>
+    <%= render :partial => "common/video_player", locals: {video: @currentvideo}%>
+  <% end %>
 </div>
     
 <%= render "footer" %>
