@@ -1,5 +1,5 @@
   <% video = local_assigns[:video] %>
-<h4 class="text-center">即将挑战</h4>
+<h4 class="text-center">准备怼<%= @targevideo.title %></h4>
 <div>
     <div class="col-xs-12 col-sm-12">
      		<%= render :partial => "common/video_player", locals: {video: @targevideo}%>
@@ -13,14 +13,14 @@
     :method => 'post' do |f| %>    
     
     <div class="group">
-        <%=f.file_field :video, :accept => 'video/*', :capture => "user", :class => "filestyle", "data-buttonText" =>"录制挑战视频", "data-icon"=>"false"%>
+        <%=f.file_field :video, :accept => 'video/*', :capture => "user", :class => "filestyle", "data-buttonText" =>"录视频", "data-icon"=>"false"%>
 
     </div>
     <div class="group">
-          <%= f.file_field :image, :accept => 'image/*', :capture => "user", :class => "filestyle", "data-buttonText" =>"添加封面照片", "data-icon"=>"false" %>
+          <%= f.file_field :image, :accept => 'image/*', :capture => "user", :class => "filestyle", "data-buttonText" =>"加封面", "data-icon"=>"false" %>
     </div>
     <div class="group">
-        <%= f.input :title, :label => "我的视频名称", :input_html => { :value => @targevideo.title} %>
+        <%= f.input :title, :label => "我的观点", :input_html => { :value => @targevideo.title} %>
     </div>
     <% if @video.image.present? %>
     <span>视频封面</span>
@@ -30,8 +30,8 @@
     
     <br>
     <div class="form-actions">
-      <%= f.submit "提交" , disable_with: "Submiting...", class: "btn btn-success", :style => "border: none;color:white;width:49%;background-color:#e02622;" %>
-      <%= link_to "取消", myasset_videos_path, class: "btn btn-default", :style => "border: none;color:white;width:49%;background-color:#e02622;"%>
+      <%= f.submit "怼起来" , disable_with: "Submiting...", class: "btn btn-success", :style => "border: none;color:white;width:49%;background-color:#e02622;" %>
+      <%= link_to "取消", :back, class: "btn btn-default", :style => "border: none;color:white;width:49%;background-color:#e02622;"%>
     </div>
 <% end %>
 </div>

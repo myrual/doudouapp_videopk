@@ -1,7 +1,6 @@
 class Myasset::VideosController < ApplicationController
     before_action :authenticate_user!
-
-    layout "myasset"
+    layout "myasset", only: [:index, :show, :edit, :new]
 
     def index
       @videos = Video.where(user_id: current_user.id)
@@ -42,7 +41,7 @@ class Myasset::VideosController < ApplicationController
           newBattle.is_hidden = false
           newBattle.user = current_user
           newBattle.save
-          redirect_to congratulation_battle_path(newBattle), notice: '比赛已创建!'
+          redirect_to congratulation_battle_path(newBattle), notice: '怼的好!'
       else
         render :new
       end

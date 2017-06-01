@@ -17,7 +17,6 @@ class TopicsController < ApplicationController
         @currentvideo = allvideo[@videoindex]
         @nextvideo = allvideo[@videoindex + 1]
       end
-
   end
 
 

@@ -13,7 +13,7 @@
                 <%= link_to myasset_topic_newvideo_path(@topic), :data => {:trackevent => "create_video_topic"} do %>
                             <i class= "fa fa-video-camera fa-2x" aria-hidden="true"></i>
                 <% end %>
-		    </div>
+		</div>
        	<div class="col-xs-4 text-center">
        	    <% if @nextvideo %>
                 <%= link_to topic_path(@topic, cur_videoid:(@videoindex + 1)), :data => {:trackevent => "next_video_topic"}  do %>
