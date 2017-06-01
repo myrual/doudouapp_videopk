@@ -2,7 +2,7 @@
   <h4>话题: <%= @topic.title %> </h4>
 </div>
 <div>
-    <%= link_to "其他话题", myasset_t1topics_path %>
+    <%= link_to "其他话题", myasset_t1topic_path(@topic.t1topic) %>
 </div>
 <div class="form-group">
 <%= simple_form_for [:myasset, @video], 
