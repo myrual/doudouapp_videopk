@@ -2,14 +2,14 @@
 <div class="row">
     <%= link_to "回到" + @topic.t1topic.title, openbattle_path(@topic.t1topic) %>
   </div>
-  <div class="row">
-     当前话题：<%= @topic.title %>
+  <div class="row text-center">
+     <h4>话题：<%= @topic.title %></h4>
   </div>
 </div>
 
 <% if @currentvideo %>
   <div class="row col-sm-12 col-xs-12">
-       <%= @currentvideo.user.name %>认为: <%= @currentvideo.title %>
+       <%= @currentvideo.user.name %>: <%= @currentvideo.title %>
   </div>
   
   <div class="row col-sm-12 col-xs-12 video_container">
