@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resource :wechat, only: [:show, :create]
   resources :openbattles
   resources :multivotes
   resources :topics
