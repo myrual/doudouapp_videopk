@@ -17,8 +17,10 @@
       <div class="pull-right col-sm-4 col-xs-4">
           <%= link_to edit_myasset_battle_path(b), class: 'btn btn-default btn-xs' do %>
           <i class="fa fa-pencil"></i><% end %>
-          <%= link_to myasset_battle_path(b), :method => :delete, :data => {:confirm => "Are your sure?" }, class: 'btn btn-danger btn-xs' do %>
-          <i class="fa fa-trash-o"></i>
+          <% if b.visitor_votes.count == 0 %>
+            <%= link_to myasset_battle_path(b), :method => :delete, :data => {:confirm => "Are your sure?" }, class: 'btn btn-danger btn-xs' do %>
+            <i class="fa fa-trash-o"></i>
+            <% end %>
           <% end %>
 
         <% if b.is_hidden %>
