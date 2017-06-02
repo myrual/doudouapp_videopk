@@ -1,23 +1,36 @@
 <% @t1topic.topics.all.each do |topic| %>
-        <div class="video-in-topic">
-            <% allvideos = topic.videos.all %>
+    <div class="video-in-topic">
+        <div></div>
+        <% allvideos = topic.videos.all %>
+        <%= link_to topic do %>
             <% if allvideos.count > 1 %>
                 <div class="row">
                    <div class="col-sm-8 col-xs-8">
-                       <h4><%= link_to topic.title, topic %></h4>
+                       <h4><%= topic.title %></h4>
                    </div>                 
                    <div class="col-sm-4 col-xs-4 pull-right text-right">
-                       <h4><%= link_to topic.videos.all.count.to_s + "段视频", topic %></h4>                       
+                       <h4><%= topic.videos.all.count.to_s + "段视频" %></h4>                       
                    </div>
                 </div>
             <% else %>
-                <h4><%= link_to topic.title, topic %></h4>            
-            <% end %>
-            <% topic.videos.all[0, 1].each do |video| %>
-                <div class="col-sm-12 col-xs-12 video_container">
-                    <p><%= video.title %></p>
-     		        <%= render :partial => "videopreview", locals: {video: video}%>
+                <div class="row">
+                    <h4><%= topic.title %></h4>                    
                 </div>
             <% end %>
-        </div>
+            
+            <div class="row">
+                <% video = topic.videos.last %>
+                <% if video %>
+                    <%= link_to topic_path(topic, cur_videoid:(0)) do %>
+                        <div class="col-sm-12 col-xs-12 video_container">
+                            <div class="row">
+     		                    <%= render :partial => "videopreview", locals: {video: video}%>
+                            </div>
+                                <%= video.user.name %>： <%= video.title%>
+                            </div>
+                    <% end %>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
 <% end %>

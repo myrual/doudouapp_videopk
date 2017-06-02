@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
   def show
       @title = @topic.title
       @videoindex = params[:cur_videoid].to_i
-      allvideo = @topic.videos.all
+      allvideo = @topic.videos.all.reverse
       if @videoindex
         @currentvideo = allvideo[@videoindex]
         @nextvideo = allvideo[@videoindex + 1]
