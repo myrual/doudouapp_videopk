@@ -1,6 +1,6 @@
 require_relative "20170602031033_create_wechat_sessions"
 class RemoveWechat < ActiveRecord::Migration[5.0]
   def change
-    revert 20170602031033_create_wechat_sessions
+    revert CreateWechatSessions
   end
 end
