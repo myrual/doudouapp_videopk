@@ -8,7 +8,7 @@ class Myasset::BattlesController < ApplicationController
   end
 
   def show
-    @battle = current_user.battles..find(params[:id])
+    @battle = current_user.battles.find(params[:id])
     @left_video = Video.find(@battle.left_video_id)
     @right_video = Video.find(@battle.right_video_id)
 
