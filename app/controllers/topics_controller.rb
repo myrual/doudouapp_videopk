@@ -4,6 +4,7 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
+      @title = @topic.title
       @videoindex = params[:cur_videoid].to_i
       allvideo = @topic.videos.all
       if @videoindex
