@@ -22,9 +22,6 @@
           <% end %>
 
         <% if b.is_hidden %>
-          <%= link_to myasset_battle_path(b), :method => :delete, :data => {:confirm => "Are your sure?" }, class: 'btn btn-danger btn-xs' do %>
-          <i class="fa fa-trash-o"></i>
-          <% end %>
           <%= button_to "发布", myasset_battle_enable_path(b) , class: 'btn'%>
           <small class="btn btn-default btn-xs">等待审核中</small>
         <% else %>

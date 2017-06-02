@@ -3,11 +3,11 @@ class Myasset::VideosController < ApplicationController
     layout "myasset", only: [:index, :show, :edit, :new]
 
     def index
-      @videos = Video.where(user_id: current_user.id)
+      @videos = current_user.videos.all
     end
 
     def show
-      @video = Video.find(params[:id])
+      @video = current_user.videos.find(params[:id])
     end
 
     def new
@@ -15,7 +15,7 @@ class Myasset::VideosController < ApplicationController
     end
 
     def create
-      @video = Video.create(video_params)
+      @video = current_user.videos.create(video_params)
       @video.user = current_user
 
       if @video.save!
