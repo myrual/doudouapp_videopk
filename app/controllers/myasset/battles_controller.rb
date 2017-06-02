@@ -4,11 +4,11 @@ class Myasset::BattlesController < ApplicationController
   layout "myasset"
 
   def index
-    @battles = Battle.where(user_id: current_user.id)
+    @battles = current_user.battles.all
   end
 
   def show
-    @battle = Battle.find(params[:id])
+    @battle = current_user.battles..find(params[:id])
     @left_video = Video.find(@battle.left_video_id)
     @right_video = Video.find(@battle.right_video_id)
 
@@ -93,11 +93,22 @@ class Myasset::BattlesController < ApplicationController
       end
     end
   def edit
-    @battle = Battle.find(params[:id])
+    @battle = current_user.battles.find(params[:id])
     @videos = Video.all.map { |v| [v.title, v.id] }
     @myvideos = Video.where(user_id: current_user.id).map { |v| [v.title, v.id] }
   end
-
+  def enable
+    @battle = current_user.battles.find(params[:battle_id])
+    @battle.is_hidden = false
+    @battle.save
+    redirect_to battle_path(@battle)
+  end
+  def disable
+    @battle = current_user.battles.find(params[:battle_id])
+    @battle.is_hidden = true
+    @battle.save
+    redirect_to myasset_battles_path
+  end
   def update
     @battle = Battle.find(params[:id])
 

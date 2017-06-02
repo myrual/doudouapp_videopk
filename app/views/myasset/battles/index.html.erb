@@ -15,14 +15,20 @@
         <% end %>
       </div>
       <div class="pull-right col-sm-4 col-xs-4">
-        <% if b.is_hidden %>
           <%= link_to edit_myasset_battle_path(b), class: 'btn btn-default btn-xs' do %>
           <i class="fa fa-pencil"></i><% end %>
           <%= link_to myasset_battle_path(b), :method => :delete, :data => {:confirm => "Are your sure?" }, class: 'btn btn-danger btn-xs' do %>
           <i class="fa fa-trash-o"></i>
           <% end %>
+
+        <% if b.is_hidden %>
+          <%= link_to myasset_battle_path(b), :method => :delete, :data => {:confirm => "Are your sure?" }, class: 'btn btn-danger btn-xs' do %>
+          <i class="fa fa-trash-o"></i>
+          <% end %>
+          <%= button_to "发布", myasset_battle_enable_path(b) , class: 'btn'%>
           <small class="btn btn-default btn-xs">等待审核中</small>
         <% else %>
+          <%= button_to "撤回", myasset_battle_disable_path(b), class: 'btn' %>
           <small class="btn btn-warning btn-xs">比赛正在进行中</small>
         <% end %>
       </div>

@@ -96,6 +96,8 @@ Rails.application.routes.draw do
       get :challenge_right
       post :createChallenge_left
       post :createChallenge_right
+      post :disable
+      post :enable
     end
 
     #resources :users
