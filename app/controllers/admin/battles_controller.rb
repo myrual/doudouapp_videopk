@@ -21,44 +21,6 @@ class Admin::BattlesController < ApplicationController
     @right_followers = FavorRightVideoRelationship.where(battle_id: @battle.id)
   end
 
-  def new
-    @battle = Battle.new
-    @videos = Video.all.map { |v| [v.title, v.id] }
-  end
-
-  def create
-    @battle = Battle.create(battle_params)
-    @battle.user = current_user
-
-    if @battle.save
-      redirect_to admin_battles_path, notice: '比赛已创建!'
-    else
-      render :new
-    end
-  end
-
-  def edit
-    @battle = Battle.find(params[:id])
-    @videos = Video.all.map { |v| [v.title, v.id] }
-  end
-
-  def update
-    @battle = Battle.find(params[:id])
-
-    if @battle.update(battle_params)
-      redirect_to admin_battles_path, notice: '比赛已更新!'
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @battle = Battle.find(params[:id])
-    @battle.destroy
-
-    redirect_to admin_battles_path,  alert: '比赛已删除!'
-  end
-
   def publish
     @battle = Battle.find(params[:id])
     @battle.publish!
