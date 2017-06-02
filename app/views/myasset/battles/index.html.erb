@@ -22,10 +22,10 @@
           <% end %>
 
         <% if b.is_hidden %>
-          <%= button_to "发布", myasset_battle_enable_path(b) , class: 'btn'%>
+          <%= link_to "发布", myasset_battle_enable_path(b) , :method => :post, class: 'btn'%>
           <small class="btn btn-default btn-xs">等待审核中</small>
         <% else %>
-          <%= button_to "撤回", myasset_battle_disable_path(b), class: 'btn' %>
+          <%= link_to "撤回", myasset_battle_disable_path(b), :method => :post, class: 'btn' %>
           <small class="btn btn-warning btn-xs">比赛正在进行中</small>
         <% end %>
       </div>

@@ -101,7 +101,7 @@ class Myasset::BattlesController < ApplicationController
     @battle = current_user.battles.find(params[:battle_id])
     @battle.is_hidden = false
     @battle.save
-    redirect_to battle_path(@battle)
+    redirect_to myasset_battles_path
   end
   def disable
     @battle = current_user.battles.find(params[:battle_id])
@@ -121,7 +121,6 @@ class Myasset::BattlesController < ApplicationController
 
   def destroy
     @battle = current_user.battles.find(params[:id])
-    debugger
     @battle.destroy
 
     redirect_to myasset_battles_path,  alert: '比赛已被删除！'
