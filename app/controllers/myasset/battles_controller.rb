@@ -120,7 +120,8 @@ class Myasset::BattlesController < ApplicationController
   end
 
   def destroy
-    @battle = Battle.find(params[:id])
+    @battle = current_user.battles.find(params[:id])
+    debugger
     @battle.destroy
 
     redirect_to myasset_battles_path,  alert: '比赛已被删除！'
