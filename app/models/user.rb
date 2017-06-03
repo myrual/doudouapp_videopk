@@ -63,6 +63,14 @@ class User < ApplicationRecord
   def display_name
     self.email.split("@").first
   end
+  
+  def avatar_url
+    if self.useravatars.first
+      self.useravatars.first.url
+    else
+      self.avatar_file_name.url(:thumb)
+    end
+  end
 
 
    def reset_authentication_token!
