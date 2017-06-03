@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     end
   end
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    omniauth_callbacks: 'omniauth_callback'
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'battles#index'
