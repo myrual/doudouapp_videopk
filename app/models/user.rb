@@ -34,6 +34,7 @@ class User < ApplicationRecord
   has_many :challenge_videos
   
   has_many :topic_videos
+  has_many :useravatars
 
   def has_follow_left?(battle)
     favor_left_videos.include?(battle)
@@ -77,6 +78,7 @@ class User < ApplicationRecord
         user.password = Devise.friendly_token[0,20]
         user.is_admin = false
         user.save
+        provider_avatar = user.useravatars.new(:url => auth.info.headimgurl, :provider => auth.provider) 
       end
   end
   private

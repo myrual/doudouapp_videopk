@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531090611) do
+ActiveRecord::Schema.define(version: 20170603124645) do
 
   create_table "battle_comments", force: :cascade do |t|
     t.integer  "battle_id"
@@ -127,6 +127,15 @@ ActiveRecord::Schema.define(version: 20170531090611) do
     t.index ["t1topic_id"], name: "index_topics_on_t1topic_id"
   end
 
+  create_table "useravatars", force: :cascade do |t|
+    t.string   "url"
+    t.string   "provider"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_useravatars_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                             default: "",    null: false
     t.string   "encrypted_password",                default: "",    null: false
@@ -180,14 +189,6 @@ ActiveRecord::Schema.define(version: 20170531090611) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["battle_id"], name: "index_visitor_votes_on_battle_id"
-  end
-
-  create_table "wechat_sessions", force: :cascade do |t|
-    t.string   "openid",     null: false
-    t.string   "hash_store"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["openid"], name: "index_wechat_sessions_on_openid", unique: true
   end
 
 end
