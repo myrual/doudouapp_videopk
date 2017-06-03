@@ -23,7 +23,7 @@
   <%- resource_class.omniauth_providers.each do |provider| %>
     <% if provider == :wechat %>
       <div class="row col-xs-12 col-sm-12 text-center">
-        <%= link_to "user/auth/wechat" do %>
+        <%= link_to omniauth_authorize_path(resource_name, provider) do %>
         <i class="fa fa-weixin" aria-hidden="true"></i> 微信登录
         <% end %>
       </div>
