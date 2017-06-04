@@ -4,7 +4,8 @@
 <% needautoplayvideo = false %>
 <% posturl = video.poster_url %>
       <% if posturl  and posturl != "" %>
-        <%= image_tag(posturl, :alt => video.title, :class => "video_preview") %>
+		    <video src="<%= video.unique_url %>" style="width:100%" class="video-js"  preload="auto" controls playsinline>
+		    </video>
 	  <% else %>
         <% if needautoplayvideo %>
 		    <video src="<%= video.unique_url %>" style="width:100%" autoplay= true class="video-js"  preload="auto" controls playsinline>
