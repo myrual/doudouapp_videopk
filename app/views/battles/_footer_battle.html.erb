@@ -30,7 +30,9 @@
                         <i class= "fa fa-arrow-right fa-2x" aria-hidden="true"></i>
                 <% end %>
         	<% else %>
-        	  <%= link_to("主人可以休息了", "#") %>
+                <%= link_to openbattles_path, :class => "btn", :data => {:trackevent => "end_show"} do %>
+                        <i class= "fa fa-users fa-2x" aria-hidden="true"></i>
+                <% end %>
         	<% end %>
        	</div>
     <% else %>
@@ -50,7 +52,9 @@
                         <i class= "fa fa-arrow-right fa-2x" aria-hidden="true"></i>
                 <% end %>
         	<% else %>
-        	  <%= link_to("主人可以休息了", "#") %>
+                <%= link_to openbattles_path, :class => "btn", :data => {:trackevent => "end_show"} do %>
+                        <i class= "fa fa-users fa-2x" aria-hidden="true"></i>
+                <% end %>
         	<% end %>
        	</div>
        	<% end %>
