@@ -2,9 +2,14 @@
 <div class="container battle_video_vote_comment" id="<%= "singlebattle_#{battle.id}"%>">
   <%= link_to battle do %>
     <div class="row">
-      <div class="col-xs-4 text-center left_user"><h3><%= battle.left_video.user.name || "朝阳群众" %></h3></div>
-      <div class="col-xs-4 text-center"><h3>VS</h3></div>
-      <div class="col-xs-4 text-center right_user"><h3><%= battle.right_video.user.name  || "朝阳群众" %></h3></div>
+      <% if battle.left_video.user == battle.right_video.user %>
+        <div class="col-xs-12 text-center left_user"><h3><%= battle.left_video.user.name || "朝阳群众" %>的内心戏</h3></div>
+      <% else %>
+        <div class="col-xs-4 text-center left_user"><h3><%= battle.left_video.user.name || "朝阳群众" %></h3></div>
+        <div class="col-xs-4 text-center"><h3>VS</h3></div>
+        <div class="col-xs-4 text-center right_user"><h3><%= battle.right_video.user.name  || "朝阳群众" %></h3></div>
+      <% end %>
+
     </div>
     <div class="row text-center">
       <%= battle.title %>
