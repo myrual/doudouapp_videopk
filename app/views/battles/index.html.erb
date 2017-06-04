@@ -4,7 +4,7 @@
 
 <% if @battles.present? %>
   <% @battles.each do |battle| %>
-  <%= render :partial => "common/singlebattle", locals: {battle: battle}%>
+  <%= render :partial => "singlebattle", locals: {battle: battle}%>
 <% end %>
 
 <div class="text-center">

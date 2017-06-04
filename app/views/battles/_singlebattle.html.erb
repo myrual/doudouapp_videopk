@@ -9,7 +9,14 @@
     <div class="row text-center">
       <%= battle.title %>
     </div>
-      <%= render :partial => "common/video_battle", locals: {battle: battle}%>
+  <div class="row ">
+    <div class="col-sm-6 col-xs-6 video_container">
+     		<%= render :partial => "video_preview", locals: {video: battle.left_video}%>
+    </div>
+    <div class="col-sm-6 col-xs-6 video_container">
+     		<%= render :partial => "video_preview", locals: {video: battle.right_video}%>
+    </div>
+  </div>
     <div id="<%= "votebar_battle_#{battle.id}"%>">
       <% if battle %>
         <div class="row">
