@@ -109,6 +109,7 @@ Rails.application.routes.draw do
       
       get 'upyunauths' => 'upyunauths#index'
       get 'wxappauths' => 'wxappauths#index'
+      post 'wxappuserupdate' => 'wxappauths#patchwxappuser'
       
       resources :streams
       resources :videos do
