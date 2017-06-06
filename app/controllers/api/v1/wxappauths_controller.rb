@@ -12,9 +12,33 @@ class Api::V1::WxappauthsController < ApplicationController
         rootURL = 'https://api.weixin.qq.com/sns/jscode2session?'
         uri = URI(rootURL + 'appid=' + appid + '&secret=' + appsecret + '&js_code=' + jscode + '&grant_type=authorization_code')
         res = Net::HTTP.get(uri)
-        if res["openid"]
-            result = {:status => "ReportInfo", :session => SecureRandom.uuid}
-            render json: result
+        if res["openid"] and res["session_key"]
+            oldsession = Wxappsession.find_by(:openid => res["openid"])
+            if oldsession
+                oldsession.wxsession_key = res["session_key"]
+                oldsession.session = SecureRandom.uuid
+                if oldsession.save
+                    result = {:status => "ReportInfo", :session => oldsession.session}
+                    render json: result
+                else
+                    result = {:status => "SaveSessionFailed", :session => ""}
+                    render json: result
+                end
+
+            else
+                new_wxsession = Wxappsession.new
+                new_wxsession.openid = res["openid"]
+                new_wxsession.wxsession_key = res["session_key"]
+                new_wxsession.session = SecureRandom.uuid
+                if new_wxsession.save
+                    result = {:status => "ReportInfo", :session => new_wxsession.session}
+                    render json: result
+                else
+                    result = {:status => "SaveSessionFailed", :session => ""}
+                    render json: result
+                end
+            end
+
             #result = {:status => "ReportInfo", :session => SecureRandom.uuid}
         else
             result = {:status => "Error", :session => ""}
