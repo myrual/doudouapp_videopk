@@ -34,6 +34,18 @@ class Api::V1::WxappauthsController < ApplicationController
         end
     end
     
+    def verifywxappuser
+        if verify_api_only and verify_user_only and json_request?
+            respond_to :json
+            
+            result = {:status => "OK", :user_id => User.find(params[:id])}
+            render json: result
+        else
+            result = {:status => "Error", :session => ""}            
+            render json: result
+        end
+    end
+    
     def index
         if verify_api_only and json_request?
             respond_to :json
@@ -91,6 +103,8 @@ class Api::V1::WxappauthsController < ApplicationController
         Thirdapp.where(:appid => params[:appid], :secret => params[:appsecret]).count > 0
     end
     def verify_user_only
-        params[:user_id].present?
+        thisUser = User.find(params[:user_id])
+        wxappuserLogin =  thisUser and thisUser.provider == "wxapp" and wxapploginsession = Wxappsession.find_by(:openid => thisUser.uid) and wxapploginsession == params["sesson"]
+        wxappuserLogin        
     end
 end

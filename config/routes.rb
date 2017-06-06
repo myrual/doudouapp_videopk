@@ -110,7 +110,7 @@ Rails.application.routes.draw do
       get 'upyunauths' => 'upyunauths#index'
       get 'wxappauths' => 'wxappauths#index'
       post 'wxappuserupdate' => 'wxappauths#patchwxappuser'
-      
+      get 'wxappuserverify' => 'wxappauths#verifywxappuser'      
       resources :streams
       resources :videos do
         member do
