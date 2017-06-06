@@ -38,7 +38,7 @@ class Api::V1::WxappauthsController < ApplicationController
         if verify_api_only and verify_user_only and json_request?
             respond_to :json
             
-            result = {:status => "OK", :user_id => User.find(params[:user_id])}
+            result = {:status => "OK", :user_id => User.find(params[:user_id]).id}
             render json: result
         else
             result = {:status => "Error", :session => ""}            
