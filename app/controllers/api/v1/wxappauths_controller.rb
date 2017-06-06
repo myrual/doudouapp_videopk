@@ -19,8 +19,9 @@ class Api::V1::WxappauthsController < ApplicationController
             if oldsession
                 oldsession.wxsession_key = res["session_key"]
                 oldsession.session = SecureRandom.uuid
+                olduser = User.find_by(:provider => "wxapp", :uid => res["openid"])
                 if oldsession.save
-                    result = {:status => "ReportInfo", :session => oldsession.session}
+                    result = {:status => "ReportInfo", :session => oldsession.session, :user_id => olduser.id}
                     render json: result
                 else
                     result = {:status => "SaveSessionFailed", :session => ""}
@@ -33,7 +34,15 @@ class Api::V1::WxappauthsController < ApplicationController
                 new_wxsession.wxsession_key = res["session_key"]
                 new_wxsession.session = SecureRandom.uuid
                 if new_wxsession.save
-                    result = {:status => "ReportInfo", :session => new_wxsession.session}
+                    newuser = User.new
+                    newuser.provider = "wxapp"
+                    newuser.uid = new_wxsession.openid
+                    newuser.email = SecureRandom.uuid + "@herego.com"
+                    newuser.name = ""
+                    newuser.password = Devise.friendly_token[0,20]
+                    newuser.is_admin = false
+                    newuser.save
+                    result = {:status => "ReportInfo", :session => new_wxsession.session, :user_id => newuser.id}
                     render json: result
                 else
                     result = {:status => "SaveSessionFailed", :session => ""}
