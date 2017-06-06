@@ -108,6 +108,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       
       get 'upyunauths' => 'upyunauths#index'
+      get 'wxappauths' => 'wxappauths#index'
       
       resources :streams
       resources :videos do

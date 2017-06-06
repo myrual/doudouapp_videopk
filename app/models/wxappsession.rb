@@ -1,0 +1,2 @@
+class Wxappsession < ApplicationRecord
+end

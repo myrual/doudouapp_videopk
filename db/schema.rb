@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170603124645) do
+ActiveRecord::Schema.define(version: 20170606061542) do
 
   create_table "battle_comments", force: :cascade do |t|
     t.integer  "battle_id"
@@ -189,6 +189,13 @@ ActiveRecord::Schema.define(version: 20170603124645) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["battle_id"], name: "index_visitor_votes_on_battle_id"
+  end
+
+  create_table "wxappsessions", force: :cascade do |t|
+    t.string   "openid"
+    t.string   "session"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
