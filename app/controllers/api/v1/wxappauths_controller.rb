@@ -1,5 +1,6 @@
 require 'securerandom'
-require 'net/http'                                              
+require 'net/http'
+require 'json'
 class Api::V1::WxappauthsController < ApplicationController
     def json_request?
       request.format.json?
@@ -11,7 +12,8 @@ class Api::V1::WxappauthsController < ApplicationController
         jscode = params["code"]
         rootURL = 'https://api.weixin.qq.com/sns/jscode2session?'
         uri = URI(rootURL + 'appid=' + appid + '&secret=' + appsecret + '&js_code=' + jscode + '&grant_type=authorization_code')
-        res = Net::HTTP.get(uri)
+        result = Net::HTTP.get(uri)
+        res = JSON.parse(result)
         if res["openid"] and res["session_key"]
             oldsession = Wxappsession.find_by(:openid => res["openid"])
             if oldsession
