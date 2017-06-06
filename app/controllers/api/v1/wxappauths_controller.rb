@@ -88,7 +88,7 @@ class Api::V1::WxappauthsController < ApplicationController
     end
     private
     def verify_api_only
-        params[:appid].present? and params[:appsecret].present?
+        Thirdapp.where(:appid => params[:appid], :secret => params[:appsecret]).count > 0
     end
     def verify_user_only
         params[:user_id].present?

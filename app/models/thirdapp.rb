@@ -1,0 +1,2 @@
+class Thirdapp < ApplicationRecord
+end
