@@ -8,9 +8,9 @@ class Api::V1::WxappauthsController < ApplicationController
         respond_to :json
         appid = 'wx094245cd07bbda82'
         appsecret = '8184ae4424fdd359de278e99474268e2'
-        JSCODE = params["code"]
+        jscode = params["code"]
         rootURL = 'https://api.weixin.qq.com/sns/jscode2session?'
-        uri = URI(rootURL + 'appid=' + appid + '&secret=' + appsecret + '&js_code=' + JSCODE + '&grant_type=authorization_code')
+        uri = URI(rootURL + 'appid=' + appid + '&secret=' + appsecret + '&js_code=' + jscode + '&grant_type=authorization_code')
         res = Net::HTTP.get(uri)
         if res["openid"]
             result = {:status => "ReportInfo", :session => SecureRandom.uuid}

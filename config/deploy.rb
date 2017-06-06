@@ -3,7 +3,7 @@ lock "3.8.1"
 
 set :application, "videopk"
 set :repo_url, "git@github.com:myrual/doudouapp_videopk.git"
-set :branch, "indexpage_improve"
+set :branch, "wxapp_login"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
