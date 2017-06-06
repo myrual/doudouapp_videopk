@@ -167,7 +167,8 @@ class Api::V1::StreamsController < ApplicationController
       end
       remainbattles_in_stream_inorder.map {|v| Battle.find(v.battle_id)}
   end
-  def verify_api_only
-     params[:appid].present? and params[:appsecret].present?
-  end
+    def verify_api_only
+        Thirdapp.where(:appid => params[:appid], :secret => params[:appsecret]).count > 0
+    end
+
 end

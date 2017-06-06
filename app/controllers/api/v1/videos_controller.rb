@@ -123,9 +123,10 @@ class Api::V1::VideosController < ApplicationController
     def video_params
       params.require(:video).permits(:title, :description)
     end
-  def verify_api_only
-     params[:appid].present? and params[:appsecret].present?
-  end
+    def verify_api_only
+        Thirdapp.where(:appid => params[:appid], :secret => params[:appsecret]).count > 0
+    end
+
   def verify_user_only
      params[:user_id].present? and params[:user_token].present? and User.find(params[:user_id]).authentication_token == params[:user_token]
   end
