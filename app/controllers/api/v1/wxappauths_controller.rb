@@ -35,7 +35,7 @@ class Api::V1::WxappauthsController < ApplicationController
     end
     
     def index
-        if verify_api_only and verify_user_only and json_request?
+        if verify_api_only and json_request?
             respond_to :json
             appid = 'wx094245cd07bbda82'
             appsecret = '8184ae4424fdd359de278e99474268e2'
