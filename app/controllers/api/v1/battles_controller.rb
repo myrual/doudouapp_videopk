@@ -23,9 +23,11 @@ class Api::V1::BattlesController < ApplicationController
           :left_video_url => each.left_video_url,
           :left_video_poster => each.left_video_poster_url,
           :left_votes => each.left_votes,
+          :left_username => each.left_video.user.name,
           :right_video_url => each.right_video_url,
           :right_video_poster => each.right_video_poster_url,
-          :right_votes => each.right_votes
+          :right_votes => each.right_votes,
+          :right_username => each.right_video.user.name
           }
       }
     else
