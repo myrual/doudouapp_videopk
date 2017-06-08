@@ -18,8 +18,8 @@ class Api::V1::BattlesController < ApplicationController
 
       @battles = battles.map {|each|
         already_vote = "NA"
-        already_vote = "left" if current_wxuser.has_follow_left?
-        already_vote = "right" if current_wxuser.has_follow_right?
+        already_vote = "left" if current_wxuser.has_follow_left?(each)
+        already_vote = "right" if current_wxuser.has_follow_right?(each)
           {:id => each.id, :user_id => each.user_id, :title => each.title, :description => each.description,
           :left_video_id => each.left_video_id, 
           :right_video_id => each.right_video_id, 
