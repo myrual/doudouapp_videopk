@@ -9,8 +9,6 @@ class Api::V1::BattlesController < ApplicationController
   
   before_action :verify_api_only, only:[:index, :show]
   before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video, :get_battle]
-  acts_as_token_authentication_handler_for User , only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video, :get_battle]
-
 
   def index
     if verify_api_only == true
@@ -78,6 +76,10 @@ class Api::V1::BattlesController < ApplicationController
   end
   
   def follow_left_video
+    if verify_wxuser_only
+      
+
+    
     respond_to :json
     if current_user.has_follow_right?(@battle)
       render json: {
@@ -98,6 +100,7 @@ class Api::V1::BattlesController < ApplicationController
       render json: @latestBattle
     end
   end
+  end
 
   def unfollow_left_video
     current_user.unfollow_left!(@battle)
@@ -107,24 +110,25 @@ class Api::V1::BattlesController < ApplicationController
   end
 
   def follow_right_video
-    respond_to :json
-    if current_user.has_follow_left?(@battle)
-      render json: {
-        error: "already vote left, can not vote again",
-        status: 400
-      }
-    elsif current_user.has_follow_right?(@battle)
-      render json: {
-        status: 204
-      }
-    else
-      current_user.follow_right!(@battle)
-      @left_video = Video.find(@battle.left_video_id)
-      @right_video = Video.find(@battle.right_video_id)
-
-      @latestBattle = {id:@battle.id, title:@battle.title, leftImage:@left_video.image.thumb.to_s, leftVideo:@left_video.video_url.to_s, rightImage:@right_video.image.thumb.to_s, rightVideo:@right_video.video_url.to_s, leftCount: @battle.left_followers.count, rightCount:@battle.right_followers.count,  status: 200}
-      render json: @latestBattle
-    end
+    if verify_wxuser_only    
+      respond_to :json
+      if current_user.has_follow_left?(@battle)
+        render json: {
+          error: "already vote left, can not vote again",
+          status: 400
+        }
+      elsif current_user.has_follow_right?(@battle)
+        render json: {
+          status: 204
+        }
+      else
+        current_user.follow_right!(@battle)
+        @left_video = Video.find(@battle.left_video_id)
+        @right_video = Video.find(@battle.right_video_id)
+        @latestBattle = {id:@battle.id, title:@battle.title, leftImage:@left_video.image.thumb.to_s, leftVideo:@left_video.video_url.to_s, rightImage:@right_video.image.thumb.to_s, rightVideo:@right_video.video_url.to_s, leftCount: @battle.left_followers.count, rightCount:@battle.right_followers.count,  status: 200}
+        render json: @latestBattle
+      end
+  end
 
   end
 
@@ -179,6 +183,11 @@ class Api::V1::BattlesController < ApplicationController
   def verify_user_only
      params[:user_id].present? and params[:user_token].present? and User.find(params[:user_id]).authentication_token == params[:user_token]
   end
+    def verify_wxuser_only
+        thisUser = User.find(params[:user_id])
+        wxappuserLogin =  thisUser and thisUser.provider == "wxapp" and wxapploginsession = Wxappsession.find_by(:openid => thisUser.uid) and wxapploginsession == params["sesson"]
+        wxappuserLogin        
+    end
   def video_present
     lv = params[:battle_left_video_id]
     rv = params[:battle_right_video_id]
