@@ -1,1 +1,1 @@
-json.array! @battles, :id, :title, :description, :user_id, :left_video_url, :left_video_poster, :left_votes, :left_username, :right_video_url, :right_video_poster, :right_votes, :right_username
+json.array! @battles, :id, :title, :description, :user_id, :left_video_url, :left_video_poster, :left_votes, :left_username, :right_video_url, :right_video_poster, :right_votes, :right_username, :already_vote
