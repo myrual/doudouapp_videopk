@@ -81,18 +81,19 @@ class Api::V1::BattlesController < ApplicationController
 
     
     respond_to :json
-    if current_user.has_follow_right?(@battle)
+    current_wxuser = User.find(params[:user_id])
+    if current_wxuser.has_follow_right?(@battle)
       render json: {
         error: "already vote right, can not vote again",
         status: 400
       }
 
-    elsif current_user.has_follow_left?(@battle)
+    elsif current_wxuser.has_follow_left?(@battle)
       render json: {
         status: 204
       }
     else
-      current_user.follow_left!(@battle)
+      current_wxuser.follow_left!(@battle)
       @left_video = Video.find(@battle.left_video_id)
       @right_video = Video.find(@battle.right_video_id)
 
@@ -112,17 +113,18 @@ class Api::V1::BattlesController < ApplicationController
   def follow_right_video
     if verify_wxuser_only    
       respond_to :json
-      if current_user.has_follow_left?(@battle)
+      current_wxuser = User.find(params[:user_id])
+      if current_wxuser.has_follow_left?(@battle)
         render json: {
           error: "already vote left, can not vote again",
           status: 400
         }
-      elsif current_user.has_follow_right?(@battle)
+      elsif current_wxuser.has_follow_right?(@battle)
         render json: {
           status: 204
         }
       else
-        current_user.follow_right!(@battle)
+        current_userwx.follow_right!(@battle)
         @left_video = Video.find(@battle.left_video_id)
         @right_video = Video.find(@battle.right_video_id)
         @latestBattle = {id:@battle.id, title:@battle.title, leftImage:@left_video.image.thumb.to_s, leftVideo:@left_video.video_url.to_s, rightImage:@right_video.image.thumb.to_s, rightVideo:@right_video.video_url.to_s, leftCount: @battle.left_followers.count, rightCount:@battle.right_followers.count,  status: 200}
@@ -175,6 +177,9 @@ class Api::V1::BattlesController < ApplicationController
   private
   def find_battle
     @battle = Battle.find(params[:id])
+  end
+  def find_wxuser
+    @wxuser = User.find(params[:user_id])
   end
     def verify_api_only
         Thirdapp.where(:appid => params[:appid], :secret => params[:appsecret]).count > 0
