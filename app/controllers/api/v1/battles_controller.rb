@@ -11,10 +11,15 @@ class Api::V1::BattlesController < ApplicationController
   before_action :find_battle, only: [:follow_left_video, :unfollow_left_video, :follow_right_video, :unfollow_right_video, :get_battle]
 
   def index
-    if verify_api_only == true
+    if verify_api_only and verify_wxuser_only
       respond_to :json
       battles = Battle.published.recent
+      current_wxuser = User.find(params[:user_id])
+
       @battles = battles.map {|each|
+        already_vote = "NA"
+        already_vote = "left" if current_wxuser.has_follow_left?
+        already_vote = "right" if current_wxuser.has_follow_right?
           {:id => each.id, :user_id => each.user_id, :title => each.title, :description => each.description,
           :left_video_id => each.left_video_id, 
           :right_video_id => each.right_video_id, 
@@ -25,7 +30,8 @@ class Api::V1::BattlesController < ApplicationController
           :right_video_url => each.right_video_url,
           :right_video_poster => each.right_video_poster_url,
           :right_votes => each.right_votes,
-          :right_username => each.right_video.user.name
+          :right_username => each.right_video.user.name,
+          :already_vote => already_vote
           }
       }
     else
@@ -35,8 +41,12 @@ class Api::V1::BattlesController < ApplicationController
 
 
   def show
-    if verify_api_only == true
+    if verify_api_only and verify_wxuser_only
       respond_to :json
+      current_wxuser = User.find(params[:user_id])
+      already_vote = "NA"
+      already_vote = "left" if current_wxuser.has_follow_left?
+      already_vote = "right" if current_wxuser.has_follow_right?
       each = Battle.find(params[:id])
       @battle = {:id => each.id, :user_id => each.user_id, :title => each.title, :description => each.description,
           :left_video_id => each.left_video_id, 
@@ -46,7 +56,8 @@ class Api::V1::BattlesController < ApplicationController
           :left_votes => each.left_votes,
           :right_video_url => each.right_video_url,
           :right_video_poster => each.right_video_poster_url,
-          :right_votes => each.right_votes
+          :right_votes => each.right_votes,
+          :already_vote => already_vote
       }
     else
       render status: :unauthorized
@@ -77,30 +88,27 @@ class Api::V1::BattlesController < ApplicationController
   
   def follow_left_video
     if verify_wxuser_only
-      
+      respond_to :json
+      current_wxuser = User.find(params[:user_id])
+      if current_wxuser.has_follow_right?(@battle)
+        render json: {
+          error: "already vote right, can not vote again",
+          status: 400
+        }
 
-    
-    respond_to :json
-    current_wxuser = User.find(params[:user_id])
-    if current_wxuser.has_follow_right?(@battle)
-      render json: {
-        error: "already vote right, can not vote again",
-        status: 400
-      }
+      elsif current_wxuser.has_follow_left?(@battle)
+        render json: {
+          status: 204
+        }
+      else
+        current_wxuser.follow_left!(@battle)
+        @left_video = Video.find(@battle.left_video_id)
+        @right_video = Video.find(@battle.right_video_id)
 
-    elsif current_wxuser.has_follow_left?(@battle)
-      render json: {
-        status: 204
-      }
-    else
-      current_wxuser.follow_left!(@battle)
-      @left_video = Video.find(@battle.left_video_id)
-      @right_video = Video.find(@battle.right_video_id)
-
-      @latestBattle = {id:@battle.id, title:@battle.title, leftImage:@left_video.image.thumb.to_s, leftVideo:@left_video.video_url.to_s, rightImage:@right_video.image.thumb.to_s, rightVideo:@right_video.video_url.to_s, leftCount: @battle.left_followers.count, rightCount:@battle.right_followers.count,  status: 200}
-      render json: @latestBattle
+        @latestBattle = {id:@battle.id, title:@battle.title, leftImage:@left_video.image.thumb.to_s, leftVideo:@left_video.video_url.to_s, rightImage:@right_video.image.thumb.to_s, rightVideo:@right_video.video_url.to_s, leftCount: @battle.left_followers.count, rightCount:@battle.right_followers.count,  status: 200}
+        render json: @latestBattle
+      end
     end
-  end
   end
 
   def unfollow_left_video
