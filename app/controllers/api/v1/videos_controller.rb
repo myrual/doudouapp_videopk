@@ -10,7 +10,7 @@ class Api::V1::VideosController < ApplicationController
         current_wxuser = User.find(params[:user_id])
         videos = current_wxuser.videos.all
         @videos = videos.map {|each|
-          {:id => each.id, :title => each.title, :user_id => each.user_id, :origin_video_poster => each.image.thumb.to_s,:origin_video_url => each.video_url.to_s}
+          {:id => each.id, :title => each.title, :user_id => each.user_id, :video_poster => each.poster_url,:video_url => each.unique_url}
         }
       else
         render status: :unauthorized
@@ -22,7 +22,7 @@ class Api::V1::VideosController < ApplicationController
         respond_to :json
         current_wxuser = User.find(params[:user_id])
         each = current_wxuser.videos.find(params[:id])
-          @video = {:id => each.id, :title => each.title, :user_id => each.user_id, :origin_video_poster => each.image.thumb.to_s,:origin_video_url => each.video_url.to_s, :ext => each.ext_video != nil}
+          @video = {:id => each.id, :title => each.title, :user_id => each.user_id, :video_poster => each.poster_url,:video_url => each.unique_url}
       else
         render status: :unauthorized
       end
