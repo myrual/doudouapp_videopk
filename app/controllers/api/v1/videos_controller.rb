@@ -99,7 +99,7 @@ class Api::V1::VideosController < ApplicationController
 
     def new_ext_video
       respond_to :json
-      if verify_api_only == true and verify_wxuser_only == true
+      if verify_api_only and verify_wxuser_only
         @video = Video.find(params[:id])
         @extvideo = @video.build_ext_video
         @extvideo.provider = params[:provider]
