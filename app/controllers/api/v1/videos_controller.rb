@@ -5,10 +5,10 @@ class Api::V1::VideosController < ApplicationController
       request.format.json?
     end
     def index
-      if verify_api_only == true and verify_user_only == true
+      if verify_api_only == true and verify_wxuser_only == true
         respond_to :json
-        currentuser  = User.find(params["user_id"])
-        videos = Video.all
+        current_wxuser = User.find(params[:user_id])
+        videos = current_wxuser.videos.all
         @videos = videos.map {|each|
           {:id => each.id, :title => each.title, :user_id => each.user_id, :origin_video_poster => each.image.thumb.to_s,:origin_video_url => each.video_url.to_s}
         }
@@ -20,9 +20,9 @@ class Api::V1::VideosController < ApplicationController
     def show
       if verify_api_only == true
         respond_to :json
-        each = Video.find(params[:id])
+        current_wxuser = User.find(params[:user_id])
+        each = current_wxuser.videos.find(params[:id])
           @video = {:id => each.id, :title => each.title, :user_id => each.user_id, :origin_video_poster => each.image.thumb.to_s,:origin_video_url => each.video_url.to_s, :ext => each.ext_video != nil}
-
       else
         render status: :unauthorized
       end
@@ -31,10 +31,9 @@ class Api::V1::VideosController < ApplicationController
 
     def create
       respond_to :json
-      if verify_api_only == true and verify_user_only == true
-        currentuser  = User.find(params["user_id"])
-        
-        @video = currentuser.videos.new
+      if verify_api_only and verify_wxuser_only
+        current_wxuser = User.find(params[:user_id])
+        @video = current_wxuser.videos.new
         @video.title = params["video_title"]
         @video.description = params["video_description"]
         if @video.save!
@@ -126,7 +125,11 @@ class Api::V1::VideosController < ApplicationController
     def verify_api_only
         Thirdapp.where(:appid => params[:appid], :secret => params[:appsecret]).count > 0
     end
-
+    def verify_wxuser_only
+        thisUser = User.find(params[:user_id])
+        wxappuserLogin =  thisUser and thisUser.provider == "wxapp" and wxapploginsession = Wxappsession.find_by(:openid => thisUser.uid) and wxapploginsession == params["sesson"]
+        wxappuserLogin        
+    end
   def verify_user_only
      params[:user_id].present? and params[:user_token].present? and User.find(params[:user_id]).authentication_token == params[:user_token]
   end
