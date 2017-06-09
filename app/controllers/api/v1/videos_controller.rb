@@ -5,7 +5,7 @@ class Api::V1::VideosController < ApplicationController
       request.format.json?
     end
     def index
-      if verify_api_only == true and verify_wxuser_only == true
+      if verify_api_only and verify_wxuser_only
         respond_to :json
         current_wxuser = User.find(params[:user_id])
         videos = current_wxuser.videos.all
