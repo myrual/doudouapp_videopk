@@ -1,8 +1,10 @@
 <% battle = local_assigns[:battle] %>
 <div class="container battle_video_vote_comment" id="<%= "singlebattle_#{battle.id}"%>">
-  <%= link_to battle do %>
     <div class="row text-center">
-      <h3><%= battle.title %></h3>
+      <%= link_to battle do %>
+
+        <h3><%= battle.title %></h3>
+      <% end %>
     </div>
     <div class="row">
       <% if battle.left_video.user == battle.right_video.user %>
@@ -38,5 +40,4 @@
         </div>
       <% end %>
     </div>
-  <% end %>
 </div>
