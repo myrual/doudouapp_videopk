@@ -62,7 +62,9 @@ class Api::V1::OpenbattlesController < ApplicationController
         @video_topic = Topic.find(params[:topic_id])
         @topic_video = current_wxuser.topic_videos.new(video: @video, topic: @video_topic)
         if @topic_video.save
+          render json: @topic_video
         else
+        render status: :not_found
         end
       else
         render status: :unauthorized
