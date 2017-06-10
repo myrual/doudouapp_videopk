@@ -53,62 +53,19 @@ class Api::V1::OpenbattlesController < ApplicationController
         render :edit
       end
     end
-    
-    def video_convert_done
-      @video = Video.find(params[:id])
 
-      bucket_name = params["bucket_name"]
-      path = params["path"]
-      taskid = params["task_id"]
-      description = params["description"]
-      if description == "OK"
-        @extvideo = ExtVideo.new
-        if @video.ext_video
-          @extvideo = @video.ext_video
-        else
-          @extvideo = ExtVideo.new
-        end
-        @extvideo.video = @video
-        @extvideo.provider = "upyun"
-        @extvideo.videourl = "http://"+bucket_name + ".b0.upaiyun.com" + path[0]
-        @extvideo.posturl = params[:posturl]
-        @extvideo.save
-      end
-
-
-    end
-
-
-    def thumb_done
-      @video = Video.find(params[:id])
-
-      bucket_name = params["bucket_name"]
-      path = params["path"]
-      taskid = params["task_id"]
-      description = params["description"]
-      if description == "OK"
-        if @video.ext_video
-          @extvideo = @video.ext_video
-          @extvideo.posturl = "http://"+bucket_name + ".b0.upaiyun.com" + path[0]
-          @extvideo.save
-        end
-      end
-    end
-
-    def new_ext_video
+    def addvideototopic
       respond_to :json
       if verify_api_only and verify_wxuser_only
-        @video = Video.find(params[:id])
-        @extvideo = @video.build_ext_video
-        @extvideo.provider = params[:provider]
-        @extvideo.videourl = params[:videourl]
-        @extvideo.posturl = params[:posturl]
-        if @extvideo.save
-          @extvideo
+        current_wxuser = User.find(params[:user_id])
+        @video = current_wxuser.videos.find(params[:video_id])
+        @video_topic = Topic.find(params[:topic_id])
+        @topic_video = current_user.topic_videos.new(video: @video, topic: @video_topic)
+        if @topic_video.save
         else
-          render status :no_content
         end
       else
+        render status: :unauthorized
       end
     end
     
