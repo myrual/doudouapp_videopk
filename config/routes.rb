@@ -111,9 +111,10 @@ Rails.application.routes.draw do
       get 'wxappauths' => 'wxappauths#index'
       post 'wxappuserupdate' => 'wxappauths#patchwxappuser'
       get 'wxappuserverify' => 'wxappauths#verifywxappuser'
+      post 'addvideototopic' => 'openbattles#addvideototopic'
       
+
       resources :openbattles do
-        post :addvideototopic
       end
       
       resources :streams
