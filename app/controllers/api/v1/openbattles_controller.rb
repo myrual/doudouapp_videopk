@@ -8,8 +8,13 @@ class Api::V1::OpenbattlesController < ApplicationController
       if verify_api_only
         respond_to :json
         @topics = Topic.all.map {|each|
-          {:id => each.id, :title => each.title}
+          if each.videos.last
+            {:id => each.id, :title => each.title, :videourl => each.videos.last.unique_url}
+          else
+            {:id => each.id, :title => each.title}
+          end
         }
+        render json: @topics
       else
         render status: :unauthorized
       end
