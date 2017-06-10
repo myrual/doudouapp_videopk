@@ -60,7 +60,7 @@ class Api::V1::OpenbattlesController < ApplicationController
         current_wxuser = User.find(params[:user_id])
         @video = current_wxuser.videos.find(params[:video_id])
         @video_topic = Topic.find(params[:topic_id])
-        @topic_video = current_user.topic_videos.new(video: @video, topic: @video_topic)
+        @topic_video = current_wxuser.topic_videos.new(video: @video, topic: @video_topic)
         if @topic_video.save
         else
         end
