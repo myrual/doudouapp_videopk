@@ -25,7 +25,7 @@ class Api::V1::OpenbattlesController < ApplicationController
         respond_to :json
         current_wxuser = User.find(params[:user_id])
         @t1topic = T1topic.find(params[:id])
-        allvideo = @topic.videos.all.reverse.map {|each|
+        allvideo = @t1topic.videos.all.reverse.map {|each|
           {:id => each.id, :videourl => each.unique_url}
         }
         @video_in_topics = {:id => @t1topic.id, :title => @t1topic.title, :videos => allvideo}
