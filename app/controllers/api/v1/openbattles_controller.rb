@@ -21,11 +21,15 @@ class Api::V1::OpenbattlesController < ApplicationController
     end
 
     def show
-      if verify_api_only == true
+      if verify_api_only and verify_wxuser_only
         respond_to :json
         current_wxuser = User.find(params[:user_id])
-        each = current_wxuser.videos.find(params[:id])
-          @video = {:id => each.id, :title => each.title, :user_id => each.user_id, :video_poster => each.poster_url,:video_url => each.unique_url}
+        @t1topic = T1topic.find(params[:id])
+        allvideo = @topic.videos.all.reverse.map {|each|
+          {:id => each.id, :videourl => each.unique_url}
+        }
+        @video_in_topics = {:id => @t1topic.id, :title => @t1topic.title, :videos => allvideo}
+        render json: @video_in_topics
       else
         render status: :unauthorized
       end
