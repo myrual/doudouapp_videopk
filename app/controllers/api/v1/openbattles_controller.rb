@@ -24,7 +24,7 @@ class Api::V1::OpenbattlesController < ApplicationController
       if verify_api_only and verify_wxuser_only
         respond_to :json
         current_wxuser = User.find(params[:user_id])
-        @t1topic = T1topic.find(params[:id])
+        @t1topic = Topic.find(params[:id])
         allvideo = @t1topic.videos.all.reverse.map {|each|
           {:id => each.id, :videourl => each.unique_url}
         }
