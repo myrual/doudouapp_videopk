@@ -72,7 +72,10 @@ class Api::V1::WxappauthsController < ApplicationController
                     end
 
                 else
-                    new_wxsession = Wxappsession.new
+                    new_wxsession = Wxappsession.find_by(:openid => res["openid"])
+                    if new_wxsession == nil
+                        new_wxsession = Wxappsession.new
+                    end
                     new_wxsession.openid = res["openid"]
                     new_wxsession.wxsession_key = res["session_key"]
                     new_wxsession.session = SecureRandom.uuid
