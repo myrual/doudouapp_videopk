@@ -58,7 +58,8 @@ class Api::V1::WxappauthsController < ApplicationController
             res = JSON.parse(result)
             if res["openid"] and res["session_key"]
                 oldsession = Wxappsession.find_by(:openid => res["openid"])
-                if oldsession
+                olduser = User.find_by(:provider => "wxapp", :uid => res["openid"])
+                if oldsession and olduser
                     oldsession.wxsession_key = res["session_key"]
                     oldsession.session = SecureRandom.uuid
                     olduser = User.find_by(:provider => "wxapp", :uid => res["openid"])
