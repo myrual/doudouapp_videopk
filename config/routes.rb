@@ -117,6 +117,7 @@ Rails.application.routes.draw do
       resources :openbattles do
       end
       
+      resources :myvotes
       resources :streams
       resources :videos do
         member do
