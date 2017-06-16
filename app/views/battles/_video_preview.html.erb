@@ -1,9 +1,9 @@
 <% video = local_assigns[:video] %>
 <% posturl = video.poster_url %>
       <% if posturl  and posturl != "" %>
-		    <video src="<%= video.unique_url %>" style="width:100%" poster= <%= posturl %> class="video-js"  preload="auto" controls playsinline>
+		    <video src="<%= video.unique_url %>" style="width:100%" poster= <%= posturl %> controls>
 		    </video>
 	  <% else %>
-		    <video src="<%= video.unique_url %>" style="width:100%" class="video-js"  preload="auto" controls playsinline>
+		    <video src="<%= video.unique_url %>" style="width:100%"  controls>
 		    </video>
 	  <% end %>
