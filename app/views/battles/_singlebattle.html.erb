@@ -5,16 +5,7 @@
         <h3><%= battle.title %></h3>
       <% end %>
     </div>
-    <div class="row">
-      <% if battle.left_video.user == battle.right_video.user %>
-        <div class="col-xs-12 text-center left_user"><%= battle.left_video.user.name || "朝阳群众" %>的内心戏</div>
-      <% else %>
-        <div class="col-xs-4 text-right left_user"><%= battle.left_video.user.name || "朝阳群众" %></div>
-        <div class="col-xs-4 text-center">VS</div>
-        <div class="col-xs-4 text-left right_user"><%= battle.right_video.user.name  || "朝阳群众" %></div>
-      <% end %>
 
-    </div>
 
   <div class="row ">
     <div class="col-sm-6 col-xs-6 video_container">
@@ -24,6 +15,16 @@
      		<%= render :partial => "video_preview", locals: {video: battle.right_video}%>
     </div>
   </div>
+    <div class="row">
+      <% if battle.left_video.user == battle.right_video.user %>
+        <div class="col-xs-12 text-center left_user"><%= battle.left_video.user.name || "朝阳群众" %>的内心戏</div>
+      <% else %>
+        <div class="col-xs-4 text-left left_user"><%= battle.left_video.user.name || "朝阳群众" %></div>
+        <div class="col-xs-4 text-center"></div>
+        <div class="col-xs-4 text-right right_user"><%= battle.right_video.user.name  || "朝阳群众" %></div>
+      <% end %>
+
+    </div>
     <div id="<%= "votebar_battle_#{battle.id}"%>">
       <% if battle %>
         <div class="row">
