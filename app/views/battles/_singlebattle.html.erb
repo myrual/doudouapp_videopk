@@ -14,6 +14,18 @@
     <div class="col-sm-6 col-xs-6 video_container">
      		<%= render :partial => "video_preview", locals: {video: battle.right_video}%>
     </div>
+    <div class="abcdefgt">
+       hello
+    </div>
+    <script>
+$(function() {
+  $('.abcdefgt').click(function() {
+         console.log("hello button");
+         alert("hello");
+    return false;
+  });
+});
+</script>
   </div>
     <div class="row">
       <% if battle.left_video.user == battle.right_video.user %>

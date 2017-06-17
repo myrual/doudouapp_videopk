@@ -121,7 +121,6 @@ Rails.application.routes.draw do
       resources :myvotes
       resources :streams
       resources :videos do
-      get listallvideos 
         member do
           post :new_ext_video
           post :video_convert_done
