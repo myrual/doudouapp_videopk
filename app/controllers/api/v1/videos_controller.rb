@@ -56,6 +56,15 @@ class Api::V1::VideosController < ApplicationController
       end
     end
     
+    def listallvideos
+      if verify_api_only
+         @videos = Video.all.map {|each|
+           {:id => each.id, :title => each.title, :user_id => each.user_id, :origin_video_poster => each.image.thumb.to_s,:origin_video_url => each.video_url.to_s}
+          }
+      else
+        render status: :unauthorized
+      end
+    end
     def video_convert_done
       @video = Video.find(params[:id])
 

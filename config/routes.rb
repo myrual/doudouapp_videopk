@@ -112,6 +112,7 @@ Rails.application.routes.draw do
       post 'wxappuserupdate' => 'wxappauths#patchwxappuser'
       get 'wxappuserverify' => 'wxappauths#verifywxappuser'
       post 'addvideototopic' => 'openbattles#addvideototopic'
+      get 'listallvideos' => 'videos#listallvideos'
       
 
       resources :openbattles do
@@ -120,6 +121,7 @@ Rails.application.routes.draw do
       resources :myvotes
       resources :streams
       resources :videos do
+      get listallvideos 
         member do
           post :new_ext_video
           post :video_convert_done
