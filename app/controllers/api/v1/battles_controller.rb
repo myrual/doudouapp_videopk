@@ -32,7 +32,7 @@ class Api::V1::BattlesController < ApplicationController
           :right_votes => each.right_votes,
           :right_username => each.right_video.user.name,
           :already_vote => already_vote,
-          :elapsedhours => (Time.now - each.created_at)/(3600)
+          :elapsedhours => ((Time.now - each.created_at)/(3600)).to_i
           }
       }
     else
