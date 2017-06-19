@@ -41,6 +41,7 @@ class Api::V1::BattlesController < ApplicationController
   end
 
 
+
   def show
     if verify_api_only and verify_wxuser_only
       respond_to :json
