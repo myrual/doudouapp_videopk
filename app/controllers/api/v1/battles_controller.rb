@@ -52,6 +52,8 @@ class Api::V1::BattlesController < ApplicationController
       already_vote = "left" if current_wxuser.has_follow_left?(each)
       already_vote = "right" if current_wxuser.has_follow_right?(each)
       allleftVoters = each.left_followers
+      allrightVoters = each.right_followers
+
       leftNameAvatar = allleftVoters.map{ |each|
         {
           :name => each.name,
@@ -64,7 +66,6 @@ class Api::V1::BattlesController < ApplicationController
           :avatar => each.avatar_url
         }
       }
-      allrightVoters = each.right_followers
       @battle = {:id => each.id, :user_id => each.user_id, :title => each.title, :description => each.description,
           :left_video_id => each.left_video_id, 
           :right_video_id => each.right_video_id, 
