@@ -60,7 +60,11 @@ class Api::V1::BattlesController < ApplicationController
           :right_video_url => each.right_video_url,
           :right_video_poster => each.right_video_poster_url,
           :right_votes => each.right_votes,
-          :already_vote => already_vote
+          :already_vote => already_vote,
+          :leftusername => each.left_video.user.name,
+          :rightusername => each.right_video.user.name,
+          :leftuseravatar => each.left_video.user.avatar_url,
+          :rightuseravatar => each.right_video.user.avatar_url,
       }
     else
       render status: :unauthorized
